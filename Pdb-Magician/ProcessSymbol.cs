@@ -77,9 +77,9 @@ namespace Pdb_Magician
             AddToBody("_StructureData = Buffer;", 3);
             AddToBody("_BufferOffset = PartitionOffset;", 3);
             AddToBody("}", 2);
-            AddToBody("public int MxStructureSize { get { return _StructureData.Length; } }", 2);
+            AddToBody("public static int MxStructureSize { get { return " + s.Length.ToString() + "; } }", 2);
 
-            AddToBody("public string manifest", 2);
+            AddToBody("public static string manifest", 2);
             AddToBody("{", 2);
             AddToBody("get", 3);
             AddToBody("{", 3);

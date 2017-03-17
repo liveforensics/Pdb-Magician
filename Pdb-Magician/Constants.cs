@@ -34,7 +34,7 @@ namespace Pdb_Magician
                     writer.WriteLine("");
                     writer.WriteLine("namespace MemoryExplorer.Symbols");
                     writer.WriteLine("{");
-                    writer.WriteLine("\tpublic class Constants");
+                    writer.WriteLine("\tpublic class MxConstants");
                     writer.WriteLine("\t{");
                     writer.WriteLine("\t\tprivate Dictionary<string, uint> _lookup = new Dictionary<string, uint>();");
 
@@ -45,7 +45,7 @@ namespace Pdb_Magician
                     writer.WriteLine("\t\t\treturn null;");
                     writer.WriteLine("\t\t}");
 
-                    writer.WriteLine("\t\tpublic Constants()");
+                    writer.WriteLine("\t\tpublic MxConstants()");
                     writer.WriteLine("\t\t{");
                     foreach (var key in list)
                     {
