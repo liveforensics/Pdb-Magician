@@ -33,7 +33,7 @@ namespace Pdb_Magician
                 {
                     writer.WriteLine("using System;");
                     writer.WriteLine("");
-                    writer.WriteLine("namespace MemoryExplorer.Symbols");
+                    writer.WriteLine("namespace LiveForensics.Symbols");
                     writer.WriteLine("{");
                 }
                 /// write out the header function
@@ -41,18 +41,18 @@ namespace Pdb_Magician
                 using (StreamWriter writer = new StreamWriter(outputFile, true))
                 {
                     writer.WriteLine("\t#region HEADER");
-                    writer.WriteLine("\tpublic static class CatalogueInformation");
+                    writer.WriteLine("\tpublic class CatalogueInformation");
                     writer.WriteLine("\t{");
                     Guid g = _session.globalScope.guid;
-                    writer.WriteLine("\t\t public static Guid Guid { get { return new Guid(\"" + g.ToString().ToUpper() + "\"); } }");
+                    writer.WriteLine("\t\t public Guid Guid { get { return new Guid(\"" + g.ToString().ToUpper() + "\"); } }");
                     uint age = _session.globalScope.age;
-                    writer.WriteLine("\t\t public static uint Age { get { return " + age.ToString() + "; } }");
+                    writer.WriteLine("\t\t public uint Age { get { return " + age.ToString() + "; } }");
                     Machine m = (Machine)_session.globalScope.machineType;
-                    writer.WriteLine("\t\t public static string MachineType { get { return @\"" + m.ToString() + "\"; } }");
-                    writer.WriteLine("\t\t public static string SymbolsFileName { get { return @\"" + _session.globalScope.name + ".pdb\"; } }");
-                    writer.WriteLine("\t\t public static uint Signature { get { return " + _session.globalScope.signature.ToString() + "; } }");
-                    writer.WriteLine("\t\t public static string Contents { get { return @\"" + Contents + ")\"; } }");
-                    writer.WriteLine("\t\t public static string Created { get { return \"" + DateTime.Now.ToString("dd-MM-yyyyTHH:mm:ss") + "\"; } }");
+                    writer.WriteLine("\t\t public string MachineType { get { return @\"" + m.ToString() + "\"; } }");
+                    writer.WriteLine("\t\t public string SymbolsFileName { get { return @\"" + _session.globalScope.name + ".pdb\"; } }");
+                    writer.WriteLine("\t\t public uint Signature { get { return " + _session.globalScope.signature.ToString() + "; } }");
+                    writer.WriteLine("\t\t public string Contents { get { return @\"" + Contents + ")\"; } }");
+                    writer.WriteLine("\t\t public string Created { get { return \"" + DateTime.Now.ToString("dd-MM-yyyyTHH:mm:ss") + "\"; } }");
                     writer.WriteLine("\t}");
                     writer.WriteLine("\t#endregion");
                 }
@@ -78,6 +78,34 @@ namespace Pdb_Magician
                 return false;
             }
 
+        }
+
+        private bool ExportClassFile()
+        {
+            try
+            {
+                string outputFile = Path.Combine(_destinationFolder, "MxSymbols.cs");
+                using (StreamWriter writer = new StreamWriter(outputFile))
+                {
+                    writer.WriteLine("namespace LiveForensics.Symbols");
+                    writer.WriteLine("{");
+                    writer.WriteLine("\tpublic partial class MxSymbols");
+                    writer.WriteLine("\t{");
+                    writer.WriteLine("\t\tpublic MxSymbols()");
+                    writer.WriteLine("\t\t{");
+                    writer.WriteLine("\t\t\tLoadConstants();");
+                    writer.WriteLine("\t\t}");
+                    writer.WriteLine("\t}");
+                    writer.WriteLine("}");
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _errorList.Add("Error while processing structures..");
+                _errorList.Add(ex.Message);
+                return false;
+            }
         }
     }
 }

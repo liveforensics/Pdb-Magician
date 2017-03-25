@@ -20,7 +20,7 @@ namespace Pdb_Magician
                 {
                     writer.WriteLine("using System;");
                     writer.WriteLine("");
-                    writer.WriteLine("namespace MemoryExplorer.Symbols");
+                    writer.WriteLine("namespace LiveForensics.Symbols");
                     writer.WriteLine("{");
                     foreach (IDiaSymbol sym in _enumEnums)
                     {

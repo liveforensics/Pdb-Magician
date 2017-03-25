@@ -30,6 +30,9 @@ namespace Pdb_Magician
                 _errorList.Add("Could't find LIST_ENTRY to determine pointer size.");
                 return false;
             }
+            if (!ExportClassFile())
+                return false;
+
             if (!ExportConstants())
                 return false;
 
@@ -57,6 +60,7 @@ namespace Pdb_Magician
                 return false;
 
             List<string> sourceFiles = new List<string>();
+            sourceFiles.Add(Path.Combine(_destinationFolder, "MxSymbols.cs"));
             sourceFiles.Add(Path.Combine(_destinationFolder, "PdbConstants.cs"));
             sourceFiles.Add(Path.Combine(_destinationFolder, "PdbEnums.cs"));
             sourceFiles.Add(Path.Combine(_destinationFolder, "PdbStructures.cs"));

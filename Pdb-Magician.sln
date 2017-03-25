@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pdb-Magician", "Pdb-Magicia
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestHarness", "TestHarness\TestHarness.csproj", "{8583184E-EEBE-434C-9749-DBA719E999CE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Liveforensics.Symbols", "Liveforensics.Symbols\Liveforensics.Symbols.csproj", "{F5CAD4D9-AE0D-4093-813B-916E77905CD4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{8583184E-EEBE-434C-9749-DBA719E999CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8583184E-EEBE-434C-9749-DBA719E999CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8583184E-EEBE-434C-9749-DBA719E999CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5CAD4D9-AE0D-4093-813B-916E77905CD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5CAD4D9-AE0D-4093-813B-916E77905CD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5CAD4D9-AE0D-4093-813B-916E77905CD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5CAD4D9-AE0D-4093-813B-916E77905CD4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
