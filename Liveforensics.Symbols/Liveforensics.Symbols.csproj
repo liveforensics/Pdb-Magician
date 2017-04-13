@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4134224E-1446-4750-BB9C-BD32289EB9F1}</ProjectGuid>
+    <ProjectGuid>{F5CAD4D9-AE0D-4093-813B-916E77905CD4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MemoryExplorer.Symbols</RootNamespace>
-    <AssemblyName>MemoryExplorer.Symbols</AssemblyName>
+    <RootNamespace>Liveforensics.Symbols</RootNamespace>
+    <AssemblyName>Liveforensics.Symbols</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MxSymbols.cs" />
     <Compile Include="PdbConstants.cs" />
     <Compile Include="PdbEnums.cs" />
     <Compile Include="PdbStructures.cs" />

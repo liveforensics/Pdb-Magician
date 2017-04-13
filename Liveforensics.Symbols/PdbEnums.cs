@@ -1,6 +1,6 @@
 using System;
 
-namespace MemoryExplorer.Symbols
+namespace LiveForensics.Symbols
 {
 	public enum SE_WS_APPX_SIGNATURE_ORIGIN
 	{
@@ -2017,5 +2017,10 @@ namespace MemoryExplorer.Symbols
 		GenericLessThan = 0,
 		GenericGreaterThan = 1,
 		GenericEqual = 2
+	}
+	public enum _UNNAMED_ENUM_KTMOH_COMMITTRANSACTION_RESULT
+	{
+		KTMOH_CommitTransaction_Result = 1,
+		KTMOH_RollbackTransaction_Result = 2
 	}
 }
