@@ -279,6 +279,17 @@ namespace Pdb_Magician
                 }
 
             }
+            else if(fr.isArray)
+            {
+                Dictionary<string, object> inner = new Dictionary<string, object>();
+                inner.Add("target", fr.targetArg.TrimEnd(new char[] { '*' }));
+                Dictionary<string, object> loaded = new Dictionary<string, object>();
+                loaded.Add("count", fr.arrayCount);
+                loaded.Add("target", "Pointer");
+                loaded.Add("target_args", inner);
+                JArray section = GetJsonSection("Array", fr.offset, loaded);
+                _manifestRootNodes.Add(new JProperty(fr.name, section));
+            }
         }
         private void AddPointerToManifest(FunctionRecord fr)
         {
@@ -392,6 +403,12 @@ namespace Pdb_Magician
                 else
                     _accessBlock.Add("\t\t\treturnValue[i] = (" + fr.arrayType + ")BitConverter.To" + fr.arrayType + "(_StructureData, (i * size) + _BufferOffset + " + fr.offset + ");");
 
+            }
+            else if(fr.isArray)
+            {
+                _accessBlock.Add("\t\tint size = " + fr.enumLength + ";");
+                _accessBlock.Add("\t\tfor(int i=0; i<" + fr.arrayCount + "; i++ )");
+                _accessBlock.Add("\t\t\treturnValue[i] = BitConverter.To" + fr.arrayType + "(_StructureData, (i * size) + _BufferOffset + " + fr.offset + ");");
             }
             _accessBlock.Add("\t\treturn returnValue;");
             _accessBlock.Add("\t}");
