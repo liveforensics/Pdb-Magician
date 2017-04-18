@@ -127,6 +127,8 @@ the member you call in your code might not exist:
     }
 ```
 
+### Catelogue
+
 The CatalogueInformation class contains some useful information:
 
 ```CS
@@ -159,13 +161,88 @@ Use it like this:
     }
 ```
 
- including Contents
-which will return a JSON string with a list of all the structures captured in the class library.
+### Constants
 
-You can then access each structure by passing in a byte buffer containing the data and accessing
-the structure members via the types.
+You can access the constants like this:
+
+```CS
+    dynamic _constantHelper = null;
+    private void InitialiseConstants()
+    {
+        foreach (Type type in _profileDll.GetExportedTypes())
+        {
+            if (type.FullName == @"LiveForensics.Symbols.MxSymbols")
+            {
+                _constantHelper = Activator.CreateInstance(type);
+                return;
+            }
+        }
+    }
+    public uint GetConstant(string name)
+    {
+        if (_constantHelper == null)
+            throw new ArgumentException("Profile couldn't load constants.");
+        uint constant;
+        string testName = name;
+        try
+        {
+            constant = _constantHelper.LookupConstant(name);
+        }
+        catch (Exception)
+        {
+            try
+            {
+                if (name.StartsWith("_"))
+                    testName = name.TrimStart(new char[] { '_' });
+                else
+                    testName = "_" + name;
+                constant = _constantHelper.LookupConstant(testName);
+            }
+            catch (Exception)
+            {
+                throw new ArgumentException("Profile couldn't find constant: " + name);
+            }
+                
+        }
+        return constant;
+    }
+```
+In this example, I've included a trick to try both the original requested name and if that fails
+to also try the leading underscore version as well, which was common on older images.
+
+### Manifests
 
 Each structure function contains a manifest member which will return a JSON string detailing the structure's 
 structure in a similar way to the rekall profiles.
+
+Note that I pretty printed the manifest in the PdbStructure.cs file, so I need to clean up the string before converting
+it to a JSON object.
+
+```CS
+	using Newtonsoft.Json;
+	using Newtonsoft.Json.Linq;
+
+    private Dictionary<string, JToken> GetDictionary(string structure)
+    {
+        try
+        {
+            dynamic st = GetStructure(structure, _dummyBuffer, 0);
+            string manifest = st.manifest;
+            manifest = manifest.Replace("\r", "");
+            manifest = manifest.Replace("\t", "");
+            manifest = manifest.Replace("\n", "");
+            manifest = manifest.Replace("(", "");
+            manifest = manifest.Replace(")", "");
+
+            object parsedObject = JsonConvert.DeserializeObject(manifest);
+            var dict = JsonConvert.DeserializeObject<Dictionary<string, JToken>>(parsedObject.ToString());
+            return dict;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+```
 
 ## Warning, I've done limited testing which seems to work, but I can't possibly have covered all the possibilites, so I won't claim it'll work everytime.
