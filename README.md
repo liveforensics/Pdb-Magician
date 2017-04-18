@@ -48,7 +48,7 @@ ParseAllSymbols just converts all the structures it can find.
 ```
 
 
-Use the test harness to see how to call the library.
+See the TestHarness project for a working implementation of the above.
 
 The essential thing you should know is that you have to provide the ParseSymbolFile function with a list
 of the structures you want to extract from the Symbol file. The parser will work out the dependencies 
@@ -58,7 +58,7 @@ So for example you could just ask the parser to extract "_EPROCESS" and it will 
 
 The parser always extracts all the constants and enums.
 
-If all went well you should see PbdConstants.cs, PdbEnums.cs and PdbStructures.cs in your
+If all went well you should see MxSymbols.cs, PbdConstants.cs, PdbEnums.cs and PdbStructures.cs in your
 specified output folder along with the LiveForensics.Symbols.dll library.
 
 
@@ -224,8 +224,8 @@ Also, it doesn't matter what's in the buffer, since we're only interested in the
 least as big as the structure you're targetting. (I just use an empty 4096 byte buffer).
 
 ```CS
-	using Newtonsoft.Json;
-	using Newtonsoft.Json.Linq;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
 
     private Dictionary<string, JToken> GetDictionary(string structure)
     {
