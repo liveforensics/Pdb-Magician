@@ -68,7 +68,7 @@ project, overwriting the originals and build it from there.
 
 This is useful when the conversion hasn't quite worked and you may need to fix some of the .cs files.
 
-## The Class Library
+## Using The Class Library
 
 I find it most useful to be able to load the appropriate version of the class library at runtime.
 
