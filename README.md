@@ -61,6 +61,12 @@ The parser always extracts all the constants and enums.
 If all went well you should see MxSymbols.cs, PbdConstants.cs, PdbEnums.cs and PdbStructures.cs in your
 specified output folder along with the LiveForensics.Symbols.dll library.
 
+## Building The Library
+
+I've already built the library for you, but if you want to do it yourself, you can copy the 4 .cs files into the LiveForensics.Symbols
+project, overwriting the originals and build it from there.
+
+This is useful when the conversion hasn't quite worked and you may need to fix some of the .cs files.
 
 ## The Class Library
 
