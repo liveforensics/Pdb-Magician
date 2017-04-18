@@ -22,12 +22,31 @@ There are essentially 3 functions
 RetrieveSymbolFile takes the pdb filename and the guid age and will retrieve the PDB symbol file from the Microsoft Symbol Server.
 
 ```CS
-function = new thing()
+	string guidAge = "AA6BC31F61F7415F8C06994099933BBD1";
+    string filename = "ntkrnlmp.pdb";
+
+    PdbMagician myLib = new PdbMagician();
+    bool result = myLib.RetrieveSymbolFile(filename, guidAge, @"c:\temp\magician");
 ```
 
 ParseSymbolFile will then turn that PDB Symbol file into a C# class library containing structures that you've selected.
 
+```CS
+    string pdbLocation = Path.Combine(Path.Combine(@"c:\temp\magician", guidAge), filename);
+    List<string> todoList = new List<string>();
+    todoList.Add("_OBJECT_DIRECTORY");
+    todoList.Add("_EPROCESS");
+    todoList.Add("_LIST_ENTRY");
+    result = myLib.ParseSymbolFile(pdbLocation, Path.Combine(@"c:\temp\magician", guidAge), todoList.ToArray());
+```
+
 ParseAllSymbols just converts all the structures it can find.
+
+```CS
+    string pdbLocation = Path.Combine(Path.Combine(@"c:\temp\magician", guidAge), filename);
+    result = myLib.ParseAllSymbols(pdbLocation, Path.Combine(@"c:\temp\magician", guidAge));
+```
+
 
 Use the test harness to see how to call the library.
 
