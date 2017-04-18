@@ -22,7 +22,7 @@ There are essentially 3 functions
 RetrieveSymbolFile takes the pdb filename and the guid age and will retrieve the PDB symbol file from the Microsoft Symbol Server.
 
 ```CS
-	string guidAge = "AA6BC31F61F7415F8C06994099933BBD1";
+    string guidAge = "AA6BC31F61F7415F8C06994099933BBD1";
     string filename = "ntkrnlmp.pdb";
 
     PdbMagician myLib = new PdbMagician();
@@ -63,6 +63,45 @@ specified output folder along with the LiveForensics.Symbols.dll library.
 
 
 ## The Class Library
+
+I find it most useful to be able to load the appropriate version of the class library at runtime.
+
+```CS
+    Assembly _profileDll = Assembly.LoadFile(dllLocation);
+```
+
+To access one of the structures, I do this:
+
+```CS
+    public dynamic GetStructure(string name, byte[] buffer, int offset)
+    {
+        try
+        {
+            string target = "LiveForensics.Symbols." + name;
+            if (buffer == null)
+                return null;
+            if (offset > buffer.Length)
+                return null;
+            foreach (Type type in _profileDll.GetExportedTypes())
+            {
+                if (type.FullName == target)
+                {
+                    dynamic c = Activator.CreateInstance(type, buffer, offset);
+                    int size = c.MxStructureSize;
+                    if ((buffer.Length - offset) < size)
+                        return null;
+                    return c;
+                }
+            }
+            return null;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+```
+
 
 Start with the CatalogueInformation class, it contains some useful information including Contents
 which will return a JSON string with a list of all the structures captured in the class library.
