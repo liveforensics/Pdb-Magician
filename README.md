@@ -21,9 +21,9 @@ There are essentially 3 functions
 
 RetrieveSymbolFile takes the pdb filename and the guid age and will retrieve the PDB symbol file from the Microsoft Symbol Server.
 
-'''CS
+```CS
 function = new thing()
-'''
+```
 
 ParseSymbolFile will then turn that PDB Symbol file into a C# class library containing structures that you've selected.
 
