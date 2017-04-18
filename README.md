@@ -106,7 +106,7 @@ To access one of the structures, I do this. Notice I'm passing in a buffer conta
 and call it like this:
 
 ```CS
-    dynamic _dynamicObject = GetStructure("_EPROCESS", physicalAddress);
+    dynamic _dynamicObject = GetStructure("_EPROCESS", buffer, 0);
 ```
 
 You can now access the (in this case) _EPROCESS members directly from the _dynamicObject, but I like to wrap them to take account of the fact that 
