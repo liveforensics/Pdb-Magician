@@ -70,7 +70,9 @@ I find it most useful to be able to load the appropriate version of the class li
     Assembly _profileDll = Assembly.LoadFile(dllLocation);
 ```
 
-To access one of the structures, I do this:
+### Structures
+
+To access one of the structures, I do this. Notice I'm passing in a buffer containing the data I want to interpret as the structure.
 
 ```CS
     public dynamic GetStructure(string name, byte[] buffer, int offset)
@@ -127,7 +129,7 @@ the member you call in your code might not exist:
     }
 ```
 
-### Catelogue
+### Catalogue
 
 The CatalogueInformation class contains some useful information:
 
@@ -217,6 +219,9 @@ structure in a similar way to the rekall profiles.
 
 Note that I pretty printed the manifest in the PdbStructure.cs file, so I need to clean up the string before converting
 it to a JSON object.
+
+Also, it doesn't matter what's in the buffer, since we're only interested in the manifest. But the buffer needs to be real and at 
+least as big as the structure you're targetting. (I just use an empty 4096 byte buffer).
 
 ```CS
 	using Newtonsoft.Json;
