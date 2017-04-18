@@ -101,9 +101,65 @@ To access one of the structures, I do this:
         }
     }
 ```
+and call it like this:
 
+```CS
+    dynamic _dynamicObject = GetStructure("_EPROCESS", physicalAddress);
+```
 
-Start with the CatalogueInformation class, it contains some useful information including Contents
+You can now access the (in this case) _EPROCESS members directly from the _dynamicObject, but I like to wrap them to take account of the fact that 
+the member you call in your code might not exist:
+
+```CS
+    public uint Pid
+    {
+        get
+        {
+            try
+            {
+                return (uint)_dynamicObject.UniqueProcessId;
+            }
+            catch (Exception)
+            {
+                throw new ArgumentException("Couldn't extract UniqueProcessId from current EPROCESS structure.");
+            }
+        }
+    }
+```
+
+The CatalogueInformation class contains some useful information:
+
+```CS
+    dynamic _catalogueHelper = null;
+
+    private void InitialiseCatalogue()
+    {
+        foreach (Type type in _profileDll.GetExportedTypes())
+        {
+            if (type.FullName == @"LiveForensics.Symbols.CatalogueInformation")
+            {
+                _catalogueHelper = Activator.CreateInstance(type);
+                return;
+            }
+        }
+    }
+```
+
+Use it like this:
+
+```CS
+    public Guid Guid
+    {
+        get
+        {
+            if (_catalogueHelper == null)
+                return Guid.Empty;
+            return _catalogueHelper.Guid;
+        }
+    }
+```
+
+ including Contents
 which will return a JSON string with a list of all the structures captured in the class library.
 
 You can then access each structure by passing in a byte buffer containing the data and accessing
