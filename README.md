@@ -13,14 +13,21 @@ member variables for each given structure.
 I've also parsed out the Public Symbols which include the constants and the function addresses, 
 plus I've parsed the enums.
 
-There are essentially 2 functions
+There are essentially 3 functions
 
 * RetrieveSymbolFile
 * ParseSymbolFile
+* ParseAllSymbols
 
 RetrieveSymbolFile takes the pdb filename and the guid age and will retrieve the PDB symbol file from the Microsoft Symbol Server.
 
-ParseSymbolFile will then turn that PDB Symbol file into a C# class library.
+'''CS
+function = new thing()
+'''
+
+ParseSymbolFile will then turn that PDB Symbol file into a C# class library containing structures that you've selected.
+
+ParseAllSymbols just converts all the structures it can find.
 
 Use the test harness to see how to call the library.
 
@@ -34,6 +41,7 @@ The parser always extracts all the constants and enums.
 
 If all went well you should see PbdConstants.cs, PdbEnums.cs and PdbStructures.cs in your
 specified output folder along with the LiveForensics.Symbols.dll library.
+
 
 ## The Class Library
 
