@@ -43,6 +43,16 @@ namespace Pdb_Magician
             _destinationFolder = destinationFolder;
             return ProcessSymbolFile();
         }
+        public bool ParseAllSymbols(string pdbName, string destinationFolder)
+        {
+            _pdbFile = pdbName;
+            _doneList.Clear();
+            _accessBlock.Clear();
+            _bodyList.Clear();
+            _todoList = null;
+            _destinationFolder = destinationFolder;
+            return ProcessSymbolFile();
+        }
         public string[] GetErrorList()
         {
             return _errorList.ToArray();

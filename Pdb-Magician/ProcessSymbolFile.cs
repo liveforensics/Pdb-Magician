@@ -39,23 +39,30 @@ namespace Pdb_Magician
             if (!ExportEnums())
                 return false;
 
-            int overallCount = _todoList.Count + _todoSymbolList.Count;
-            while (overallCount > 0)
+            if (_todoList == null)
+                ProcessAllStructures();
+            else
             {
-                if (_todoList.Count > 0)
+                int overallCount = _todoList.Count + _todoSymbolList.Count;
+                while (overallCount > 0)
                 {
-                    string next = _todoList[0];
-                    _todoList.RemoveAt(0);
-                    ProcessStructure(next);
+                    if (_todoList.Count > 0)
+                    {
+                        string next = _todoList[0];
+                        _todoList.RemoveAt(0);
+                        ProcessStructure(next);
+                    }
+                    if (_todoSymbolList.Count > 0)
+                    {
+                        Symbol next = _todoSymbolList[0];
+                        _todoSymbolList.RemoveAt(0);
+                        ProcessSymbol(next);
+                    }
+                    overallCount = _todoList.Count + _todoSymbolList.Count;
                 }
-                if (_todoSymbolList.Count > 0)
-                {
-                    Symbol next = _todoSymbolList[0];
-                    _todoSymbolList.RemoveAt(0);
-                    ProcessSymbol(next);
-                }
-                overallCount = _todoList.Count + _todoSymbolList.Count;
             }
+
+            
             if (!ExportStructures())
                 return false;
 
