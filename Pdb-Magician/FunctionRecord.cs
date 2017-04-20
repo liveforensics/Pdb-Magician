@@ -143,13 +143,13 @@ namespace Pdb_Magician
         }
         private UInt64 GetMask(int start, int end)
         {
-            int counter = 1;
+            ulong counter = 1;
             UInt64 value = 0;
             for (int i = 0; i < end; i++)
             {
                 if (i == start)
                 {
-                    value += (uint)counter;
+                    value += counter;
                     start++;
                 }
                 counter *= 2;
