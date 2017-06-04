@@ -51,6 +51,8 @@ namespace Pdb_Magician
             }
             foreach (FunctionRecord entry in entries)
             {
+                if (_enumList.Contains(entry.symbolType))
+                    entry.isFoundInEnumList = true;
                 if (!entry.isBuiltinType && structureName != entry.type && !_doneList.Contains(entry.type) && !_todoList.Contains(entry.type) && !entry.type.StartsWith("_UNNAMED"))
                 {
                     if (entry.isArray)
@@ -105,6 +107,8 @@ namespace Pdb_Magician
             Members member = new Members(c);
             Symbol grandChild = c.InspectType();
             Symbol greatGrandChild = grandChild.InspectType();
+            if(c.Name == "OptimalZeroingAttribute")
+                Debug.WriteLine("");
             if ("RecordType" == c.Name)
             {
                 Debug.WriteLine("");
@@ -335,7 +339,7 @@ namespace Pdb_Magician
             _accessBlock.Add("{");
             _accessBlock.Add("\tget");
             _accessBlock.Add("\t{");
-            _accessBlock.Add("\t\t// start: " + fr.startBit + "  end: " + fr.endBit + "  Mask: " + Convert.ToString((int)fr.bitMask, 2).PadLeft(max, '0'));
+            _accessBlock.Add("\t\t// start: " + fr.startBit + "  end: " + fr.endBit + "  Mask: " + Convert.ToString((long)fr.bitMask, 2).PadLeft(max, '0'));
             if (fr.friendlySymbolType == "Byte")
                 _accessBlock.Add("\t\t" + fr.structureType + " value = _StructureData[_BufferOffset + " + fr.offset + "];");
             else
@@ -360,6 +364,8 @@ namespace Pdb_Magician
         }
         private void AddArrayToAccessBlock(FunctionRecord fr)
         {
+            bool isKnownEnumeration = _enumList.Contains(fr.targetArg);
+
             _accessBlock.Add("public " + fr.structureType + " " + fr.name);
             _accessBlock.Add("{");
             _accessBlock.Add("\tget");
@@ -404,11 +410,23 @@ namespace Pdb_Magician
                     _accessBlock.Add("\t\t\treturnValue[i] = (" + fr.arrayType + ")BitConverter.To" + fr.arrayType + "(_StructureData, (i * size) + _BufferOffset + " + fr.offset + ");");
 
             }
-            else if(fr.isArray)
+            else if(fr.isArray && !isKnownEnumeration)
             {
-                _accessBlock.Add("\t\tint size = " + fr.enumLength + ";");
+                if (!fr.isBuiltinType)
+                    _accessBlock.Add("\t\tint size = returnValue[0].MxStructureSize;");
+                else
+                    _accessBlock.Add("\t\tint size = " + fr.enumLength + ";");
                 _accessBlock.Add("\t\tfor(int i=0; i<" + fr.arrayCount + "; i++ )");
-                _accessBlock.Add("\t\t\treturnValue[i] = BitConverter.To" + fr.arrayType + "(_StructureData, (i * size) + _BufferOffset + " + fr.offset + ");");
+                if (!fr.isBuiltinType)
+                    _accessBlock.Add("\t\t\treturnValue[i] = new " + fr.arrayType + "(_StructureData, (i * size) + _BufferOffset + " + fr.offset + ");");
+                else
+                    _accessBlock.Add("\t\t\treturnValue[i] = (" + fr.arrayType + ")BitConverter.To" + fr.arrayType + "(_StructureData, (i * size) + _BufferOffset + " + fr.offset + ");");
+            }
+            else if(fr.isArray && isKnownEnumeration)
+            {
+                _accessBlock.Add("\t\tint size = 4;");
+                _accessBlock.Add("\t\tfor(int i=0; i<" + fr.arrayCount + "; i++ )");
+                _accessBlock.Add("\t\t\treturnValue[i] = (" + fr.arrayType + ")BitConverter.ToUInt32(_StructureData, (i * size) + _BufferOffset + " + fr.offset + ");");
             }
             _accessBlock.Add("\t\treturn returnValue;");
             _accessBlock.Add("\t}");

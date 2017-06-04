@@ -17,7 +17,7 @@ namespace Pdb_Magician
         private IDiaEnumSymbols _enumEnums;
         private int _pointerSize;
         private List<Symbol> _todoSymbolList = new List<Symbol>(); // I need this to process <unnamed-tag> blocks
-        
+        private List<string> _enumList = new List<string>();
 
         private bool ProcessSymbolFile()
         {

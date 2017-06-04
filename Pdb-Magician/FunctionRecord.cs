@@ -23,6 +23,7 @@ namespace Pdb_Magician
         public bool isEnum = false;
         public bool isBuiltinType = false;
         public bool isMultiDimensionalArray = false;
+        public bool isFoundInEnumList = false;
         private int _pointerSize;
         public UInt64 bitMask;
         public string arrayType;
@@ -46,6 +47,7 @@ namespace Pdb_Magician
             Symbol greatGrandChild = grandChild.InspectType();
             isPointer = symbolType.EndsWith("*");
             isEnum = (grandChild.Kind == SymbolKind.Enum);
+            isArray = (grandChild.Kind == SymbolKind.ArrayType);
             isBuiltinType = TestType(friendlySymbolType);
             offset = member.offset;
             access = SymbolWrapper.rgAccess[(int)member.access];
@@ -71,65 +73,98 @@ namespace Pdb_Magician
                 }
                 type = "Enumeration";
             }
-            else if (friendlySymbolType != null && friendlySymbolType.EndsWith("]"))
+            else if(isArray)
             {
                 string[] parts = friendlySymbolType.Split(new char[] { '[', ']' }, StringSplitOptions.RemoveEmptyEntries);
-                if(parts.Length == 2)
-                {
-                    try
-                    {
-                        arrayType = parts[0];
-                        arrayCount = int.Parse(parts[1]);
-                        structureType = arrayType + "[]";
-                        isArray = true;
-                        isBuiltinType = TestType(arrayType);
-                        arrayTarget = (SymbolKind)greatGrandChild.Kind;
-                        enumLength = (int)greatGrandChild.Length;
-                        enumName = greatGrandChild.Name;
-                        enumTarget = GetEnumType(greatGrandChild);
-                    }
-                    catch { }
-                }
-                else if(parts.Length == 3)
-                {
-                    try
-                    {
-                        isMultiDimensionalArray = true;
-                        isArray = true;
-                        arraySize = (int)grandChild.Length;
-                        arrayType = parts[0];
-                        arrayCount = int.Parse(parts[1]);
-                        int s = int.Parse(parts[2]);
-                        enumLength = arrayCount * s; // just using enumLength for convenience
-                        friendlySymbolType = arrayType + "[" + enumLength + "]";
-                        structureType = arrayType + "[]";
-                        isBuiltinType = TestType(arrayType);
-                        arrayTarget = (SymbolKind)greatGrandChild.Kind;
-                    }
-                    catch { }
-                }
-                else if(parts.Length == 4) // I can't keep doing this. Need to rewrite to handle any number of dimensions.
-                {
-                    try
-                    {
-                        isMultiDimensionalArray = true;
-                        arraySize = (int)grandChild.Length;
-                        innerArraySize = (int)greatGrandChild.Length;
-                        arrayType = parts[0];
-                        arrayCount = int.Parse(parts[1]);
-                        int s = int.Parse(parts[2]);
-                        int t = int.Parse(parts[3]);
-                        enumLength = arrayCount * s * t; // just using enumLength for convenience
-                        friendlySymbolType = arrayType + "[" + enumLength + "]";
-                        structureType = arrayType + "[]";
-                        isBuiltinType = TestType(arrayType);
-                        arrayTarget = (SymbolKind)greatGrandChild.Kind;
-                        isArray = true;
-                    }
-                    catch { }
-                }
+                arrayType = parts[0];
+                arrayCount = int.Parse(parts[1]);
+                structureType = arrayType + "[]";
+                isBuiltinType = TestType(arrayType);
+                arrayTarget = (SymbolKind)greatGrandChild.Kind;
+                enumLength = GetTypeLength(arrayType);
+                enumName = greatGrandChild.Name;
+                enumTarget = GetEnumType(greatGrandChild);
+            }
+            //else if (friendlySymbolType != null && friendlySymbolType.EndsWith("]"))
+            //{
+                //string[] parts = friendlySymbolType.Split(new char[] { '[', ']' }, StringSplitOptions.RemoveEmptyEntries);
+                //if (parts.Length == 2)
+                //{
+                //    try
+                //    {
+                //        arrayType = parts[0];
+                //        arrayCount = int.Parse(parts[1]);
+                //        structureType = arrayType + "[]";
+                //        isArray = true;
+                //        isBuiltinType = TestType(arrayType);
+                //        arrayTarget = (SymbolKind)greatGrandChild.Kind;
+                //        enumLength = (int)greatGrandChild.Length;
+                //        enumName = greatGrandChild.Name;
+                //        enumTarget = GetEnumType(greatGrandChild);
+                //    }
+                //    catch { }
+                //}
+                //else if (parts.Length == 3)
+                //{
+                //    try
+                //    {
+                //        isMultiDimensionalArray = true;
+                //        isArray = true;
+                //        arraySize = (int)grandChild.Length;
+                //        arrayType = parts[0];
+                //        arrayCount = int.Parse(parts[1]);
+                //        int s = int.Parse(parts[2]);
+                //        enumLength = arrayCount * s; // just using enumLength for convenience
+                //        friendlySymbolType = arrayType + "[" + enumLength + "]";
+                //        structureType = arrayType + "[]";
+                //        isBuiltinType = TestType(arrayType);
+                //        arrayTarget = (SymbolKind)greatGrandChild.Kind;
+                //    }
+                //    catch { }
+                //}
+                //else if (parts.Length == 4) // I can't keep doing this. Need to rewrite to handle any number of dimensions.
+                //{
+                //    try
+                //    {
+                //        isMultiDimensionalArray = true;
+                //        arraySize = (int)grandChild.Length;
+                //        innerArraySize = (int)greatGrandChild.Length;
+                //        arrayType = parts[0];
+                //        arrayCount = int.Parse(parts[1]);
+                //        int s = int.Parse(parts[2]);
+                //        int t = int.Parse(parts[3]);
+                //        enumLength = arrayCount * s * t; // just using enumLength for convenience
+                //        friendlySymbolType = arrayType + "[" + enumLength + "]";
+                //        structureType = arrayType + "[]";
+                //        isBuiltinType = TestType(arrayType);
+                //        arrayTarget = (SymbolKind)greatGrandChild.Kind;
+                //        isArray = true;
+                //    }
+                //    catch { }
+                //}
+            //}
+        }
+
+        private int GetTypeLength(string arrayType)
+        {
+            switch(arrayType)
+            {
+                case "byte":
+                    return 1;
+                case "UInt16":
+                case "Int16":
+                    return 2;
+                case "UInt32":
+                case "Int32":
+                    return 4;
+                case "UInt64":
+                case "Int64":
+                    return 8;
+                default:
+                    return 0;
             }
         }
+
         private bool TestType(string arrayType)
         {
             if (arrayType == "Byte" || arrayType == "UInt16" || arrayType == "UInt32" || arrayType == "UInt64")
@@ -248,6 +283,21 @@ namespace Pdb_Magician
         private string GetUsefulSymbolType(string st)
         {
             string pointer = _pointerSize == 4 ? "UInt32" : "UInt64";
+            if (st.StartsWith("unsigned long"))
+                st = st.Replace("unsigned long", "UInt32");
+            if (st.StartsWith("unsigned long long"))
+                st = st.Replace("unsigned long long", "UInt64");
+            if (st.StartsWith("long"))
+                st = st.Replace("long", "Int32");
+            if (st.StartsWith("char"))
+                st = st.Replace("char", "Char");
+            if (st.StartsWith("byte"))
+                st = st.Replace("byte", "Byte");
+            if (st.StartsWith("wchar_t"))
+                st = st.Replace("wchar_t", "UInt16");
+            if (st.StartsWith("long long"))
+                st = st.Replace("long long", "Int64");
+
             if (st.EndsWith("*"))
             {
                 return pointer;
@@ -255,40 +305,32 @@ namespace Pdb_Magician
             
             if (st.EndsWith("]"))
             {
-                if(st.Contains("*["))
+                if (st.Contains("*["))
                 {
                     int index = st.IndexOf('*');
-                    targetArg = st.Substring(0, index+1);
+                    targetArg = st.Substring(0, index + 1);
                     return st.Replace(targetArg, pointer);
                 }
-                if (st.StartsWith("unsigned long"))
-                    return st.Replace("unsigned long", "UInt32");
-                if (st.StartsWith("unsigned long long"))
-                    return st.Replace("unsigned long long", "UInt64");
-                if (st.StartsWith("long"))
-                    return st.Replace("long", "Int32");
-                if (st.StartsWith("char"))
-                    return st.Replace("char", "Char");
-                if (st.StartsWith("wchar_t"))
-                    return st.Replace("wchar_t", "UInt16");
-                if (st.StartsWith("long long"))
-                    return st.Replace("long long", "Int64");
-            }
-            switch (st)
-            {
-                case "unsigned long":
-                    return "UInt32";
-                case "long":
-                    return "Int32";
-                case "char":
-                    return "Char";
-                case "byte":
-                    return "Byte";
-                case "wchar_t":
-                    return "UInt16";
-                default:
+                int count = st.Split('[').Length - 1; // have we got a multi-dimensional array?
+                if(count > 1)
+                {
+                    int index = st.IndexOf('[');
+                    targetArg = st.Substring(0, index);
+                    st = st.Replace("][", ",");
+                    int end = st.IndexOf(']');
+                    st = st.Substring(index + 1, end - index - 1);
+                    string[] parts = st.Split(new char[] { ','}, StringSplitOptions.RemoveEmptyEntries);
+                    int total = 1;
+                    foreach (var item in parts)
+                    {
+                        int v = int.Parse(item);
+                        total *= v;
+                    }
+                    st = targetArg + "[" + total.ToString() + "]";
                     return st;
+                }
             }
+            return st;
         }
     }
 }

@@ -10,6 +10,29 @@ namespace LiveForensics.Symbols
 		SE_WS_APPX_SIGNATURE_ORIGIN_WINDOWS = 3,
 		SE_WS_APPX_SIGNATURE_ORIGIN_ENTERPRISE = 4
 	}
+	public enum _PS_MITIGATION_OPTION
+	{
+		PS_MITIGATION_OPTION_NX = 0,
+		PS_MITIGATION_OPTION_SEHOP = 1,
+		PS_MITIGATION_OPTION_FORCE_RELOCATE_IMAGES = 2,
+		PS_MITIGATION_OPTION_HEAP_TERMINATE = 3,
+		PS_MITIGATION_OPTION_BOTTOM_UP_ASLR = 4,
+		PS_MITIGATION_OPTION_HIGH_ENTROPY_ASLR = 5,
+		PS_MITIGATION_OPTION_STRICT_HANDLE_CHECKS = 6,
+		PS_MITIGATION_OPTION_WIN32K_SYSTEM_CALL_DISABLE = 7,
+		PS_MITIGATION_OPTION_EXTENSION_POINT_DISABLE = 8,
+		PS_MITIGATION_OPTION_PROHIBIT_DYNAMIC_CODE = 9,
+		PS_MITIGATION_OPTION_CONTROL_FLOW_GUARD = 10,
+		PS_MITIGATION_OPTION_BLOCK_NON_MICROSOFT_BINARIES = 11,
+		PS_MITIGATION_OPTION_FONT_DISABLE = 12,
+		PS_MITIGATION_OPTION_IMAGE_LOAD_NO_REMOTE = 13,
+		PS_MITIGATION_OPTION_IMAGE_LOAD_NO_LOW_LABEL = 14,
+		PS_MITIGATION_OPTION_IMAGE_LOAD_PREFER_SYSTEM32 = 15,
+		PS_MITIGATION_OPTION_RETURN_FLOW_GUARD = 16,
+		PS_MITIGATION_OPTION_LOADER_INTEGRITY_CONTINUITY = 17,
+		PS_MITIGATION_OPTION_STRICT_CONTROL_FLOW_GUARD = 18,
+		PS_MITIGATION_OPTION_RESTRICT_SET_THREAD_CONTEXT = 19
+	}
 	public enum _NT_PRODUCT_TYPE
 	{
 		NtProductWinNt = 1,
@@ -152,7 +175,12 @@ namespace LiveForensics.Symbols
 		FileReplaceCompletionInformation = 61,
 		FileHardLinkFullIdInformation = 62,
 		FileIdExtdBothDirectoryInformation = 63,
-		FileMaximumInformation = 64
+		FileDispositionInformationEx = 64,
+		FileRenameInformationEx = 65,
+		FileRenameInformationExBypassAccessCheck = 66,
+		FileDesiredStorageClassInformation = 67,
+		FileStatInformation = 68,
+		FileMaximumInformation = 69
 	}
 	public enum _FSINFOCLASS
 	{
@@ -315,7 +343,9 @@ namespace LiveForensics.Symbols
 		WheaErrSrcTypeIPFMCA = 9,
 		WheaErrSrcTypeIPFCMC = 10,
 		WheaErrSrcTypeIPFCPE = 11,
-		WheaErrSrcTypeMax = 12
+		WheaErrSrcTypeGenericV2 = 12,
+		WheaErrSrcTypeSCIGenericV2 = 13,
+		WheaErrSrcTypeMax = 14
 	}
 	public enum _WHEA_ERROR_PACKET_DATA_FORMAT
 	{
@@ -398,7 +428,32 @@ namespace LiveForensics.Symbols
 		_HvpReadLogEntryHeader = 19,
 		_HvpReadLogEntry = 20,
 		_CmpMountPreloadedHives = 21,
-		_CmpLoadHiveThread = 22
+		_CmpLoadHiveThread = 22,
+		_CmpCheckLeaf = 23
+	}
+	public enum UoWActionType
+	{
+		UoWAddThisKey = 0,
+		UoWAddChildKey = 1,
+		UoWDeleteThisKey = 2,
+		UoWDeleteChildKey = 3,
+		UoWSetValueNew = 4,
+		UoWSetValueExisting = 5,
+		UoWDeleteValue = 6,
+		UoWSetKeyUserFlags = 7,
+		UoWSetLastWriteTime = 8,
+		UoWSetSecurityDescriptor = 9,
+		UoWRenameSubKey = 10,
+		UoWRenameOldSubKey = 11,
+		UoWRenameNewSubKey = 12,
+		UoWIsolation = 13,
+		UoWInvalid = 14
+	}
+	public enum HSTORAGE_TYPE
+	{
+		Stable = 0,
+		Volatile = 1,
+		InvalidStorage = 2
 	}
 	public enum _CMP_FAILURE_INJECTION_POINT
 	{
@@ -413,7 +468,13 @@ namespace LiveForensics.Symbols
 		CmpFailurePointFlushAndPurge = 8,
 		CmpFailurePointForceLargeBin = 9,
 		CmpFailurePointDontFixAlignment = 10,
-		CmpFailureInjectionPointCount = 11
+		CmpFailurePointAllocateCell = 11,
+		CmpFailurePointMarkDirty = 12,
+		CmpFailurePointAllocateKcb = 13,
+		CmpFailurePointCreateKeyBody = 14,
+		CmpFailurePointForcePoolAllocateKcb = 15,
+		CmpFailurePointForceFreeKcb = 16,
+		CmpFailureInjectionPointCount = 17
 	}
 	public enum _PCW_CALLBACK_TYPE
 	{
@@ -522,7 +583,9 @@ namespace LiveForensics.Symbols
 		TokenIsRestricted = 40,
 		TokenProcessTrustLevel = 41,
 		TokenPrivateNameSpace = 42,
-		MaxTokenInfoClass = 43
+		TokenSingletonAttributes = 43,
+		TokenBnoIsolation = 44,
+		MaxTokenInfoClass = 45
 	}
 	public enum _ARBITER_REQUEST_SOURCE
 	{
@@ -547,7 +610,8 @@ namespace LiveForensics.Symbols
 		PowerRequestAwayModeRequiredInternal = 2,
 		PowerRequestExecutionRequiredInternal = 3,
 		PowerRequestPerfBoostRequiredInternal = 4,
-		PowerRequestInternalInvalid = 5
+		PowerRequestActiveLockScreenInternal = 5,
+		PowerRequestInternalInvalid = 6
 	}
 	public enum _PEP_ACPI_RESOURCE_TYPE
 	{
@@ -599,6 +663,14 @@ namespace LiveForensics.Symbols
 		PoHot = 2,
 		PoConditionMaximum = 3
 	}
+	public enum _SERVERSILO_STATE
+	{
+		SERVERSILO_INITING = 0,
+		SERVERSILO_STARTED = 1,
+		SERVERSILO_SHUTTING_DOWN = 2,
+		SERVERSILO_TERMINATING = 3,
+		SERVERSILO_TERMINATED = 4
+	}
 	public enum _HEAP_FAILURE_TYPE
 	{
 		heap_failure_internal = 0,
@@ -618,7 +690,8 @@ namespace LiveForensics.Symbols
 		heap_failure_lfh_bitmap_mismatch = 14,
 		heap_failure_segment_lfh_bitmap_corruption = 15,
 		heap_failure_segment_lfh_double_free = 16,
-		heap_failure_vs_subsegment_corruption = 17
+		heap_failure_vs_subsegment_corruption = 17,
+		heap_failure_null_heap = 18
 	}
 	public enum _BLOB_ID
 	{
@@ -717,6 +790,17 @@ namespace LiveForensics.Symbols
 		CreateFileTypeNamedPipe = 1,
 		CreateFileTypeMailslot = 2
 	}
+	public enum _ETW_BUFFER_STATE
+	{
+		EtwBufferStateFree = 0,
+		EtwBufferStateGeneralLogging = 1,
+		EtwBufferStateCSwitch = 2,
+		EtwBufferStateFlush = 3,
+		EtwBufferStatePendingCompression = 4,
+		EtwBufferStateCompressed = 5,
+		EtwBufferStatePlaceholder = 6,
+		EtwBufferStateMaximum = 7
+	}
 	public enum _ETW_RT_EVENT_LOSS
 	{
 		EtwRtEventNoLoss = 0,
@@ -724,6 +808,17 @@ namespace LiveForensics.Symbols
 		EtwRtBufferLost = 2,
 		EtwRtBackupLost = 3,
 		EtwRtEventLossMax = 4
+	}
+	public enum _ETW_PERIODIC_TIMER_STATE
+	{
+		EtwpPeriodicTimerUnset = 0,
+		EtwpPeriodicTimerSet = 1
+	}
+	public enum ETW_COMPRESSION_RESUMPTION_MODE
+	{
+		EtwCompressionModeRestart = 0,
+		EtwCompressionModeNoDisable = 1,
+		EtwCompressionModeNoRestart = 2
 	}
 	public enum _KPROFILE_SOURCE
 	{
@@ -765,179 +860,34 @@ namespace LiveForensics.Symbols
 		SecurityImpersonation = 2,
 		SecurityDelegation = 3
 	}
-	public enum POWER_POLICY_DEVICE_TYPE
+	public enum _IO_RATE_CONTROL_TYPE
 	{
-		PolicyDeviceSystemButton = 0,
-		PolicyDeviceThermalZone = 1,
-		PolicyDeviceBattery = 2,
-		PolicyDeviceMemory = 3,
-		PolicyInitiatePowerActionAPI = 4,
-		PolicySetPowerStateAPI = 5,
-		PolicyImmediateDozeS4 = 6,
-		PolicySystemIdle = 7,
-		PolicyDeviceWakeAlarm = 8,
-		PolicyDeviceFan = 9,
-		PolicyCsBatterySaver = 10,
-		PolicyDeviceMax = 11
-	}
-	public enum _KTIMER2_TYPE
-	{
-		KTimer2TypeMin = 0,
-		KTimer2Plain = 0,
-		KTimer2IdleResilient = 1,
-		KTimer2HighResolution = 2,
-		KTimer2NoWake = 3,
-		KTimer2NoWakeFinite = 4,
-		KTimer2TypeMax = 5
-	}
-	public enum IRPLOCK
-	{
-		IRPLOCK_CANCELABLE = 0,
-		IRPLOCK_CANCEL_STARTED = 1,
-		IRPLOCK_CANCEL_COMPLETE = 2,
-		IRPLOCK_COMPLETED = 3
-	}
-	public enum _PNP_DEVICE_DELETE_TYPE
-	{
-		QueryRemoveDevice = 0,
-		CancelRemoveDevice = 1,
-		RemoveDevice = 2,
-		SurpriseRemoveDevice = 3,
-		EjectDevice = 4,
-		RemoveFailedDevice = 5,
-		RemoveUnstartedFailedDevice = 6,
-		MaxDeviceDeleteType = 7
-	}
-	public enum _TRACE_INFORMATION_CLASS
-	{
-		TraceIdClass = 0,
-		TraceHandleClass = 1,
-		TraceEnableFlagsClass = 2,
-		TraceEnableLevelClass = 3,
-		GlobalLoggerHandleClass = 4,
-		EventLoggerHandleClass = 5,
-		AllLoggerHandlesClass = 6,
-		TraceHandleByNameClass = 7,
-		LoggerEventsLostClass = 8,
-		TraceSessionSettingsClass = 9,
-		LoggerEventsLoggedClass = 10,
-		DiskIoNotifyRoutinesClass = 11,
-		TraceInformationClassReserved1 = 12,
-		AllPossibleNotifyRoutinesClass = 12,
-		FltIoNotifyRoutinesClass = 13,
-		TraceInformationClassReserved2 = 14,
-		WdfNotifyRoutinesClass = 15,
-		MaxTraceInformationClass = 16
-	}
-	public enum _MI_WORKING_SET_TYPE
-	{
-		MiWorkingSetTypeSystemCache = 0,
-		MiWorkingSetTypePagedPool = 1,
-		MiWorkingSetTypeSystemPtes = 2,
-		MiWorkingSetTypeMaximum = 3
-	}
-	public enum SLEEPSTUDY_SPM_SCENARIO_CS_EXIT
-	{
-		SpmScenarioStopReasonUnspecified = 16,
-		SpmScenarioStopReasonCsExit = 17,
-		SpmScenarioStopReasonMax = 18
-	}
-	public enum _MI_NODE_NONPAGED_POOL_BITMAP
-	{
-		NonPagedPoolLargePdeNx = 0,
-		NonPagedPoolSmallPde = 1,
-		NonPagedPoolPerPage = 2
-	}
-	public enum _PS_ATTRIBUTE_NUM
-	{
-		PsAttributeParentProcess = 0,
-		PsAttributeDebugObject = 1,
-		PsAttributeToken = 2,
-		PsAttributeClientId = 3,
-		PsAttributeTebAddress = 4,
-		PsAttributeImageName = 5,
-		PsAttributeImageInfo = 6,
-		PsAttributeMemoryReserve = 7,
-		PsAttributePriorityClass = 8,
-		PsAttributeErrorMode = 9,
-		PsAttributeStdHandleInfo = 10,
-		PsAttributeHandleList = 11,
-		PsAttributeGroupAffinity = 12,
-		PsAttributePreferredNode = 13,
-		PsAttributeIdealProcessor = 14,
-		PsAttributeUmsThread = 15,
-		PsAttributeMitigationOptions = 16,
-		PsAttributeProtectionLevel = 17,
-		PsAttributeSecureProcess = 18,
-		PsAttributeJobList = 19,
-		PsAttributeMax = 20
-	}
-	public enum _USER_ACTIVITY_PRESENCE
-	{
-		PowerUserPresent = 0,
-		PowerUserNotPresent = 1,
-		PowerUserInactive = 2,
-		PowerUserMaximum = 3,
-		PowerUserInvalid = 3
-	}
-	public enum _WHEA_ERROR_SOURCE_STATE
-	{
-		WheaErrSrcStateStopped = 1,
-		WheaErrSrcStateStarted = 2
-	}
-	public enum _EXQUEUEINDEX
-	{
-		ExPoolUntrusted = 0,
-		ExPoolTrusted = 1,
-		ExPoolMax = 8
-	}
-	public enum _DMA_WIDTH
-	{
-		Width8Bits = 0,
-		Width16Bits = 1,
-		Width32Bits = 2,
-		Width64Bits = 3,
-		WidthNoWrap = 4,
-		MaximumDmaWidth = 5
-	}
-	public enum _DMA_SPEED
-	{
-		Compatible = 0,
-		TypeA = 1,
-		TypeB = 2,
-		TypeC = 3,
-		TypeF = 4,
-		MaximumDmaSpeed = 5
-	}
-	public enum _PS_RESOURCE_TYPE
-	{
-		PsResourceNonPagedPool = 0,
-		PsResourcePagedPool = 1,
-		PsResourcePageFile = 2,
-		PsResourceWorkingSet = 3,
-		PsResourceMax = 4
-	}
-	public enum _ETW_HEADER_TYPE
-	{
-		EtwHeaderTypeNative = 0,
-		EtwHeaderTypeWow = 1,
-		EtwHeaderTypeMax = 2
-	}
-	public enum _PNP_VETO_TYPE
-	{
-		PNP_VetoTypeUnknown = 0,
-		PNP_VetoLegacyDevice = 1,
-		PNP_VetoPendingClose = 2,
-		PNP_VetoWindowsApp = 3,
-		PNP_VetoWindowsService = 4,
-		PNP_VetoOutstandingOpen = 5,
-		PNP_VetoDevice = 6,
-		PNP_VetoDriver = 7,
-		PNP_VetoIllegalDeviceRequest = 8,
-		PNP_VetoInsufficientPower = 9,
-		PNP_VetoNonDisableable = 10,
-		PNP_VetoLegacyDriver = 11,
-		PNP_VetoInsufficientRights = 12
+		IoRateControlTypeCapMin = 0,
+		IoRateControlTypeIopsCap = 0,
+		IoRateControlTypeBandwidthCap = 1,
+		IoRateControlTypeTimePercentCap = 2,
+		IoRateControlTypeCapMax = 2,
+		IoRateControlTypeReservationMin = 3,
+		IoRateControlTypeIopsReservation = 3,
+		IoRateControlTypeBandwidthReservation = 4,
+		IoRateControlTypeTimePercentReservation = 5,
+		IoRateControlTypeReservationMax = 5,
+		IoRateControlTypeCriticalReservationMin = 6,
+		IoRateControlTypeIopsCriticalReservation = 6,
+		IoRateControlTypeBandwidthCriticalReservation = 7,
+		IoRateControlTypeTimePercentCriticalReservation = 8,
+		IoRateControlTypeCriticalReservationMax = 8,
+		IoRateControlTypeSoftCapMin = 9,
+		IoRateControlTypeIopsSoftCap = 9,
+		IoRateControlTypeBandwidthSoftCap = 10,
+		IoRateControlTypeTimePercentSoftCap = 11,
+		IoRateControlTypeSoftCapMax = 11,
+		IoRateControlTypeLimitExcessNotifyMin = 12,
+		IoRateControlTypeIopsLimitExcessNotify = 12,
+		IoRateControlTypeBandwidthLimitExcessNotify = 13,
+		IoRateControlTypeTimePercentLimitExcessNotify = 14,
+		IoRateControlTypeLimitExcessNotifyMax = 14,
+		IoRateControlTypeMax = 15
 	}
 	public enum _JOBOBJECTINFOCLASS
 	{
@@ -972,6 +922,17 @@ namespace LiveForensics.Symbols
 		JobObjectSharedCommit = 29,
 		JobObjectContainerId = 30,
 		JobObjectIoRateControlInformation = 31,
+		JobObjectSiloRootDirectory = 37,
+		JobObjectServerSiloBasicInformation = 38,
+		JobObjectServerSiloUserSharedData = 39,
+		JobObjectServerSiloInitialize = 40,
+		JobObjectServerSiloRunningState = 41,
+		JobObjectIoAttribution = 42,
+		JobObjectMemoryPartitionInformation = 43,
+		JobObjectContainerTelemetryId = 44,
+		JobObjectSiloSystemRoot = 45,
+		JobObjectEnergyTrackingState = 46,
+		JobObjectThreadImpersonationInformation = 47,
 		JobObjectReserved1Information = 18,
 		JobObjectReserved2Information = 19,
 		JobObjectReserved3Information = 20,
@@ -991,107 +952,29 @@ namespace LiveForensics.Symbols
 		JobObjectLimitViolationInformation2 = 34,
 		JobObjectCreateSilo = 35,
 		JobObjectSiloBasicInformation = 36,
-		JobObjectSiloRootDirectory = 37,
-		JobObjectServerSiloBasicInformation = 38,
-		JobObjectServerSiloServiceSessionId = 39,
-		JobObjectServerSiloInitialize = 40,
-		JobObjectServerSiloDefaultCompartmentId = 41,
-		MaxJobObjectInfoClass = 42
+		JobObjectReserved15Information = 37,
+		JobObjectReserved16Information = 38,
+		JobObjectReserved17Information = 39,
+		JobObjectReserved18Information = 40,
+		JobObjectReserved19Information = 41,
+		JobObjectReserved20Information = 42,
+		JobObjectReserved21Information = 43,
+		JobObjectReserved22Information = 44,
+		JobObjectReserved23Information = 45,
+		JobObjectReserved24Information = 46,
+		JobObjectReserved25Information = 47,
+		MaxJobObjectInfoClass = 48
 	}
-	public enum _CM_SHARE_DISPOSITION
+	public enum _OBJECT_INFORMATION_CLASS
 	{
-		CmResourceShareUndetermined = 0,
-		CmResourceShareDeviceExclusive = 1,
-		CmResourceShareDriverExclusive = 2,
-		CmResourceShareShared = 3
-	}
-	public enum _ConnectionResourceConsumerDesc
-	{
-		ConnectionResourceConsumerDescIsUndefined = 0,
-		ConnectionResourceConsumerDescIsDevice = 1,
-		ConnectionResourceConsumerDescIsOpregion = 2,
-		ConnectionResourceConsumerDescMax = 3
-	}
-	public enum _MM_PREEMPTIVE_TRIMS
-	{
-		MmPreemptForNonPaged = 0,
-		MmPreemptForPaged = 1,
-		MmPreemptForNonPagedPriority = 2,
-		MmPreemptForPagedPriority = 3,
-		MmMaximumPreempt = 4
-	}
-	public enum _ETW_BUFFER_STATE
-	{
-		EtwBufferStateFree = 0,
-		EtwBufferStateGeneralLogging = 1,
-		EtwBufferStateCSwitch = 2,
-		EtwBufferStateFlush = 3,
-		EtwBufferStateMaximum = 4
-	}
-	public enum _PROC_HYPERVISOR_STATE
-	{
-		ProcHypervisorNone = 0,
-		ProcHypervisorPresent = 1,
-		ProcHypervisorPower = 2,
-		ProcHypervisorHvCounters = 3
-	}
-	public enum PROFILE_DEPARTURE_STYLE
-	{
-		PDS_UPDATE_DEFAULT = 1,
-		PDS_UPDATE_ON_REMOVE = 2,
-		PDS_UPDATE_ON_INTERFACE = 3,
-		PDS_UPDATE_ON_EJECT = 4
-	}
-	public enum LSA_FOREST_TRUST_RECORD_TYPE
-	{
-		ForestTrustTopLevelName = 0,
-		ForestTrustTopLevelNameEx = 1,
-		ForestTrustDomainInfo = 2,
-		ForestTrustRecordTypeLast = 2
-	}
-	public enum _TYPE_OF_MEMORY
-	{
-		LoaderExceptionBlock = 0,
-		LoaderSystemBlock = 1,
-		LoaderFree = 2,
-		LoaderBad = 3,
-		LoaderLoadedProgram = 4,
-		LoaderFirmwareTemporary = 5,
-		LoaderFirmwarePermanent = 6,
-		LoaderOsloaderHeap = 7,
-		LoaderOsloaderStack = 8,
-		LoaderSystemCode = 9,
-		LoaderHalCode = 10,
-		LoaderBootDriver = 11,
-		LoaderConsoleInDriver = 12,
-		LoaderConsoleOutDriver = 13,
-		LoaderStartupDpcStack = 14,
-		LoaderStartupKernelStack = 15,
-		LoaderStartupPanicStack = 16,
-		LoaderStartupPcrPage = 17,
-		LoaderStartupPdrPage = 18,
-		LoaderRegistryData = 19,
-		LoaderMemoryData = 20,
-		LoaderNlsData = 21,
-		LoaderSpecialMemory = 22,
-		LoaderBBTMemory = 23,
-		LoaderZero = 24,
-		LoaderXIPRom = 25,
-		LoaderHALCachedMemory = 26,
-		LoaderLargePageFiller = 27,
-		LoaderErrorLogMemory = 28,
-		LoaderVsmMemory = 29,
-		LoaderFirmwareCode = 30,
-		LoaderFirmwareData = 31,
-		LoaderFirmwareReserved = 32,
-		LoaderMaximum = 33
-	}
-	public enum JOB_OBJECT_NET_RATE_CONTROL_FLAGS
-	{
-		JOB_OBJECT_NET_RATE_CONTROL_ENABLE = 1,
-		JOB_OBJECT_NET_RATE_CONTROL_MAX_BANDWIDTH = 2,
-		JOB_OBJECT_NET_RATE_CONTROL_DSCP_TAG = 4,
-		JOB_OBJECT_NET_RATE_CONTROL_VALID_FLAGS = 7
+		ObjectBasicInformation = 0,
+		ObjectNameInformation = 1,
+		ObjectTypeInformation = 2,
+		ObjectTypesInformation = 3,
+		ObjectHandleFlagInformation = 4,
+		ObjectSessionInformation = 5,
+		ObjectSessionObjectInformation = 6,
+		MaxObjectInfoClass = 7
 	}
 	public enum PPM_IDLE_BUCKET_TIME_TYPE
 	{
@@ -1099,11 +982,59 @@ namespace LiveForensics.Symbols
 		PpmIdleBucketTimeIn100ns = 1,
 		PpmIdleBucketTimeMaximum = 2
 	}
-	public enum _MI_KSTACK_TYPE
+	public enum _FILE_OBJECT_EXTENSION_TYPE
 	{
-		MiRegularKstack = 0,
-		MiShortLivedKstack = 1,
-		MiMaximumKstack = 2
+		FoExtTypeTransactionParams = 0,
+		FoExtTypeInternal = 1,
+		FoExtTypeIosbRange = 2,
+		FoExtTypeGeneric = 3,
+		FoExtTypeSfio = 4,
+		FoExtTypeSymlink = 5,
+		FoExtTypeOplockKey = 6,
+		FoExtTypeSilo = 7,
+		MaxFoExtTypes = 8
+	}
+	public enum _IO_SESSION_STATE
+	{
+		IoSessionStateCreated = 1,
+		IoSessionStateInitialized = 2,
+		IoSessionStateConnected = 3,
+		IoSessionStateDisconnected = 4,
+		IoSessionStateDisconnectedLoggedOn = 5,
+		IoSessionStateLoggedOn = 6,
+		IoSessionStateLoggedOff = 7,
+		IoSessionStateTerminated = 8,
+		IoSessionStateMax = 9
+	}
+	public enum _PROCESS_SECTION_TYPE
+	{
+		ProcessSectionData = 0,
+		ProcessSectionImage = 1,
+		ProcessSectionImageNx = 2,
+		ProcessSectionPagefileBacked = 3,
+		ProcessSectionMax = 4
+	}
+	public enum _OB_OPEN_REASON
+	{
+		ObCreateHandle = 0,
+		ObOpenHandle = 1,
+		ObDuplicateHandle = 2,
+		ObInheritHandle = 3,
+		ObMaxOpenReason = 4
+	}
+	public enum _SECURITY_OPERATION_CODE
+	{
+		SetSecurityDescriptor = 0,
+		QuerySecurityDescriptor = 1,
+		DeleteSecurityDescriptor = 2,
+		AssignSecurityDescriptor = 3
+	}
+	public enum _MM_POOL_TYPES
+	{
+		MmNonPagedPool = 0,
+		MmPagedPool = 1,
+		MmSessionPagedPool = 2,
+		MmMaximumPoolType = 3
 	}
 	public enum _DEVPROP_OPERATOR
 	{
@@ -1150,33 +1081,71 @@ namespace LiveForensics.Symbols
 		DEVPROP_OPERATOR_MASK_LOGICAL = 267386880,
 		DEVPROP_OPERATOR_MASK_ARRAY = -268435456
 	}
-	public enum _TlgBlob_t
+	public enum _KWAIT_BLOCK_STATE
 	{
-		_TlgBlobNone = 0,
-		_TlgBlobEnd = 1,
-		_TlgBlobProvider = 2,
-		_TlgBlobEvent3 = 3,
-		_TlgBlobProvider3 = 4,
-		_TlgBlobEvent2 = 5,
-		_TlgBlobMax = 6
+		WaitBlockBypassStart = 0,
+		WaitBlockBypassComplete = 1,
+		WaitBlockSuspendBypassStart = 2,
+		WaitBlockSuspendBypassComplete = 3,
+		WaitBlockActive = 4,
+		WaitBlockInactive = 5,
+		WaitBlockSuspended = 6,
+		WaitBlockAllStates = 7
 	}
-	public enum _IRQ_PRIORITY
+	public enum _WHEA_ERROR_SOURCE_STATE
 	{
-		IrqPriorityUndefined = 0,
-		IrqPriorityLow = 1,
-		IrqPriorityNormal = 2,
-		IrqPriorityHigh = 3
+		WheaErrSrcStateStopped = 1,
+		WheaErrSrcStateStarted = 2
 	}
-	public enum PS_CREATE_STATE
+	public enum _VI_DEADLOCK_RESOURCE_TYPE
 	{
-		PsCreateInitialState = 0,
-		PsCreateFailOnFileOpen = 1,
-		PsCreateFailOnSectionCreate = 2,
-		PsCreateFailExeFormat = 3,
-		PsCreateFailMachineMismatch = 4,
-		PsCreateFailExeName = 5,
-		PsCreateSuccess = 6,
-		PsCreateMaximumStates = 7
+		VfDeadlockUnknown = 0,
+		VfDeadlockMutex = 1,
+		VfDeadlockMutexAbandoned = 2,
+		VfDeadlockFastMutex = 3,
+		VfDeadlockFastMutexUnsafe = 4,
+		VfDeadlockSpinLock = 5,
+		VfDeadlockInStackQueuedSpinLock = 6,
+		VfDeadlockUnusedSpinLock = 7,
+		VfDeadlockEresource = 8,
+		VfDeadlockTypeMaximum = 9
+	}
+	public enum _POWER_INFORMATION_LEVEL_INTERNAL
+	{
+		PowerInternalAcpiInterfaceRegister = 0,
+		PowerInternalS0LowPowerIdleInfo = 1,
+		PowerInternalReapplyBrightnessSettings = 2,
+		PowerInternalUserAbsencePrediction = 3,
+		PowerInternalUserAbsencePredictionCapability = 4,
+		PowerInternalPoProcessorLatencyHint = 5,
+		PowerInternalStandbyNetworkRequest = 6,
+		PowerInternalDirtyTransitionInformation = 7,
+		PowerInternalSetBackgroundTaskState = 8,
+		PowerInternalTtmOpenTerminal = 9,
+		PowerInformationInternalTtmFirst = 9,
+		PowerInternalTtmCreateTerminal = 10,
+		PowerInternalTtmEvacuateDevices = 11,
+		PowerInternalTtmCreateTerminalEventQueue = 12,
+		PowerInternalTtmGetTerminalEvent = 13,
+		PowerInternalTtmSetDefaultDeviceAssignment = 14,
+		PowerInternalTtmAssignDevice = 15,
+		PowerInternalTtmSetDisplayState = 16,
+		PowerInternalTtmSetDisplayTimeouts = 17,
+		PowerInformationInternalTtmLast = 17,
+		PowerInternalBootSessionStandbyActivationInformation = 18,
+		PowerInternalSessionPowerState = 19,
+		PowerInternalSessionTerminalInput = 20,
+		PowerInternalSetWatchdog = 21,
+		PowerInternalPhysicalPowerButtonPressInfoAtBoot = 22,
+		PowerInternalExternalMonitorConnected = 23,
+		PowerInternalHighPrecisionBrightnessSettings = 24,
+		PowerInternalWinrtScreenToggle = 25,
+		PowerInternalVirtualHeterogeneityDisable = 26,
+		PowerInternalTransitionCheckpoint = 27,
+		PowerInternalInputControllerState = 28,
+		PowerInternalFirmwareResetReason = 29,
+		PowerInternalVirtualHeterogeneitySupport = 30,
+		PowerInformationInternalMaximum = 31
 	}
 	public enum _KHETERO_CPU_POLICY
 	{
@@ -1192,179 +1161,69 @@ namespace LiveForensics.Symbols
 		KHeteroCpuPolicyDefault = 8,
 		KHeteroCpuPolicyMax = 9
 	}
-	public enum _PLUGPLAY_EVENT_CATEGORY
+	public enum _POP_SLEEP_CHECKPOINT
 	{
-		HardwareProfileChangeEvent = 0,
-		TargetDeviceChangeEvent = 1,
-		DeviceClassChangeEvent = 2,
-		CustomDeviceEvent = 3,
-		DeviceInstallEvent = 4,
-		DeviceArrivalEvent = 5,
-		VetoEvent = 6,
-		BlockedDriverEvent = 7,
-		InvalidIDEvent = 8,
-		DevicePropertyChangeEvent = 9,
-		DeviceInstanceRemovalEvent = 10,
-		DeviceInstanceStartedEvent = 11,
-		MaxPlugEventCategory = 12
+		PopSleepCheckpointInvalid = 0,
+		PopSleepCheckpointPowerTransitionStart = 1,
+		PopSleepCheckpointSuspendAppsBefore = 2,
+		PopSleepCheckpointSuspendAppsAfter = 3,
+		PopSleepCheckpointSuspendServicesBefore = 4,
+		PopSleepCheckpointSuspendServicesAfter = 5,
+		PopSleepCheckpointNotifySuperfetchBefore = 6,
+		PopSleepCheckpointNotifySuperfetchAfter = 7,
+		PopSleepCheckpointNotifyCallbacksBefore = 8,
+		PopSleepCheckpointNotifyCallbacksAfter = 9,
+		PopSleepCheckpointSleepTransactionCommitted = 10,
+		PopSleepCheckpointQueryDriversBefore = 11,
+		PopSleepCheckpointQueryDriversAfter = 12,
+		PopSleepCheckpointAllocatingHiberContext = 13,
+		PopSleepCheckpointSuspendDriversBefore = 14,
+		PopSleepCheckpointPreSleepNotification = 16,
+		PopSleepCheckpointInterruptsDisabledBegin = 17,
+		PopSleepCheckpointInvokeHandlerBefore = 18,
+		PopSleepCheckpointSaveHiberContextBegin = 19,
+		PopSleepCheckpointInitializeDumpStackFailed = 20,
+		PopSleepCheckpointHiberWriteFailed = 21,
+		PopSleepCheckpointHiberFileTooSmall = 22,
+		PopSleepCheckpointSaveHiberContextFailed = 23,
+		PopSleepCheckpointSaveHiberContextEnd = 24,
+		PopSleepCheckpointHiberKernelHandoff = 25,
+		PopSleepCheckpointInvokeHandlerAfter = 26,
+		PopSleepCheckpointReadHiberfileBefore = 27,
+		PopSleepCheckpointInitializeDumpStackForReadFailed = 28,
+		PopSleepCheckpointHiberReadFailed = 29,
+		PopSleepCheckpointChecksumFailure = 30,
+		PopSleepCheckpointDecompressionFailed = 31,
+		PopSleepCheckpointReadHiberfileAfter = 32,
+		PopSleepCheckpointInterruptsDisabledEnd = 33,
+		PopSleepCheckpointWakeDriversAfter = 36,
+		PopSleepCheckpointResumeAppsBefore = 37,
+		PopSleepCheckpointResumeAppsAfter = 38,
+		PopSleepCheckpointResumeServicesBefore = 39,
+		PopSleepCheckpointResumeServicesAfter = 40,
+		PopSleepCheckpointPowerTransitionEnd = 41,
+		PopSleepCheckpointMaximum = 42
 	}
-	public enum _MI_MEMORY_HIGHLOW
+	public enum _MI_MEMORY_EVENT_TYPES
 	{
-		MiMemoryHigh = 0,
-		MiMemoryLow = 1,
-		MiMemoryHighLow = 2
+		LowPagedPoolEvent = 0,
+		HighPagedPoolEvent = 1,
+		LowNonPagedPoolEvent = 2,
+		HighNonPagedPoolEvent = 3,
+		LowAvailablePagesEvent = 4,
+		HighAvailablePagesEvent = 5,
+		LowCommitEvent = 6,
+		HighCommitEvent = 7,
+		MaximumCommitEvent = 8,
+		BadMemoryDetectedEvent = 9,
+		PhysicalMemoryChangeEvent = 10,
+		TotalNumberOfMemoryEvents = 11
 	}
-	public enum _ETW_STRING_TOKEN_TYPE
+	public enum JOB_OBJECT_IO_RATE_CONTROL_FLAGS
 	{
-		ETW_STRING_TOKEN_EXE = 0,
-		ETW_STRING_TOKEN_PACKAGE_ID = 1,
-		ETW_STRING_TOKEN_PKG_APP_ID = 2,
-		ETW_STRING_TOKEN_MAX_COUNT = 3
-	}
-	public enum _OB_OPEN_REASON
-	{
-		ObCreateHandle = 0,
-		ObOpenHandle = 1,
-		ObDuplicateHandle = 2,
-		ObInheritHandle = 3,
-		ObMaxOpenReason = 4
-	}
-	public enum _SECURITY_OPERATION_CODE
-	{
-		SetSecurityDescriptor = 0,
-		QuerySecurityDescriptor = 1,
-		DeleteSecurityDescriptor = 2,
-		AssignSecurityDescriptor = 3
-	}
-	public enum _MM_POOL_TYPES
-	{
-		MmNonPagedPool = 0,
-		MmPagedPool = 1,
-		MmSessionPagedPool = 2,
-		MmMaximumPoolType = 3
-	}
-	public enum _KWAIT_STATE
-	{
-		WaitInProgress = 0,
-		WaitCommitted = 1,
-		WaitAborted = 2,
-		WaitSuspendInProgress = 3,
-		WaitSuspended = 4,
-		WaitResumeInProgress = 5,
-		WaitResumeAborted = 6,
-		WaitFirstSuspendState = 3,
-		WaitLastSuspendState = 6,
-		MaximumWaitState = 7
-	}
-	public enum _PROCESSOR_CACHE_TYPE
-	{
-		CacheUnified = 0,
-		CacheInstruction = 1,
-		CacheData = 2,
-		CacheTrace = 3
-	}
-	public enum _MEMORY_CACHING_TYPE_ORIG
-	{
-		MmFrameBufferCached = 2
-	}
-	public enum _EXCEPTION_DISPOSITION
-	{
-		ExceptionContinueExecution = 0,
-		ExceptionContinueSearch = 1,
-		ExceptionNestedException = 2,
-		ExceptionCollidedUnwind = 3
-	}
-	public enum _KTHREAD_TAG
-	{
-		KThreadTagNone = 0,
-		KThreadTagMediaBuffering = 1,
-		KThreadTagMax = 2
-	}
-	public enum _MM_POOL_PRIORITIES
-	{
-		MmHighPriority = 0,
-		MmNormalPriority = 1,
-		MmLowPriority = 2,
-		MmMaximumPoolPriority = 3
-	}
-	public enum _POP_DEVICE_IDLE_TYPE
-	{
-		DeviceIdleNormal = 0,
-		DeviceIdleDisk = 1
-	}
-	public enum _KENLISTMENT_STATE
-	{
-		KEnlistmentUninitialized = 0,
-		KEnlistmentActive = 256,
-		KEnlistmentPreparing = 257,
-		KEnlistmentPrepared = 258,
-		KEnlistmentInDoubt = 259,
-		KEnlistmentCommitted = 260,
-		KEnlistmentCommittedNotify = 261,
-		KEnlistmentCommitRequested = 262,
-		KEnlistmentAborted = 263,
-		KEnlistmentDelegated = 264,
-		KEnlistmentDelegatedDisconnected = 265,
-		KEnlistmentPrePreparing = 266,
-		KEnlistmentForgotten = 267,
-		KEnlistmentRecovering = 268,
-		KEnlistmentAborting = 269,
-		KEnlistmentReadOnly = 270,
-		KEnlistmentOutcomeUnavailable = 271,
-		KEnlistmentOffline = 272,
-		KEnlistmentPrePrepared = 273,
-		KEnlistmentInitialized = 274
-	}
-	public enum _ARBITER_ACTION
-	{
-		ArbiterActionTestAllocation = 0,
-		ArbiterActionRetestAllocation = 1,
-		ArbiterActionCommitAllocation = 2,
-		ArbiterActionRollbackAllocation = 3,
-		ArbiterActionQueryAllocatedResources = 4,
-		ArbiterActionWriteReservedResources = 5,
-		ArbiterActionQueryConflict = 6,
-		ArbiterActionQueryArbitrate = 7,
-		ArbiterActionAddReserved = 8,
-		ArbiterActionBootAllocation = 9
-	}
-	public enum _CM_DIRTY_VECTOR_OPERATION
-	{
-		DirtyVectorModified = 0,
-		DirtyDataCaptureStart = 1,
-		DirtyDataCaptureEnd = 2
-	}
-	public enum _KTHREAD_STATE
-	{
-		Initialized = 0,
-		Ready = 1,
-		Running = 2,
-		Standby = 3,
-		Terminated = 4,
-		Waiting = 5,
-		Transition = 6,
-		DeferredReady = 7,
-		GateWaitObsolete = 8,
-		WaitingForProcessInSwap = 9
-	}
-	public enum _IO_ALLOCATION_ACTION
-	{
-		KeepObject = 1,
-		DeallocateObject = 2,
-		DeallocateObjectKeepRegisters = 3
-	}
-	public enum _INTERLOCKED_RESULT
-	{
-		ResultNegative = 1,
-		ResultZero = 0,
-		ResultPositive = 2
-	}
-	public enum _PS_PROTECTED_TYPE
-	{
-		PsProtectedTypeNone = 0,
-		PsProtectedTypeProtectedLight = 1,
-		PsProtectedTypeProtected = 2,
-		PsProtectedTypeMax = 3
+		JOB_OBJECT_IO_RATE_CONTROL_ENABLE = 1,
+		JOB_OBJECT_IO_RATE_CONTROL_STANDALONE_VOLUME = 2,
+		JOB_OBJECT_IO_RATE_CONTROL_VALID_FLAGS = 3
 	}
 	public enum _KOBJECTS
 	{
@@ -1397,46 +1256,44 @@ namespace LiveForensics.Symbols
 		ThreadedDpcObject = 26,
 		MaximumKernelObject = 27
 	}
-	public enum _PERFINFO_KERNELMEMORY_USAGE_TYPE
+	public enum TlgIn_t
 	{
-		PerfInfoMemUsagePfnMetadata = 0,
-		PerfInfoMemUsageMax = 1
-	}
-	public enum _MI_AVAILABLE_PAGE_WAIT_TYPES
-	{
-		AvailablePagesWaitLow = 0,
-		AvailablePagesWaitHigh = 1,
-		AvailablePagesWaitMaximum = 2
-	}
-	public enum _POLICY_AUDIT_EVENT_TYPE
-	{
-		AuditCategorySystem = 0,
-		AuditCategoryLogon = 1,
-		AuditCategoryObjectAccess = 2,
-		AuditCategoryPrivilegeUse = 3,
-		AuditCategoryDetailedTracking = 4,
-		AuditCategoryPolicyChange = 5,
-		AuditCategoryAccountManagement = 6,
-		AuditCategoryDirectoryServiceAccess = 7,
-		AuditCategoryAccountLogon = 8
-	}
-	public enum _PS_PROTECTED_SIGNER
-	{
-		PsProtectedSignerNone = 0,
-		PsProtectedSignerAuthenticode = 1,
-		PsProtectedSignerCodeGen = 2,
-		PsProtectedSignerAntimalware = 3,
-		PsProtectedSignerLsa = 4,
-		PsProtectedSignerWindows = 5,
-		PsProtectedSignerWinTcb = 6,
-		PsProtectedSignerMax = 7
-	}
-	public enum _PROCESS_VA_TYPE
-	{
-		ProcessVAImage = 0,
-		ProcessVASection = 1,
-		ProcessVAPrivate = 2,
-		ProcessVAMax = 3
+		TlgInNULL = 0,
+		TlgInUNICODESTRING = 1,
+		TlgInANSISTRING = 2,
+		TlgInINT8 = 3,
+		TlgInUINT8 = 4,
+		TlgInINT16 = 5,
+		TlgInUINT16 = 6,
+		TlgInINT32 = 7,
+		TlgInUINT32 = 8,
+		TlgInINT64 = 9,
+		TlgInUINT64 = 10,
+		TlgInFLOAT = 11,
+		TlgInDOUBLE = 12,
+		TlgInBOOL32 = 13,
+		TlgInBINARY = 14,
+		TlgInGUID = 15,
+		_TlgInPOINTER_unsupported = 16,
+		TlgInFILETIME = 17,
+		TlgInSYSTEMTIME = 18,
+		TlgInSID = 19,
+		TlgInHEXINT32 = 20,
+		TlgInHEXINT64 = 21,
+		TlgInCOUNTEDSTRING = 22,
+		TlgInCOUNTEDANSISTRING = 23,
+		_TlgInSTRUCT = 24,
+		_TlgInMax = 25,
+		TlgInINTPTR = 9,
+		TlgInUINTPTR = 10,
+		TlgInPOINTER = 21,
+		_TlgInCcount = 32,
+		TlgInVcount = 64,
+		_TlgInChain = 128,
+		_TlgInCustom = 96,
+		_TlgInTypeMask = 31,
+		_TlgInCountMask = 96,
+		_TlgInFlagMask = 224
 	}
 	public enum _PS_STD_HANDLE_STATE
 	{
@@ -1445,169 +1302,6 @@ namespace LiveForensics.Symbols
 		PsAlwaysDuplicate = 2,
 		PsMaxStdHandleStates = 3
 	}
-	public enum _MI_IO_PFN_TYPE
-	{
-		MiIoPfnProbes = 0,
-		MiIoPfnMaps = 1,
-		MiIoPfnUnmapped = 2,
-		MiMaximumIoPfnType = 3
-	}
-	public enum _IO_SESSION_STATE
-	{
-		IoSessionStateCreated = 1,
-		IoSessionStateInitialized = 2,
-		IoSessionStateConnected = 3,
-		IoSessionStateDisconnected = 4,
-		IoSessionStateDisconnectedLoggedOn = 5,
-		IoSessionStateLoggedOn = 6,
-		IoSessionStateLoggedOff = 7,
-		IoSessionStateTerminated = 8,
-		IoSessionStateMax = 9
-	}
-	public enum _VI_DEADLOCK_RESOURCE_TYPE
-	{
-		VfDeadlockUnknown = 0,
-		VfDeadlockMutex = 1,
-		VfDeadlockMutexAbandoned = 2,
-		VfDeadlockFastMutex = 3,
-		VfDeadlockFastMutexUnsafe = 4,
-		VfDeadlockSpinLock = 5,
-		VfDeadlockInStackQueuedSpinLock = 6,
-		VfDeadlockUnusedSpinLock = 7,
-		VfDeadlockEresource = 8,
-		VfDeadlockTypeMaximum = 9
-	}
-	public enum _EX_BALANCE_OBJECT
-	{
-		ExTimerExpiration = 0,
-		ExThreadSetManagerEvent = 1,
-		ExThreadReaperEvent = 2,
-		ExMaximumBalanceObject = 3
-	}
-	public enum ReplacesCorHdrNumericDefines
-	{
-		COMIMAGE_FLAGS_ILONLY = 1,
-		COMIMAGE_FLAGS_32BITREQUIRED = 2,
-		COMIMAGE_FLAGS_IL_LIBRARY = 4,
-		COMIMAGE_FLAGS_STRONGNAMESIGNED = 8,
-		COMIMAGE_FLAGS_NATIVE_ENTRYPOINT = 16,
-		COMIMAGE_FLAGS_TRACKDEBUGDATA = 65536,
-		COMIMAGE_FLAGS_32BITPREFERRED = 131072,
-		COR_VERSION_MAJOR_V2 = 2,
-		COR_VERSION_MAJOR = 2,
-		COR_VERSION_MINOR = 5,
-		COR_DELETED_NAME_LENGTH = 8,
-		COR_VTABLEGAP_NAME_LENGTH = 8,
-		NATIVE_TYPE_MAX_CB = 1,
-		COR_ILMETHOD_SECT_SMALL_MAX_DATASIZE = 255,
-		IMAGE_COR_MIH_METHODRVA = 1,
-		IMAGE_COR_MIH_EHRVA = 2,
-		IMAGE_COR_MIH_BASICBLOCK = 8,
-		COR_VTABLE_32BIT = 1,
-		COR_VTABLE_64BIT = 2,
-		COR_VTABLE_FROM_UNMANAGED = 4,
-		COR_VTABLE_FROM_UNMANAGED_RETAIN_APPDOMAIN = 8,
-		COR_VTABLE_CALL_MOST_DERIVED = 16,
-		IMAGE_COR_EATJ_THUNK_SIZE = 32,
-		MAX_CLASS_NAME = 1024,
-		MAX_PACKAGE_NAME = 1024
-	}
-	public enum _FUNCTION_TABLE_TYPE
-	{
-		RF_SORTED = 0,
-		RF_UNSORTED = 1,
-		RF_CALLBACK = 2,
-		RF_KERNEL_DYNAMIC = 3
-	}
-	public enum _PROCESS_SECTION_TYPE
-	{
-		ProcessSectionData = 0,
-		ProcessSectionImage = 1,
-		ProcessSectionImageNx = 2,
-		ProcessSectionPagefileBacked = 3,
-		ProcessSectionMax = 4
-	}
-	public enum _REQUESTER_TYPE
-	{
-		KernelRequester = 0,
-		UserProcessRequester = 1,
-		UserSharedServiceRequester = 2
-	}
-	public enum _PNP_DEVICE_ACTION_REQUEST
-	{
-		AssignResources = 0,
-		ClearDeviceProblem = 1,
-		ClearProblem = 2,
-		ClearEjectProblem = 3,
-		HaltDevice = 4,
-		QueryPowerRelations = 5,
-		Rebalance = 6,
-		ReenumerateBootDevices = 7,
-		ReenumerateDeviceOnly = 8,
-		ReenumerateDeviceTree = 9,
-		ReenumerateRootDevices = 10,
-		RequeryDeviceState = 11,
-		ResetDevice = 12,
-		ResourceRequirementsChanged = 13,
-		RestartEnumeration = 14,
-		SetDeviceProblem = 15,
-		StartDevice = 16,
-		StartSystemDevicesPass0 = 17,
-		StartSystemDevicesPass1 = 18,
-		NotifyTransportRelationsChange = 19,
-		NotifyEjectionRelationsChange = 20,
-		ConfigureDevice = 21,
-		ConfigureDeviceClass = 22,
-		ConfigureDeviceExtensions = 23,
-		ConfigureDeviceReset = 24
-	}
-	public enum _HARDWARE_COUNTER_TYPE
-	{
-		PMCCounter = 0,
-		MaxHardwareCounterType = 1
-	}
-	public enum _ARBITER_RESULT
-	{
-		ArbiterResultUndefined = -1,
-		ArbiterResultSuccess = 0,
-		ArbiterResultExternalConflict = 1,
-		ArbiterResultNullRequest = 2
-	}
-	public enum _ETW_PERFECT_HASH_FUNCTION_TYPE
-	{
-		ETW_PHF_EVENT_ID = 0,
-		ETW_PHF_STACK_WALK = 1,
-		ETW_PHF_MAX_COUNT = 2
-	}
-	public enum _LDR_DLL_LOAD_REASON
-	{
-		LoadReasonStaticDependency = 0,
-		LoadReasonStaticForwarderDependency = 1,
-		LoadReasonDynamicForwarderDependency = 2,
-		LoadReasonDelayloadDependency = 3,
-		LoadReasonDynamicLoad = 4,
-		LoadReasonAsImageLoad = 5,
-		LoadReasonAsDataLoad = 6,
-		LoadReasonUnknown = -1
-	}
-	public enum _LDR_DDAG_STATE
-	{
-		LdrModulesMerged = -5,
-		LdrModulesInitError = -4,
-		LdrModulesSnapError = -3,
-		LdrModulesUnloaded = -2,
-		LdrModulesUnloading = -1,
-		LdrModulesPlaceHolder = 0,
-		LdrModulesMapping = 1,
-		LdrModulesMapped = 2,
-		LdrModulesWaitingForDependencies = 3,
-		LdrModulesSnapping = 4,
-		LdrModulesSnapped = 5,
-		LdrModulesCondensed = 6,
-		LdrModulesReadyToInit = 7,
-		LdrModulesInitializing = 8,
-		LdrModulesReadyToRun = 9
-	}
 	public enum _PS_WAKE_REASON
 	{
 		PsWakeReasonUser = 0,
@@ -1615,202 +1309,14 @@ namespace LiveForensics.Symbols
 		PsWakeReasonKernel = 2,
 		PsWakeReasonInstrumentation = 3,
 		PsWakeReasonPreserveProcess = 4,
-		PsMaxWakeReasons = 5
+		PsWakeReasonActivityReference = 5,
+		PsWakeReasonWorkOnBehalf = 6,
+		PsMaxWakeReasons = 7
 	}
-	public enum _OBJECT_INFORMATION_CLASS
+	public enum _HARDWARE_COUNTER_TYPE
 	{
-		ObjectBasicInformation = 0,
-		ObjectNameInformation = 1,
-		ObjectTypeInformation = 2,
-		ObjectTypesInformation = 3,
-		ObjectHandleFlagInformation = 4,
-		ObjectSessionInformation = 5,
-		MaxObjectInfoClass = 6
-	}
-	public enum _KWAIT_BLOCK_STATE
-	{
-		WaitBlockBypassStart = 0,
-		WaitBlockBypassComplete = 1,
-		WaitBlockSuspendBypassStart = 2,
-		WaitBlockSuspendBypassComplete = 3,
-		WaitBlockActive = 4,
-		WaitBlockInactive = 5,
-		WaitBlockSuspended = 6,
-		WaitBlockAllStates = 7
-	}
-	public enum JOB_OBJECT_IO_RATE_CONTROL_FLAGS
-	{
-		JOB_OBJECT_IO_RATE_CONTROL_ENABLE = 1,
-		JOB_OBJECT_IO_RATE_CONTROL_VALID_FLAGS = 1
-	}
-	public enum _KRESOURCEMANAGER_STATE
-	{
-		KResourceManagerUninitialized = 0,
-		KResourceManagerOffline = 1,
-		KResourceManagerOnline = 2
-	}
-	public enum _MM_POOL_FAILURE_REASONS
-	{
-		MmNonPagedNoPtes = 0,
-		MmPriorityTooLow = 1,
-		MmNonPagedNoPagesAvailable = 2,
-		MmPagedNoPtes = 3,
-		MmSessionPagedNoPtes = 4,
-		MmPagedNoPagesAvailable = 5,
-		MmSessionPagedNoPagesAvailable = 6,
-		MmPagedNoCommit = 7,
-		MmSessionPagedNoCommit = 8,
-		MmNonPagedNoResidentAvailable = 9,
-		MmNonPagedNoCommit = 10,
-		MmMaximumFailureReason = 11
-	}
-	public enum _KPROCESS_STATE
-	{
-		ProcessInMemory = 0,
-		ProcessOutOfMemory = 1,
-		ProcessInTransition = 2,
-		ProcessOutTransition = 3,
-		ProcessInSwap = 4,
-		ProcessOutSwap = 5,
-		ProcessRetryOutSwap = 6,
-		ProcessAllSwapStates = 7
-	}
-	public enum _TlgIn_t
-	{
-		_TlgInNULL = 0,
-		_TlgInUNICODESTRING = 1,
-		_TlgInANSISTRING = 2,
-		_TlgInINT8 = 3,
-		_TlgInUINT8 = 4,
-		_TlgInINT16 = 5,
-		_TlgInUINT16 = 6,
-		_TlgInINT32 = 7,
-		_TlgInUINT32 = 8,
-		_TlgInINT64 = 9,
-		_TlgInUINT64 = 10,
-		_TlgInFLOAT = 11,
-		_TlgInDOUBLE = 12,
-		_TlgInBOOL32 = 13,
-		_TlgInBINARY = 14,
-		_TlgInGUID = 15,
-		_TlgInPOINTER_unsupported = 16,
-		_TlgInFILETIME = 17,
-		_TlgInSYSTEMTIME = 18,
-		_TlgInSID = 19,
-		_TlgInHEXINT32 = 20,
-		_TlgInHEXINT64 = 21,
-		_TlgInCOUNTEDSTRING = 22,
-		_TlgInCOUNTEDANSISTRING = 23,
-		_TlgInSTRUCT = 24,
-		_TlgInMax = 25,
-		_TlgInINTPTR = 9,
-		_TlgInUINTPTR = 10,
-		_TlgInPOINTER = 21,
-		_TlgInCcount = 32,
-		_TlgInVcount = 64,
-		_TlgInChain = 128,
-		_TlgInCustom = 96,
-		_TlgInTypeMask = 31,
-		_TlgInCountMask = 96,
-		_TlgInFlagMask = 224
-	}
-	public enum _WORKING_SET_TYPE
-	{
-		WorkingSetTypeUser = 0,
-		WorkingSetTypeSession = 1,
-		WorkingSetTypeSystemTypes = 2,
-		WorkingSetTypeSystemCache = 2,
-		WorkingSetTypePagedPool = 3,
-		WorkingSetTypeSystemPtes = 4,
-		WorkingSetTypeMaximum = 5
-	}
-	public enum _KERNEL_STACK_LIMITS
-	{
-		BugcheckStackLimits = 0,
-		DPCStackLimits = 1,
-		ExpandedStackLimits = 2,
-		NormalStackLimits = 3,
-		Win32kStackLimits = 4,
-		SwapBusyStackLimits = 5,
-		IsrStackLimits = 6,
-		MaximumStackLimits = 7
-	}
-	public enum _MI_CFG_BITMAP_TYPE
-	{
-		CfgBitMapNative = 0,
-		CfgBitMapWow64 = 1,
-		CfgBitMapMax = 2
-	}
-	public enum KTM_STATE
-	{
-		KKtmUninitialized = 0,
-		KKtmInitialized = 1,
-		KKtmRecovering = 2,
-		KKtmOnline = 3,
-		KKtmRecoveryFailed = 4,
-		KKtmOffline = 5
-	}
-	public enum _KTRANSACTION_STATE
-	{
-		KTransactionUninitialized = 0,
-		KTransactionActive = 1,
-		KTransactionPreparing = 2,
-		KTransactionPrepared = 3,
-		KTransactionInDoubt = 4,
-		KTransactionCommitted = 5,
-		KTransactionAborted = 6,
-		KTransactionDelegated = 7,
-		KTransactionPrePreparing = 8,
-		KTransactionForgotten = 9,
-		KTransactionRecovering = 10,
-		KTransactionPrePrepared = 11
-	}
-	public enum _KTRANSACTION_OUTCOME
-	{
-		KTxOutcomeUninitialized = 0,
-		KTxOutcomeUndetermined = 1,
-		KTxOutcomeCommitted = 2,
-		KTxOutcomeAborted = 3,
-		KTxOutcomeUnavailable = 4
-	}
-	public enum UoWActionType
-	{
-		UoWAddThisKey = 0,
-		UoWAddChildKey = 1,
-		UoWDeleteThisKey = 2,
-		UoWDeleteChildKey = 3,
-		UoWSetValueNew = 4,
-		UoWSetValueExisting = 5,
-		UoWDeleteValue = 6,
-		UoWSetKeyUserFlags = 7,
-		UoWSetLastWriteTime = 8,
-		UoWSetSecurityDescriptor = 9,
-		UoWRenameSubKey = 10,
-		UoWRenameOldSubKey = 11,
-		UoWRenameNewSubKey = 12,
-		UoWIsolation = 13,
-		UoWInvalid = 14
-	}
-	public enum HSTORAGE_TYPE
-	{
-		Stable = 0,
-		Volatile = 1,
-		InvalidStorage = 2
-	}
-	public enum _WOW64_SHARED_INFORMATION
-	{
-		SharedNtdll32LdrInitializeThunk = 0,
-		SharedNtdll32KiUserExceptionDispatcher = 1,
-		SharedNtdll32KiUserApcDispatcher = 2,
-		SharedNtdll32KiUserCallbackDispatcher = 3,
-		SharedNtdll32ExpInterlockedPopEntrySListFault = 4,
-		SharedNtdll32ExpInterlockedPopEntrySListResume = 5,
-		SharedNtdll32ExpInterlockedPopEntrySListEnd = 6,
-		SharedNtdll32RtlUserThreadStart = 7,
-		SharedNtdll32pQueryProcessDebugInformationRemote = 8,
-		SharedNtdll32BaseAddress = 9,
-		SharedNtdll32LdrSystemDllInitBlock = 10,
-		Wow64SharedPageEntriesCount = 11
+		PMCCounter = 0,
+		MaxHardwareCounterType = 1
 	}
 	public enum _REG_NOTIFY_CLASS
 	{
@@ -1876,70 +1382,264 @@ namespace LiveForensics.Symbols
 		RegNtPostQueryKeyName = 48,
 		MaxRegNtNotifyClass = 49
 	}
-	public enum _TlgOut_t
+	public enum _MM_POOL_PRIORITIES
 	{
-		_TlgOutNULL = 0,
-		_TlgOutNOPRINT = 1,
-		_TlgOutSTRING = 2,
-		_TlgOutBOOLEAN = 3,
-		_TlgOutHEX = 4,
-		_TlgOutPID = 5,
-		_TlgOutTID = 6,
-		_TlgOutPORT = 7,
-		_TlgOutIPV4 = 8,
-		_TlgOutIPV6 = 9,
-		_TlgOutSOCKETADDRESS = 10,
-		_TlgOutXML = 11,
-		_TlgOutJSON = 12,
-		_TlgOutWIN32ERROR = 13,
-		_TlgOutNTSTATUS = 14,
-		_TlgOutHRESULT = 15,
-		_TlgOutFILETIME = 16,
-		_TlgOutSIGNED = 17,
-		_TlgOutUNSIGNED = 18,
-		_TlgOutMax = 19,
-		_TlgOutChain = 128,
-		_TlgOutTypeMask = 127
+		MmHighPriority = 0,
+		MmNormalPriority = 1,
+		MmLowPriority = 2,
+		MmMaximumPoolPriority = 3
 	}
-	public enum _PERFINFO_MM_STAT
+	public enum _KTHREAD_TAG
 	{
-		PerfInfoMMStatNotUsed = 0,
-		PerfInfoMMStatAggregatePageCombine = 1,
-		PerfInfoMMStatIterationPageCombine = 2,
-		PerfInfoMMStatMax = 3
+		KThreadTagNone = 0,
+		KThreadTagMediaBuffering = 1,
+		KThreadTagMax = 2
 	}
-	public enum _FILE_OBJECT_EXTENSION_TYPE
+	public enum _ETW_PERFECT_HASH_FUNCTION_TYPE
 	{
-		FoExtTypeTransactionParams = 0,
-		FoExtTypeInternal = 1,
-		FoExtTypeIosbRange = 2,
-		FoExtTypeGeneric = 3,
-		FoExtTypeSfio = 4,
-		FoExtTypeSymlink = 5,
-		FoExtTypeOplockKey = 6,
-		MaxFoExtTypes = 7
+		ETW_PHF_EVENT_ID = 0,
+		ETW_PHF_STACK_WALK = 1,
+		ETW_PHF_MAX_COUNT = 2
 	}
-	public enum _MI_MEMORY_EVENT_TYPES
+	public enum _TYPE_OF_MEMORY
 	{
-		LowAvailablePagesEvent = 0,
-		HighAvailablePagesEvent = 1,
-		LowPagedPoolEvent = 2,
-		HighPagedPoolEvent = 3,
-		LowNonPagedPoolEvent = 4,
-		HighNonPagedPoolEvent = 5,
-		LowCommitEvent = 6,
-		HighCommitEvent = 7,
-		MaximumCommitEvent = 8,
-		BadMemoryDetectedEvent = 9,
-		PhysicalMemoryChangeEvent = 10,
-		TotalNumberOfMemoryEvents = 11
+		LoaderExceptionBlock = 0,
+		LoaderSystemBlock = 1,
+		LoaderFree = 2,
+		LoaderBad = 3,
+		LoaderLoadedProgram = 4,
+		LoaderFirmwareTemporary = 5,
+		LoaderFirmwarePermanent = 6,
+		LoaderOsloaderHeap = 7,
+		LoaderOsloaderStack = 8,
+		LoaderSystemCode = 9,
+		LoaderHalCode = 10,
+		LoaderBootDriver = 11,
+		LoaderConsoleInDriver = 12,
+		LoaderConsoleOutDriver = 13,
+		LoaderStartupDpcStack = 14,
+		LoaderStartupKernelStack = 15,
+		LoaderStartupPanicStack = 16,
+		LoaderStartupPcrPage = 17,
+		LoaderStartupPdrPage = 18,
+		LoaderRegistryData = 19,
+		LoaderMemoryData = 20,
+		LoaderNlsData = 21,
+		LoaderSpecialMemory = 22,
+		LoaderBBTMemory = 23,
+		LoaderZero = 24,
+		LoaderXIPRom = 25,
+		LoaderHALCachedMemory = 26,
+		LoaderLargePageFiller = 27,
+		LoaderErrorLogMemory = 28,
+		LoaderVsmMemory = 29,
+		LoaderFirmwareCode = 30,
+		LoaderFirmwareData = 31,
+		LoaderFirmwareReserved = 32,
+		LoaderEnclaveMemory = 33,
+		LoaderFirmwareKsr = 34,
+		LoaderEnclaveKsr = 35,
+		LoaderMaximum = 36
 	}
-	public enum _MI_LOCK_ACQUIRE_TYPE
+	public enum _MM_PREEMPTIVE_TRIMS
 	{
-		MiAcquireExclusive = 0,
-		MiAcquireExclusiveAutoExpand = 1,
-		MiAcquireShared = 2,
-		MiAcquireSharedAutoExpand = 3
+		MmPreemptForNonPaged = 0,
+		MmPreemptForPaged = 1,
+		MmPreemptForNonPagedPriority = 2,
+		MmPreemptForPagedPriority = 3,
+		MmMaximumPreempt = 4
+	}
+	public enum _KTIMER2_COLLECTION_INDEX
+	{
+		KTimer2CollectionNoWake = 0,
+		KTimer2CollectionHr = 1,
+		KTimer2CollectionFinite = 2,
+		KTimer2CollectionIr = 3,
+		KTimer2CollectionNotInserted = 16,
+		KTimer2CollectionInvalid = 20,
+		KTimer2CollectionOptional = 32,
+		KTimer2CollectionMin = 0,
+		KTimer2CollectionMax = 4,
+		KTimer2CollectionNode1 = 2
+	}
+	public enum _PS_PROTECTED_TYPE
+	{
+		PsProtectedTypeNone = 0,
+		PsProtectedTypeProtectedLight = 1,
+		PsProtectedTypeProtected = 2,
+		PsProtectedTypeMax = 3
+	}
+	public enum _MI_CFG_BITMAP_TYPE
+	{
+		CfgBitMapNative = 0,
+		CfgBitMapWow64 = 1,
+		CfgBitMapMax = 2
+	}
+	public enum _PROCESS_VA_TYPE
+	{
+		ProcessVAImage = 0,
+		ProcessVASection = 1,
+		ProcessVAPrivate = 2,
+		ProcessVAMax = 3
+	}
+	public enum _PS_RESOURCE_TYPE
+	{
+		PsResourceNonPagedPool = 0,
+		PsResourcePagedPool = 1,
+		PsResourcePageFile = 2,
+		PsResourceWorkingSet = 3,
+		PsResourceMax = 4
+	}
+	public enum _PERFINFO_KERNELMEMORY_USAGE_TYPE
+	{
+		PerfInfoMemUsagePfnMetadata = 0,
+		PerfInfoMemUsageMax = 1
+	}
+	public enum _EX_BALANCE_OBJECT
+	{
+		ExTimerExpiration = 0,
+		ExThreadSetManagerEvent = 1,
+		ExThreadReaperEvent = 2,
+		ExMaximumBalanceObject = 3
+	}
+	public enum IRPLOCK
+	{
+		IRPLOCK_CANCELABLE = 0,
+		IRPLOCK_CANCEL_STARTED = 1,
+		IRPLOCK_CANCEL_COMPLETE = 2,
+		IRPLOCK_COMPLETED = 3
+	}
+	public enum _PNP_DEVICE_DELETE_TYPE
+	{
+		QueryRemoveDevice = 0,
+		CancelRemoveDevice = 1,
+		RemoveDevice = 2,
+		SurpriseRemoveDevice = 3,
+		EjectDevice = 4,
+		RemoveFailedDevice = 5,
+		RemoveUnstartedFailedDevice = 6,
+		MaxDeviceDeleteType = 7
+	}
+	public enum _IO_ALLOCATION_ACTION
+	{
+		KeepObject = 1,
+		DeallocateObject = 2,
+		DeallocateObjectKeepRegisters = 3
+	}
+	public enum _EXQUEUEINDEX
+	{
+		ExPoolUntrusted = 0,
+		IoPoolUntrusted = 1,
+		ExPoolTrusted = 2,
+		ExPoolMax = 8
+	}
+	public enum _MI_MEMORY_HIGHLOW
+	{
+		MiMemoryHigh = 0,
+		MiMemoryLow = 1,
+		MiMemoryHighLow = 2
+	}
+	public enum _PS_PROTECTED_SIGNER
+	{
+		PsProtectedSignerNone = 0,
+		PsProtectedSignerAuthenticode = 1,
+		PsProtectedSignerCodeGen = 2,
+		PsProtectedSignerAntimalware = 3,
+		PsProtectedSignerLsa = 4,
+		PsProtectedSignerWindows = 5,
+		PsProtectedSignerWinTcb = 6,
+		PsProtectedSignerWinSystem = 7,
+		PsProtectedSignerApp = 8,
+		PsProtectedSignerMax = 9
+	}
+	public enum POWER_POLICY_DEVICE_TYPE
+	{
+		PolicyDeviceSystemButton = 0,
+		PolicyDeviceThermalZone = 1,
+		PolicyDeviceBattery = 2,
+		PolicyDeviceMemory = 3,
+		PolicyInitiatePowerActionAPI = 4,
+		PolicySetPowerStateAPI = 5,
+		PolicyImmediateDozeS4 = 6,
+		PolicySystemIdle = 7,
+		PolicyDeviceWakeAlarm = 8,
+		PolicyDeviceFan = 9,
+		PolicyCsBatterySaver = 10,
+		PolicyImmediateDozeS4Predicted = 11,
+		PolicyImmediateDozeS4PredictedNoWake = 12,
+		PolicyImmediateDozeS4AdaptiveBudget = 13,
+		PolicyImmediateDozeS4AdaptiveReserveNoWake = 14,
+		PolicyDeviceMax = 15
+	}
+	public enum _WORKING_SET_TYPE
+	{
+		WorkingSetTypeUser = 0,
+		WorkingSetTypeSession = 1,
+		WorkingSetTypeSystemTypes = 2,
+		WorkingSetTypeSystemCache = 2,
+		WorkingSetTypePagedPool = 3,
+		WorkingSetTypeSystemPtes = 4,
+		WorkingSetTypeMaximum = 5
+	}
+	public enum _ETW_STRING_TOKEN_TYPE
+	{
+		ETW_STRING_TOKEN_EXE = 0,
+		ETW_STRING_TOKEN_PACKAGE_ID = 1,
+		ETW_STRING_TOKEN_PKG_APP_ID = 2,
+		ETW_STRING_TOKEN_MAX_COUNT = 3
+	}
+	public enum PS_CREATE_STATE
+	{
+		PsCreateInitialState = 0,
+		PsCreateFailOnFileOpen = 1,
+		PsCreateFailOnSectionCreate = 2,
+		PsCreateFailExeFormat = 3,
+		PsCreateFailMachineMismatch = 4,
+		PsCreateFailExeName = 5,
+		PsCreateSuccess = 6,
+		PsCreateMaximumStates = 7
+	}
+	public enum _KE_HETERO_SYSTEM
+	{
+		KeHeteroSystemNone = 0,
+		KeHeteroSystemVirtualOff = 1,
+		KeHeteroSystemVirtualOn = 2,
+		KeHeteroSystemNative = 3,
+		KeHeteroSystemMaximum = 4
+	}
+	public enum _KPROCESS_PPM_POLICY
+	{
+		ProcessPpmDefault = 0,
+		ProcessPpmThrottle = 1,
+		ProcessPpmNoThrottle = 2,
+		MaxProcessPpmPolicy = 3
+	}
+	public enum _MEMORY_CACHING_TYPE_ORIG
+	{
+		MmFrameBufferCached = 2
+	}
+	public enum _TlgBlob_t
+	{
+		_TlgBlobNone = 0,
+		_TlgBlobEnd = 1,
+		_TlgBlobProvider = 2,
+		_TlgBlobEvent3 = 3,
+		_TlgBlobProvider3 = 4,
+		_TlgBlobEvent2 = 5,
+		_TlgBlobMax = 6
+	}
+	public enum _KTHREAD_STATE
+	{
+		Initialized = 0,
+		Ready = 1,
+		Running = 2,
+		Standby = 3,
+		Terminated = 4,
+		Waiting = 5,
+		Transition = 6,
+		DeferredReady = 7,
+		GateWaitObsolete = 8,
+		WaitingForProcessInSwap = 9
 	}
 	public enum _MI_DYNAMICBASE_BITMAP
 	{
@@ -1949,21 +1649,726 @@ namespace LiveForensics.Symbols
 		DynamicBaseBitMapWow64Dll = 3,
 		LastDynamicBaseBitMap = 4
 	}
-	public enum _FS_FILTER_SECTION_SYNC_TYPE
+	public enum _MI_NODE_NONPAGED_POOL_BITMAP
 	{
-		SyncTypeOther = 0,
-		SyncTypeCreateSection = 1
+		NonPagedPoolLargePdeNx = 0,
+		NonPagedPoolSmallPde = 1,
+		NonPagedPoolPerPage = 2
 	}
-	public enum _FS_FILTER_STREAM_FO_NOTIFICATION_TYPE
+	public enum _INTERLOCKED_RESULT
 	{
-		NotifyTypeCreate = 0,
-		NotifyTypeRetired = 1
+		ResultNegative = 1,
+		ResultZero = 0,
+		ResultPositive = 2
+	}
+	public enum _PNP_DEVICE_ACTION_REQUEST
+	{
+		AssignResources = 0,
+		ClearDeviceProblem = 1,
+		ClearProblem = 2,
+		ClearEjectProblem = 3,
+		HaltDevice = 4,
+		QueryPowerRelations = 5,
+		Rebalance = 6,
+		ReenumerateBootDevices = 7,
+		ReenumerateDeviceOnly = 8,
+		ReenumerateDeviceTree = 9,
+		ReenumerateRootDevices = 10,
+		RequeryDeviceState = 11,
+		ResetDevice = 12,
+		ResourceRequirementsChanged = 13,
+		RestartEnumeration = 14,
+		SetDeviceProblem = 15,
+		StartDevice = 16,
+		StartSystemDevicesPass0 = 17,
+		StartSystemDevicesPass1 = 18,
+		NotifyTransportRelationsChange = 19,
+		NotifyEjectionRelationsChange = 20,
+		ConfigureDevice = 21,
+		ConfigureDeviceClass = 22,
+		ConfigureDeviceExtensions = 23,
+		ConfigureDeviceReset = 24
+	}
+	public enum _PO_HIBER_FORCE_DISABLE_REASON
+	{
+		PoHiberForceDisableReasonPolicy = 0,
+		PoHiberForceDisableReasonGuardedHost = 1,
+		PoHiberForceDisableReasonMax = 2
+	}
+	public enum _WOW64_SHARED_INFORMATION
+	{
+		SharedNtdll32LdrInitializeThunk = 0,
+		SharedNtdll32KiUserExceptionDispatcher = 1,
+		SharedNtdll32KiUserApcDispatcher = 2,
+		SharedNtdll32KiUserCallbackDispatcher = 3,
+		SharedNtdll32RtlUserThreadStart = 4,
+		SharedNtdll32pQueryProcessDebugInformationRemote = 5,
+		SharedNtdll32BaseAddress = 6,
+		SharedNtdll32LdrSystemDllInitBlock = 7,
+		Wow64SharedPageEntriesCount = 8
+	}
+	public enum _PROCESSOR_CACHE_TYPE
+	{
+		CacheUnified = 0,
+		CacheInstruction = 1,
+		CacheData = 2,
+		CacheTrace = 3
+	}
+	public enum _MI_KSTACK_TYPE
+	{
+		MiRegularKstack = 0,
+		MiShortLivedKstack = 1,
+		MiMaximumKstack = 2
+	}
+	public enum _ETW_GUID_TYPE
+	{
+		EtwTraceGuidType = 0,
+		EtwNotificationGuidType = 1,
+		EtwGroupGuidType = 2,
+		EtwGuidTypeMax = 3
+	}
+	public enum _KI_CALLBACK
+	{
+		KiCallbackNmi = 0,
+		KiCallbackBound = 1,
+		KiCallbackCount = 2,
+		KiFirstCallback = 0
+	}
+	public enum _KWAIT_STATE
+	{
+		WaitInProgress = 0,
+		WaitCommitted = 1,
+		WaitAborted = 2,
+		WaitSuspendInProgress = 3,
+		WaitSuspended = 4,
+		WaitResumeInProgress = 5,
+		WaitResumeAborted = 6,
+		WaitFirstSuspendState = 3,
+		WaitLastSuspendState = 6,
+		MaximumWaitState = 7
+	}
+	public enum _MI_SUBVAD_LISTS
+	{
+		MiSubVadPebTebAny = 0,
+		MiSubVadPebTebBelow2gb = 1,
+		MiSubVadPebTebBelow4gb = 2,
+		MiSubVadRfg = 3,
+		MiSubVadMaximum = 4
+	}
+	public enum _MI_ASSIGNED_REGION_TYPES
+	{
+		AssignedRegionNonPagedPool = 0,
+		AssignedRegionPagedPool = 1,
+		AssignedRegionSystemCache = 2,
+		AssignedRegionSystemPtes = 3,
+		AssignedRegionUltraZero = 4,
+		AssignedRegionPfnDatabase = 5,
+		AssignedRegionCfg = 6,
+		AssignedRegionHyperSpace = 7,
+		AssignedRegionPageTables = 8,
+		AssignedRegionSpecialPoolPaged = 9,
+		AssignedRegionSpecialPoolNonPaged = 10,
+		AssignedRegionSession = 11,
+		AssignedRegionSystemImages = 12,
+		AssignedRegionMaximum = 13
+	}
+	public enum _MI_WORKING_SET_TYPE
+	{
+		MiWorkingSetTypeSystemCache = 0,
+		MiWorkingSetTypeSystemPtes = 1,
+		MiWorkingSetTypePartitionMaximum = 1,
+		MiWorkingSetTypePagedPool = 2,
+		MiWorkingSetTypeMaximum = 3
+	}
+	public enum _POLICY_AUDIT_EVENT_TYPE
+	{
+		AuditCategorySystem = 0,
+		AuditCategoryLogon = 1,
+		AuditCategoryObjectAccess = 2,
+		AuditCategoryPrivilegeUse = 3,
+		AuditCategoryDetailedTracking = 4,
+		AuditCategoryPolicyChange = 5,
+		AuditCategoryAccountManagement = 6,
+		AuditCategoryDirectoryServiceAccess = 7,
+		AuditCategoryAccountLogon = 8
+	}
+	public enum _USER_ACTIVITY_PRESENCE
+	{
+		PowerUserPresent = 0,
+		PowerUserNotPresent = 1,
+		PowerUserInactive = 2,
+		PowerUserMaximum = 3,
+		PowerUserInvalid = 3
+	}
+	public enum _PO_CS_DEVICE_NOTIFICATION_TYPE
+	{
+		PoCsDeviceNotificationStorage = 0,
+		PoCsDeviceNotificationWiFi = 1,
+		PoCsDeviceNotificationMbn = 2,
+		PoCsDeviceNotificationAudio = 3,
+		PoCsDeviceNotificationEthernet = 4,
+		PoCsDeviceNotificationMaximum = 5
+	}
+	public enum _MI_VAD_64K_TYPES
+	{
+		MiVad64KPrivate = 0,
+		MiVad64KShared = 1,
+		MiVad64KTypes = 2
+	}
+	public enum _KPROCESS_STATE
+	{
+		ProcessInMemory = 0,
+		ProcessOutOfMemory = 1,
+		ProcessInTransition = 2,
+		ProcessOutTransition = 3,
+		ProcessInSwap = 4,
+		ProcessOutSwap = 5,
+		ProcessRetryOutSwap = 6,
+		ProcessAllSwapStates = 7
+	}
+	public enum _KENLISTMENT_STATE
+	{
+		KEnlistmentUninitialized = 0,
+		KEnlistmentActive = 256,
+		KEnlistmentPreparing = 257,
+		KEnlistmentPrepared = 258,
+		KEnlistmentInDoubt = 259,
+		KEnlistmentCommitted = 260,
+		KEnlistmentCommittedNotify = 261,
+		KEnlistmentCommitRequested = 262,
+		KEnlistmentAborted = 263,
+		KEnlistmentDelegated = 264,
+		KEnlistmentDelegatedDisconnected = 265,
+		KEnlistmentPrePreparing = 266,
+		KEnlistmentForgotten = 267,
+		KEnlistmentRecovering = 268,
+		KEnlistmentAborting = 269,
+		KEnlistmentReadOnly = 270,
+		KEnlistmentOutcomeUnavailable = 271,
+		KEnlistmentOffline = 272,
+		KEnlistmentPrePrepared = 273,
+		KEnlistmentInitialized = 274
+	}
+	public enum TlgOut_t
+	{
+		TlgOutNULL = 0,
+		TlgOutNOPRINT = 1,
+		TlgOutSTRING = 2,
+		TlgOutBOOLEAN = 3,
+		TlgOutHEX = 4,
+		TlgOutPID = 5,
+		TlgOutTID = 6,
+		TlgOutPORT = 7,
+		TlgOutIPV4 = 8,
+		TlgOutIPV6 = 9,
+		TlgOutSOCKETADDRESS = 10,
+		TlgOutXML = 11,
+		TlgOutJSON = 12,
+		TlgOutWIN32ERROR = 13,
+		TlgOutNTSTATUS = 14,
+		TlgOutHRESULT = 15,
+		TlgOutFILETIME = 16,
+		TlgOutSIGNED = 17,
+		TlgOutUNSIGNED = 18,
+		TlgOutUTF8 = 35,
+		TlgOutPKCS7_WITH_TYPE_INFO = 36,
+		_TlgOutMax = 37,
+		_TlgOutChain = 128,
+		_TlgOutTypeMask = 127
+	}
+	public enum _MI_IO_PFN_TYPE
+	{
+		MiIoPfnProbes = 0,
+		MiIoPfnMaps = 1,
+		MiIoPfnUnmapped = 2,
+		MiMaximumIoPfnType = 3
+	}
+	public enum _TRACE_INFORMATION_CLASS
+	{
+		TraceIdClass = 0,
+		TraceHandleClass = 1,
+		TraceEnableFlagsClass = 2,
+		TraceEnableLevelClass = 3,
+		GlobalLoggerHandleClass = 4,
+		EventLoggerHandleClass = 5,
+		AllLoggerHandlesClass = 6,
+		TraceHandleByNameClass = 7,
+		LoggerEventsLostClass = 8,
+		TraceSessionSettingsClass = 9,
+		LoggerEventsLoggedClass = 10,
+		DiskIoNotifyRoutinesClass = 11,
+		TraceInformationClassReserved1 = 12,
+		AllPossibleNotifyRoutinesClass = 12,
+		FltIoNotifyRoutinesClass = 13,
+		TraceInformationClassReserved2 = 14,
+		WdfNotifyRoutinesClass = 15,
+		MaxTraceInformationClass = 16
+	}
+	public enum _EXCEPTION_DISPOSITION
+	{
+		ExceptionContinueExecution = 0,
+		ExceptionContinueSearch = 1,
+		ExceptionNestedException = 2,
+		ExceptionCollidedUnwind = 3
+	}
+	public enum _MI_PARTITION_THREAD
+	{
+		MiZeroPageThreadSlot = 0,
+		MiPartitionWorkingSetManagerSlot = 1,
+		MiDereferenceSegmentThreadSlot = 2,
+		MiModifiedPageWriterSlot = 3,
+		MiMappedPageWriterSlot = 4,
+		MiNumberOfPartitionThreads = 5
+	}
+	public enum _PERFINFO_MM_STAT
+	{
+		PerfInfoMMStatNotUsed = 0,
+		PerfInfoMMStatAggregatePageCombine = 1,
+		PerfInfoMMStatIterationPageCombine = 2,
+		PerfInfoMMStatMax = 3
+	}
+	public enum _PNP_VETO_TYPE
+	{
+		PNP_VetoTypeUnknown = 0,
+		PNP_VetoLegacyDevice = 1,
+		PNP_VetoPendingClose = 2,
+		PNP_VetoWindowsApp = 3,
+		PNP_VetoWindowsService = 4,
+		PNP_VetoOutstandingOpen = 5,
+		PNP_VetoDevice = 6,
+		PNP_VetoDriver = 7,
+		PNP_VetoIllegalDeviceRequest = 8,
+		PNP_VetoInsufficientPower = 9,
+		PNP_VetoNonDisableable = 10,
+		PNP_VetoLegacyDriver = 11,
+		PNP_VetoInsufficientRights = 12
+	}
+	public enum _PROC_HYPERVISOR_STATE
+	{
+		ProcHypervisorNone = 0,
+		ProcHypervisorPresent = 1,
+		ProcHypervisorPower = 2,
+		ProcHypervisorHvCounters = 3
+	}
+	public enum _KRESOURCEMANAGER_STATE
+	{
+		KResourceManagerUninitialized = 0,
+		KResourceManagerOffline = 1,
+		KResourceManagerOnline = 2
+	}
+	public enum _SEP_CACHED_HANDLES_ENTRY_TYPE
+	{
+		SepCachedHandlesEntryLowbox = 0,
+		SepCachedHandlesEntryBnoIsolation = 1
+	}
+	public enum _POP_DEVICE_IDLE_TYPE
+	{
+		DeviceIdleNormal = 0,
+		DeviceIdleDisk = 1
+	}
+	public enum _MI_CROSS_PARTITION_CHARGE_TYPE
+	{
+		MiCrossPartitionSectionResAvailCharge = 0,
+		MiCrossPartitionSectionCommitCharge = 1,
+		MiCrossPartitionPageCombineResAvailCharge = 2,
+		MiCrossPartitionPageCombineCommitCharge = 3,
+		MiCrossPartitionMaximumCharge = 4
+	}
+	public enum _PNP_REBALANCE_REASON
+	{
+		RebalanceReasonUnknown = 0,
+		RebalanceReasonRequirementsChanged = 1,
+		RebalanceReasonNewDevice = 2
+	}
+	public enum _PNP_REBALANCE_FAILURE
+	{
+		RebalanceFailureNone = 0,
+		RebalanceFailureDisabled = 1,
+		RebalanceFailureNoMemory = 2,
+		RebalanceFailureQueryStopUnexpectedVeto = 3,
+		RebalanceFailureNoRequirements = 4,
+		RebalanceFailureNoCandidates = 5,
+		RebalanceFailureNoConfiguration = 6
+	}
+	public enum _PNP_DEVNODE_QUERY_REBALANCE_VETO_REASON
+	{
+		DeviceQueryRebalanceSucceeded = 0,
+		DeviceQueryStopFailed = 1,
+		DeviceFailedGetNewResourceRequirement = 2,
+		DeviceInUnexpectedState = 3,
+		DeviceNotSupportQueryRebalance = 4
+	}
+	public enum _PS_ATTRIBUTE_NUM
+	{
+		PsAttributeParentProcess = 0,
+		PsAttributeDebugObject = 1,
+		PsAttributeToken = 2,
+		PsAttributeClientId = 3,
+		PsAttributeTebAddress = 4,
+		PsAttributeImageName = 5,
+		PsAttributeImageInfo = 6,
+		PsAttributeMemoryReserve = 7,
+		PsAttributePriorityClass = 8,
+		PsAttributeErrorMode = 9,
+		PsAttributeStdHandleInfo = 10,
+		PsAttributeHandleList = 11,
+		PsAttributeGroupAffinity = 12,
+		PsAttributePreferredNode = 13,
+		PsAttributeIdealProcessor = 14,
+		PsAttributeUmsThread = 15,
+		PsAttributeMitigationOptions = 16,
+		PsAttributeProtectionLevel = 17,
+		PsAttributeSecureProcess = 18,
+		PsAttributeJobList = 19,
+		PsAttributeChildProcessPolicy = 20,
+		PsAttributeAllApplicationPackagesPolicy = 21,
+		PsAttributeWin32kFilter = 22,
+		PsAttributeSafeOpenPromptOriginClaim = 23,
+		PsAttributeBnoIsolation = 24,
+		PsAttributeDesktopAppPolicy = 25,
+		PsAttributeMax = 26
+	}
+	public enum _MI_VAD_ALLOCATION_CELL_TYPE
+	{
+		MiVadBottomUp = 0,
+		MiVadStackPebTeb = 1,
+		MiVadAllocationCellMaximum = 2
+	}
+	public enum _ConnectionResourceConsumerDesc
+	{
+		ConnectionResourceConsumerDescIsUndefined = 0,
+		ConnectionResourceConsumerDescIsDevice = 1,
+		ConnectionResourceConsumerDescIsOpregion = 2,
+		ConnectionResourceConsumerDescMax = 3
+	}
+	public enum _PROCESS_TERMINATE_REQUEST_REASON
+	{
+		ProcessTerminateRequestReasonNone = 0,
+		ProcessTerminateCommitFail = 1,
+		ProcessTerminateRfgViolation = 2,
+		ProcessTerminateRfgAttachedViolation = 3,
+		ProcessTerminateRequestReasonMax = 4
+	}
+	public enum _REQUESTER_TYPE
+	{
+		KernelRequester = 0,
+		UserProcessRequester = 1,
+		UserSharedServiceRequester = 2
+	}
+	public enum _KERNEL_STACK_LIMITS
+	{
+		BugcheckStackLimits = 0,
+		DPCStackLimits = 1,
+		ExpandedStackLimits = 2,
+		NormalStackLimits = 3,
+		Win32kStackLimits = 4,
+		SwapBusyStackLimits = 5,
+		IsrStackLimits = 6,
+		DebuggerStackLimits = 7,
+		MaximumStackLimits = 8
+	}
+	public enum PDCCLIENTID
+	{
+		PDC_INVALID_CLIENT = 0,
+		PDC_PLM_CLIENT = 1,
+		PDC_NQM_CLIENT = 2,
+		PDC_WNS_CLIENT = 3,
+		PDC_DAM_CLIENT = 4,
+		PDC_WCM_CLIENT = 5,
+		PDC_NCSI_CLIENT = 7,
+		PDC_DHCP_CLIENT = 8,
+		PDC_TCPIP_CLIENT = 9,
+		PDC_WU_CLIENT = 11,
+		PDC_GP_CLIENT = 12,
+		PDC_NCA_CLIENT = 14,
+		PDC_BI_CLIENT = 15,
+		PDC_MSCHED_CLIENT = 16,
+		PDC_SUSPENDRESUME_CLIENT = 17,
+		PDC_ACTIVATION_CLIENT = 18,
+		PDC_ACTIVATION_TEST_CLIENT = 19,
+		PDC_PLM_PHASE_TEST_CLIENT = 20,
+		PDC_DAM_PHASE_TEST_CLIENT = 21,
+		PDC_LOW_POWER_PHASE_TEST_CLIENT = 22,
+		PDC_RESILIENCY_NOTIFICATION_PHASE_TEST_CLIENT = 23,
+		PDC_NQM_RESILIENCY_TEST_CLIENT = 24,
+		PDC_DAM_RESILIENCY_TEST_CLIENT = 25,
+		PDC_DAM_KM_TEST_CLIENT = 26,
+		PDC_DAM_UM_TEST_CLIENT = 27,
+		PDC_SINGLETON_TEST_CLIENT = 28,
+		PDC_NETWORK_SERVICE_TEST_CLIENT = 29,
+		PDC_NETWORK_SERVICE2_TEST_CLIENT = 30,
+		PDC_SYSTEM_SERVICE_TEST_CLIENT = 31,
+		PDC_ACTIV_NOTIF_DAM_RESIL_TEST_CLIENT = 32,
+		PDC_ACTIV_NOTIF_NET_RESIL_TEST_CLIENT = 33,
+		PDC_SHELL_CLIENT = 34,
+		PDC_MAINTENANCE_CLIENT = 35,
+		PDC_SYNC_CLIENT = 36,
+		PDC_IDM_CLIENT = 37,
+		PDC_CORTANA_VOICE_ACTIVATION_CLIENT = 38,
+		PDC_TETHERING_CLIENT = 39,
+		PDC_AUDIO_CLIENT = 40,
+		PDC_LOCK_SCREEN = 41,
+		PDC_LREC_CLIENT = 42,
+		PDC_WP_BW_CLIENT = 43,
+		PDC_WP_MEDIA_STREAMING_CLIENT = 44,
+		PDC_WP_MAPS_CLIENT = 46,
+		PDC_WP_SYNC_CLIENT = 47,
+		PDC_SETTING_SYNC_CLIENT = 48,
+		PDC_WP_EDM_CLIENT = 49,
+		PDC_WP_WALLET_CLIENT = 50,
+		PDC_WP_LOCATION_CLIENT = 51,
+		PDC_WP_CM_CLIENT = 53,
+		PDC_WP_DCP_CLIENT = 54,
+		PDC_WP_WIFIAUTO_CLIENT = 55,
+		PDC_MDM_CERTINSTALLER_CLIENT = 57,
+		PDC_WP_IM_CLIENT = 58,
+		PDC_WP_MMS_CLIENT = 59,
+		PDC_DEVICEENROLLER_CLIENT = 60,
+		PDC_WP_WIFI_SCANNING_CLIENT = 61,
+		PDC_WP_OMADM_CLIENT = 62,
+		PDC_WP_TELEMETRY_CHECK_CLIENT = 63,
+		PDC_WP_DIS_CLIENT = 64,
+		PDC_BITS_CLIENT = 65,
+		PDC_WP_VOIP_EXECUTION_CLIENT = 66,
+		PDC_WP_RESERVED_CLIENT3 = 67,
+		PDC_SLEEP_STUDY_CLIENT = 68,
+		PDC_WP_AUTOTIMEUPDATE_CLIENT = 69,
+		PDC_HYPERV_CLIENT = 70,
+		PDC_KM_SIGNAL_CLIENT = 71,
+		PDC_UM_SIGNAL_CLIENT = 72,
+		PDC_DEVICE_HEALTH_ATTESTATION_CLIENT = 73,
+		PDC_XB_SYSTEM_CLIENT = 74,
+		PDC_XB_HOST_CLIENT = 75,
+		PDC_PRINT_JOB_MANAGER_CLIENT = 76,
+		PDC_TELEMETRY_CLIENT = 77,
+		PDC_ERROR_REPORTING_CLIENT = 78,
+		PDC_XBOX_NTM = 79,
+		PDC_CBE_CLIENT = 80,
+		PDC_FIND_MY_PHONE_CLIENT = 81,
+		PDC_COMMAND_CHANNEL_CLIENT = 82,
+		PDC_PPM_PROFILES_CLIENT = 83,
+		PDC_WIFI_CALLING_CLIENT = 84,
+		PDC_WU_REBOOT_CLIENT = 85,
+		PDC_SYSMAIN_CLIENT = 86,
+		PDC_XBOX_UPDATE_CLIENT = 87,
+		PDC_CHAT_SERVICE_CLIENT = 88,
+		PDC_FIND_MY_DEVICE_CLIENT = 89,
+		PDC_NOTIFICATION_FORWARDING_AND_ACTION_CLIENT = 90,
+		PDC_INSTALL_AGENT_CLIENT = 91,
+		PDC_XBOX_WAKE_ON_VOICE = 92,
+		PDC_PLM_AUDIO_CLIENT = 93,
+		PDC_WP_BCKAUDIO_CLIENT = 94,
+		PDC_WAKE_ON_LAN_CLIENT = 95,
+		PDC_WP_CLOUD_MESSAGING_CLIENT = 96,
+		PDC_DATA_MIGRATION_MANAGER = 97,
+		PDC_EVENT_SOUND_MANAGER_CLIENT = 98,
+		PDC_WWAN_DORMANCY_HINT_CLIENT = 99,
+		PDC_NUMBER_OF_CLIENTS = 100
+	}
+	public enum SLEEPSTUDY_SPM_SCENARIO_CS_EXIT
+	{
+		SpmScenarioStopReasonUnspecified = 16,
+		SpmScenarioStopReasonCsExit = 17,
+		SpmScenarioStopReasonMax = 18
+	}
+	public enum PROFILE_DEPARTURE_STYLE
+	{
+		PDS_UPDATE_DEFAULT = 1,
+		PDS_UPDATE_ON_REMOVE = 2,
+		PDS_UPDATE_ON_INTERFACE = 3,
+		PDS_UPDATE_ON_EJECT = 4
+	}
+	public enum LSA_FOREST_TRUST_RECORD_TYPE
+	{
+		ForestTrustTopLevelName = 0,
+		ForestTrustTopLevelNameEx = 1,
+		ForestTrustDomainInfo = 2,
+		ForestTrustRecordTypeLast = 2
+	}
+	public enum ReplacesCorHdrNumericDefines
+	{
+		COMIMAGE_FLAGS_ILONLY = 1,
+		COMIMAGE_FLAGS_32BITREQUIRED = 2,
+		COMIMAGE_FLAGS_IL_LIBRARY = 4,
+		COMIMAGE_FLAGS_STRONGNAMESIGNED = 8,
+		COMIMAGE_FLAGS_NATIVE_ENTRYPOINT = 16,
+		COMIMAGE_FLAGS_TRACKDEBUGDATA = 65536,
+		COMIMAGE_FLAGS_32BITPREFERRED = 131072,
+		COR_VERSION_MAJOR_V2 = 2,
+		COR_VERSION_MAJOR = 2,
+		COR_VERSION_MINOR = 5,
+		COR_DELETED_NAME_LENGTH = 8,
+		COR_VTABLEGAP_NAME_LENGTH = 8,
+		NATIVE_TYPE_MAX_CB = 1,
+		COR_ILMETHOD_SECT_SMALL_MAX_DATASIZE = 255,
+		IMAGE_COR_MIH_METHODRVA = 1,
+		IMAGE_COR_MIH_EHRVA = 2,
+		IMAGE_COR_MIH_BASICBLOCK = 8,
+		COR_VTABLE_32BIT = 1,
+		COR_VTABLE_64BIT = 2,
+		COR_VTABLE_FROM_UNMANAGED = 4,
+		COR_VTABLE_FROM_UNMANAGED_RETAIN_APPDOMAIN = 8,
+		COR_VTABLE_CALL_MOST_DERIVED = 16,
+		IMAGE_COR_EATJ_THUNK_SIZE = 32,
+		MAX_CLASS_NAME = 1024,
+		MAX_PACKAGE_NAME = 1024
+	}
+	public enum _ARBITER_RESULT
+	{
+		ArbiterResultUndefined = -1,
+		ArbiterResultSuccess = 0,
+		ArbiterResultExternalConflict = 1,
+		ArbiterResultNullRequest = 2
+	}
+	public enum PDC_ACTIVITY_TYPE
+	{
+		PdcNetwork = 0,
+		PdcSystem = 1,
+		PdcTimer = 2,
+		PdcAllNetworks = 3,
+		PdcInvalidActivity = 4,
+		PdcMaxActivity = 4
+	}
+	public enum JOB_OBJECT_NET_RATE_CONTROL_FLAGS
+	{
+		JOB_OBJECT_NET_RATE_CONTROL_ENABLE = 1,
+		JOB_OBJECT_NET_RATE_CONTROL_MAX_BANDWIDTH = 2,
+		JOB_OBJECT_NET_RATE_CONTROL_DSCP_TAG = 4,
+		JOB_OBJECT_NET_RATE_CONTROL_VALID_FLAGS = 7
+	}
+	public enum _MI_MIRROR_BITMAP_TYPES
+	{
+		MirrorBitmapTypeNormal = 0,
+		MirrorBitmapTypeInterlocked = 1,
+		MirrorBitmapTypeMaximum = 2
 	}
 	public enum _POP_IO_STATUS
 	{
 		IoReady = 0,
 		IoPending = 1,
 		IoDone = 2
+	}
+	public enum KTM_STATE
+	{
+		KKtmUninitialized = 0,
+		KKtmInitialized = 1,
+		KKtmRecovering = 2,
+		KKtmOnline = 3,
+		KKtmRecoveryFailed = 4,
+		KKtmOffline = 5
+	}
+	public enum _LDR_DLL_LOAD_REASON
+	{
+		LoadReasonStaticDependency = 0,
+		LoadReasonStaticForwarderDependency = 1,
+		LoadReasonDynamicForwarderDependency = 2,
+		LoadReasonDelayloadDependency = 3,
+		LoadReasonDynamicLoad = 4,
+		LoadReasonAsImageLoad = 5,
+		LoadReasonAsDataLoad = 6,
+		LoadReasonUnknown = -1
+	}
+	public enum _RTL_GENERIC_COMPARE_RESULTS
+	{
+		GenericLessThan = 0,
+		GenericGreaterThan = 1,
+		GenericEqual = 2
+	}
+	public enum _PO_MODERN_SLEEP_ACTION
+	{
+		PoModernSleepActionGlobalActivatorsVeto = 0,
+		PoModernSleepActionNonBlockingPhases = 1,
+		PoModernSleepActionForceIdle = 2,
+		PoModernSleepActionMinimalBlockingNotificationClients = 3,
+		PoModernSleepActionMax = 4
+	}
+	public enum _DMA_WIDTH
+	{
+		Width8Bits = 0,
+		Width16Bits = 1,
+		Width32Bits = 2,
+		Width64Bits = 3,
+		WidthNoWrap = 4,
+		MaximumDmaWidth = 5
+	}
+	public enum _DMA_SPEED
+	{
+		Compatible = 0,
+		TypeA = 1,
+		TypeB = 2,
+		TypeC = 3,
+		TypeF = 4,
+		MaximumDmaSpeed = 5
+	}
+	public enum _MI_AVAILABLE_PAGE_WAIT_TYPES
+	{
+		AvailablePagesWaitLow = 0,
+		AvailablePagesWaitHigh = 1,
+		AvailablePagesWaitVeryHigh = 2,
+		AvailablePagesWaitMaximum = 3
+	}
+	public enum _ETW_HEADER_TYPE
+	{
+		EtwHeaderTypeNative = 0,
+		EtwHeaderTypeWow = 1,
+		EtwHeaderTypeMax = 2
+	}
+	public enum _FUNCTION_TABLE_TYPE
+	{
+		RF_SORTED = 0,
+		RF_UNSORTED = 1,
+		RF_CALLBACK = 2,
+		RF_KERNEL_DYNAMIC = 3
+	}
+	public enum _CM_SHARE_DISPOSITION
+	{
+		CmResourceShareUndetermined = 0,
+		CmResourceShareDeviceExclusive = 1,
+		CmResourceShareDriverExclusive = 2,
+		CmResourceShareShared = 3
+	}
+	public enum _ARBITER_ACTION
+	{
+		ArbiterActionTestAllocation = 0,
+		ArbiterActionRetestAllocation = 1,
+		ArbiterActionCommitAllocation = 2,
+		ArbiterActionRollbackAllocation = 3,
+		ArbiterActionQueryAllocatedResources = 4,
+		ArbiterActionWriteReservedResources = 5,
+		ArbiterActionQueryConflict = 6,
+		ArbiterActionQueryArbitrate = 7,
+		ArbiterActionAddReserved = 8,
+		ArbiterActionBootAllocation = 9
+	}
+	public enum _IRQ_PRIORITY
+	{
+		IrqPriorityUndefined = 0,
+		IrqPriorityLow = 1,
+		IrqPriorityNormal = 2,
+		IrqPriorityHigh = 3
+	}
+	public enum _KTRANSACTION_STATE
+	{
+		KTransactionUninitialized = 0,
+		KTransactionActive = 1,
+		KTransactionPreparing = 2,
+		KTransactionPrepared = 3,
+		KTransactionInDoubt = 4,
+		KTransactionCommitted = 5,
+		KTransactionAborted = 6,
+		KTransactionDelegated = 7,
+		KTransactionPrePreparing = 8,
+		KTransactionForgotten = 9,
+		KTransactionRecovering = 10,
+		KTransactionPrePrepared = 11
+	}
+	public enum _KTRANSACTION_OUTCOME
+	{
+		KTxOutcomeUninitialized = 0,
+		KTxOutcomeUndetermined = 1,
+		KTxOutcomeCommitted = 2,
+		KTxOutcomeAborted = 3,
+		KTxOutcomeUnavailable = 4
 	}
 	public enum INTERRUPT_CONNECTION_TYPE
 	{
@@ -1979,24 +2384,56 @@ namespace LiveForensics.Symbols
 		ApicDestinationModeLogicalClustered = 3,
 		ApicDestinationModeUnknown = 4
 	}
-	public enum _PO_FX_PERF_STATE_UNIT
+	public enum _LDR_DDAG_STATE
 	{
-		PoFxPerfStateUnitOther = 0,
-		PoFxPerfStateUnitFrequency = 1,
-		PoFxPerfStateUnitBandwidth = 2,
-		PoFxPerfStateUnitMaximum = 3
+		LdrModulesMerged = -5,
+		LdrModulesInitError = -4,
+		LdrModulesSnapError = -3,
+		LdrModulesUnloaded = -2,
+		LdrModulesUnloading = -1,
+		LdrModulesPlaceHolder = 0,
+		LdrModulesMapping = 1,
+		LdrModulesMapped = 2,
+		LdrModulesWaitingForDependencies = 3,
+		LdrModulesSnapping = 4,
+		LdrModulesSnapped = 5,
+		LdrModulesCondensed = 6,
+		LdrModulesReadyToInit = 7,
+		LdrModulesInitializing = 8,
+		LdrModulesReadyToRun = 9
 	}
-	public enum _PO_FX_PERF_STATE_TYPE
+	public enum _PLUGPLAY_EVENT_CATEGORY
 	{
-		PoFxPerfStateTypeDiscrete = 0,
-		PoFxPerfStateTypeRange = 1,
-		PoFxPerfStateTypeMaximum = 2
+		HardwareProfileChangeEvent = 0,
+		TargetDeviceChangeEvent = 1,
+		DeviceClassChangeEvent = 2,
+		CustomDeviceEvent = 3,
+		DeviceInstallEvent = 4,
+		DeviceArrivalEvent = 5,
+		VetoEvent = 6,
+		BlockedDriverEvent = 7,
+		InvalidIDEvent = 8,
+		DevicePropertyChangeEvent = 9,
+		DeviceInstanceRemovalEvent = 10,
+		DeviceInstanceStartedEvent = 11,
+		MaxPlugEventCategory = 12
 	}
 	public enum _DUMP_EVENTS
 	{
 		DUMP_EVENT_NONE = 0,
 		DUMP_EVENT_HIBER_RESUME = 1,
 		DUMP_EVENT_HIBER_RESUME_END = 2
+	}
+	public enum _CM_DIRTY_VECTOR_OPERATION
+	{
+		DirtyVectorModified = 0,
+		DirtyDataCaptureStart = 1,
+		DirtyDataCaptureEnd = 2
+	}
+	public enum _UNNAMED_ENUM_KTMOH_COMMITTRANSACTION_RESULT
+	{
+		KTMOH_CommitTransaction_Result = 1,
+		KTMOH_RollbackTransaction_Result = 2
 	}
 	public enum _ETW_NOTIFICATION_TYPE
 	{
@@ -2010,17 +2447,30 @@ namespace LiveForensics.Symbols
 		EtwNotificationTypeReserved = 8,
 		EtwNotificationTypeCredentialUI = 9,
 		EtwNotificationTypeInProcSession = 10,
-		EtwNotificationTypeMax = 11
+		EtwNotificationTypeFilteredPrivateLogger = 11,
+		EtwNotificationTypeMax = 12
 	}
-	public enum _RTL_GENERIC_COMPARE_RESULTS
+	public enum _PO_FX_PERF_STATE_UNIT
 	{
-		GenericLessThan = 0,
-		GenericGreaterThan = 1,
-		GenericEqual = 2
+		PoFxPerfStateUnitOther = 0,
+		PoFxPerfStateUnitFrequency = 1,
+		PoFxPerfStateUnitBandwidth = 2,
+		PoFxPerfStateUnitMaximum = 3
 	}
-	public enum _UNNAMED_ENUM_KTMOH_COMMITTRANSACTION_RESULT
+	public enum _PO_FX_PERF_STATE_TYPE
 	{
-		KTMOH_CommitTransaction_Result = 1,
-		KTMOH_RollbackTransaction_Result = 2
+		PoFxPerfStateTypeDiscrete = 0,
+		PoFxPerfStateTypeRange = 1,
+		PoFxPerfStateTypeMaximum = 2
+	}
+	public enum _FS_FILTER_SECTION_SYNC_TYPE
+	{
+		SyncTypeOther = 0,
+		SyncTypeCreateSection = 1
+	}
+	public enum _FS_FILTER_STREAM_FO_NOTIFICATION_TYPE
+	{
+		NotifyTypeCreate = 0,
+		NotifyTypeRetired = 1
 	}
 }
