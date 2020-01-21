@@ -2,4 +2,13 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/.vs/Pdb-Magician/v16/Server/sqlite3/db.lock
+/.vs/*
+/Liveforensics.Symbols/obj/Debug
+/packages/Newtonsoft.Json.12.0.3
+/Pdb-Magician/bin/Debug
+/Pdb-Magician/obj/Debug
+/TestHarness/bin/Debug
+/TestHarness/obj/Debug
+*.csproj
+*.config
+TestHarness/TestHarness.csproj

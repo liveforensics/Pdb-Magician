@@ -3,14 +3,21 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
+/// <summary>
+/// First time you run this stuff, you probably need to register the DIA dll
+/// regsvr32.exe "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\DIA SDK\bin\msdia140.dll"
+/// </summary>
+
+
 namespace TestHarness
 {
     class Program
     {
         static void Main(string[] args)
-        {  
+        {
             // this is a GUIDAGE from my Windows 10 x64 box.          
-            string guidAge = "AA6BC31F61F7415F8C06994099933BBD1";
+            //string guidAge = "AA6BC31F61F7415F8C06994099933BBD1"; 93D178D59F755B803E7780CB3A795671
+            string guidAge = "3A79567180CB3E77805B759FD578D1931";
             string filename = "ntkrnlmp.pdb";
 
             // start by retrieving the Symbol file (PDB)
