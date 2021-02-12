@@ -17,10 +17,15 @@ namespace TestHarness
     {
         static void Main(string[] args)
         {
-            string guidAge = "0F0B35EF85904B09A22E11C1DBEF83921";
+            //string guidAge = "0F0B35EF85904B09A22E11C1DBEF83921";
             //string guidAge = "afcb4fd7b7a844acaa1a4154cc1091871";
             //string guidAge = "1453BDA99D224237ABDDB806A482DDF41";
-            string filename = "ntkrnlmp.pdb";
+            string guidAge = "864170751E2F4E98A60091F60CA538D11";
+            //string filename = "ntkrnlmp.pdb";
+            string filename = "ntoskrnl.pdb";
+            //12 / 02 / 2021 16:49:30 - RSDS Filename ntoskrnl.pdb GuidAge 864170751E2F4E98A60091F60CA538D11
+
+
 
             PdbMagician myLib = new PdbMagician();
             bool result = myLib.RetrieveSymbolFile(filename, guidAge, @"c:\temp\magician");

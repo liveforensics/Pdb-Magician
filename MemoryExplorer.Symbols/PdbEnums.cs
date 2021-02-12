@@ -7,8 +7,7 @@ namespace MemoryExplorer.Symbols
 		SE_WS_APPX_SIGNATURE_ORIGIN_NOT_VALIDATED = 0,
 		SE_WS_APPX_SIGNATURE_ORIGIN_UNKNOWN = 1,
 		SE_WS_APPX_SIGNATURE_ORIGIN_APPSTORE = 2,
-		SE_WS_APPX_SIGNATURE_ORIGIN_WINDOWS = 3,
-		SE_WS_APPX_SIGNATURE_ORIGIN_ENTERPRISE = 4
+		SE_WS_APPX_SIGNATURE_ORIGIN_WINDOWS = 3
 	}
 	public enum _NT_PRODUCT_TYPE
 	{
@@ -168,8 +167,7 @@ namespace MemoryExplorer.Symbols
 		FileFsVolumeFlagsInformation = 10,
 		FileFsSectorSizeInformation = 11,
 		FileFsDataCopyInformation = 12,
-		FileFsMetadataSizeInformation = 13,
-		FileFsMaximumInformation = 14
+		FileFsMaximumInformation = 13
 	}
 	public enum _DEVICE_RELATION_TYPE
 	{
@@ -229,8 +227,7 @@ namespace MemoryExplorer.Symbols
 		PowerActionShutdown = 4,
 		PowerActionShutdownReset = 5,
 		PowerActionShutdownOff = 6,
-		PowerActionWarmEject = 7,
-		PowerActionDisplayOff = 8
+		PowerActionWarmEject = 7
 	}
 	public enum _IO_PRIORITY_HINT
 	{
@@ -249,8 +246,7 @@ namespace MemoryExplorer.Symbols
 		MmHardwareCoherentCached = 3,
 		MmNonCachedUnordered = 4,
 		MmUSWCCached = 5,
-		MmMaximumCacheType = 6,
-		MmNotMapped = -1
+		MmMaximumCacheType = 6
 	}
 	public enum _MM_PAGE_ACCESS_TYPE
 	{
@@ -329,14 +325,6 @@ namespace MemoryExplorer.Symbols
 		WheaDataFormatGeneric = 7,
 		WheaDataFormatMax = 8
 	}
-	public enum _EVENT_INFO_CLASS
-	{
-		EventProviderBinaryTrackInfo = 0,
-		EventProviderSetEnableAllKeywords = 1,
-		EventProviderSetTraits = 2,
-		EventProviderUseDescriptorType = 3,
-		MaxEventInfo = 4
-	}
 	public enum _MMLISTS
 	{
 		ZeroedPageList = 0,
@@ -374,6 +362,12 @@ namespace MemoryExplorer.Symbols
 		MiVaMaximumType = 14,
 		MiVaSystemPtesLarge = 15
 	}
+	public enum _MI_STORE_BIT_TYPE
+	{
+		MiStoreBitTypeInStore = 0,
+		MiStoreBitTypeEvicted = 1,
+		MiStoreBitTypeMax = 2
+	}
 	public enum _CM_LOAD_FAILURE_TYPE
 	{
 		_None = 0,
@@ -396,24 +390,7 @@ namespace MemoryExplorer.Symbols
 		_HvCheckBin = 17,
 		_HvpGetLogEntryDirtyVector = 18,
 		_HvpReadLogEntryHeader = 19,
-		_HvpReadLogEntry = 20,
-		_CmpMountPreloadedHives = 21,
-		_CmpLoadHiveThread = 22
-	}
-	public enum _CMP_FAILURE_INJECTION_POINT
-	{
-		CmpFailurePointPoolAllocation = 0,
-		CmpFailurePointViewMapping = 1,
-		CmpFailurePointViewPinning = 2,
-		CmpFailurePointResourceCharging = 3,
-		CmpFailurePointFileWrite = 4,
-		CmpFailurePointFileRead = 5,
-		CmpFailurePointCacheFlush = 6,
-		CmpFailurePointFlush = 7,
-		CmpFailurePointFlushAndPurge = 8,
-		CmpFailurePointForceLargeBin = 9,
-		CmpFailurePointDontFixAlignment = 10,
-		CmpFailureInjectionPointCount = 11
+		_HvpReadLogEntry = 20
 	}
 	public enum _PCW_CALLBACK_TYPE
 	{
@@ -421,6 +398,51 @@ namespace MemoryExplorer.Symbols
 		PcwCallbackRemoveCounter = 1,
 		PcwCallbackEnumerateInstances = 2,
 		PcwCallbackCollectData = 3
+	}
+	public enum _TOKEN_INFORMATION_CLASS
+	{
+		TokenUser = 1,
+		TokenGroups = 2,
+		TokenPrivileges = 3,
+		TokenOwner = 4,
+		TokenPrimaryGroup = 5,
+		TokenDefaultDacl = 6,
+		TokenSource = 7,
+		TokenType = 8,
+		TokenImpersonationLevel = 9,
+		TokenStatistics = 10,
+		TokenRestrictedSids = 11,
+		TokenSessionId = 12,
+		TokenGroupsAndPrivileges = 13,
+		TokenSessionReference = 14,
+		TokenSandBoxInert = 15,
+		TokenAuditPolicy = 16,
+		TokenOrigin = 17,
+		TokenElevationType = 18,
+		TokenLinkedToken = 19,
+		TokenElevation = 20,
+		TokenHasRestrictions = 21,
+		TokenAccessInformation = 22,
+		TokenVirtualizationAllowed = 23,
+		TokenVirtualizationEnabled = 24,
+		TokenIntegrityLevel = 25,
+		TokenUIAccess = 26,
+		TokenMandatoryPolicy = 27,
+		TokenLogonSid = 28,
+		TokenIsAppContainer = 29,
+		TokenCapabilities = 30,
+		TokenAppContainerSid = 31,
+		TokenAppContainerNumber = 32,
+		TokenUserClaimAttributes = 33,
+		TokenDeviceClaimAttributes = 34,
+		TokenRestrictedUserClaimAttributes = 35,
+		TokenRestrictedDeviceClaimAttributes = 36,
+		TokenDeviceGroups = 37,
+		TokenRestrictedDeviceGroups = 38,
+		TokenSecurityAttributes = 39,
+		TokenIsRestricted = 40,
+		TokenProcessTrustLevel = 41,
+		MaxTokenInfoClass = 42
 	}
 	public enum _PNP_DEVNODE_STATE
 	{
@@ -478,52 +500,6 @@ namespace MemoryExplorer.Symbols
 		DOCK_DEPARTING = 3,
 		DOCK_EJECTIRP_COMPLETED = 4
 	}
-	public enum _TOKEN_INFORMATION_CLASS
-	{
-		TokenUser = 1,
-		TokenGroups = 2,
-		TokenPrivileges = 3,
-		TokenOwner = 4,
-		TokenPrimaryGroup = 5,
-		TokenDefaultDacl = 6,
-		TokenSource = 7,
-		TokenType = 8,
-		TokenImpersonationLevel = 9,
-		TokenStatistics = 10,
-		TokenRestrictedSids = 11,
-		TokenSessionId = 12,
-		TokenGroupsAndPrivileges = 13,
-		TokenSessionReference = 14,
-		TokenSandBoxInert = 15,
-		TokenAuditPolicy = 16,
-		TokenOrigin = 17,
-		TokenElevationType = 18,
-		TokenLinkedToken = 19,
-		TokenElevation = 20,
-		TokenHasRestrictions = 21,
-		TokenAccessInformation = 22,
-		TokenVirtualizationAllowed = 23,
-		TokenVirtualizationEnabled = 24,
-		TokenIntegrityLevel = 25,
-		TokenUIAccess = 26,
-		TokenMandatoryPolicy = 27,
-		TokenLogonSid = 28,
-		TokenIsAppContainer = 29,
-		TokenCapabilities = 30,
-		TokenAppContainerSid = 31,
-		TokenAppContainerNumber = 32,
-		TokenUserClaimAttributes = 33,
-		TokenDeviceClaimAttributes = 34,
-		TokenRestrictedUserClaimAttributes = 35,
-		TokenRestrictedDeviceClaimAttributes = 36,
-		TokenDeviceGroups = 37,
-		TokenRestrictedDeviceGroups = 38,
-		TokenSecurityAttributes = 39,
-		TokenIsRestricted = 40,
-		TokenProcessTrustLevel = 41,
-		TokenPrivateNameSpace = 42,
-		MaxTokenInfoClass = 43
-	}
 	public enum _ARBITER_REQUEST_SOURCE
 	{
 		ArbiterRequestUndefined = -1,
@@ -549,55 +525,22 @@ namespace MemoryExplorer.Symbols
 		PowerRequestPerfBoostRequiredInternal = 4,
 		PowerRequestInternalInvalid = 5
 	}
-	public enum _PEP_ACPI_RESOURCE_TYPE
+	public enum _PROC_HYPERVISOR_STATE
 	{
-		PepAcpiMemory = 0,
-		PepAcpiIoPort = 1,
-		PepAcpiInterrupt = 2,
-		PepAcpiGpioIo = 3,
-		PepAcpiGpioInt = 4,
-		PepAcpiSpbI2c = 5,
-		PepAcpiSpbSpi = 6,
-		PepAcpiSpbUart = 7,
-		PepAcpiExtendedMemory = 8,
-		PepAcpiExtendedIo = 9
+		ProcHypervisorNone = 0,
+		ProcHypervisorPresent = 1,
+		ProcHypervisorPower = 2
 	}
-	public enum _KINTERRUPT_MODE
+	public enum _POP_SPM_STATUS
 	{
-		LevelSensitive = 0,
-		Latched = 1
-	}
-	public enum _KINTERRUPT_POLARITY
-	{
-		InterruptPolarityUnknown = 0,
-		InterruptActiveHigh = 1,
-		InterruptRisingEdge = 1,
-		InterruptActiveLow = 2,
-		InterruptFallingEdge = 2,
-		InterruptActiveBoth = 3,
-		InterruptActiveBothTriggerLow = 3,
-		InterruptActiveBothTriggerHigh = 4
-	}
-	public enum _GPIO_PIN_CONFIG_TYPE
-	{
-		PullDefault = 0,
-		PullUp = 1,
-		PullDown = 2,
-		PullNone = 3
-	}
-	public enum _GPIO_PIN_IORESTRICTION_TYPE
-	{
-		IoRestrictionNone = 0,
-		IoRestrictionInputOnly = 1,
-		IoRestrictionOutputOnly = 2,
-		IoRestrictionNoneAndPreserve = 3
-	}
-	public enum SYSTEM_POWER_CONDITION
-	{
-		PoAc = 0,
-		PoDc = 1,
-		PoHot = 2,
-		PoConditionMaximum = 3
+		PopSpmStatusUninitialized = 0,
+		PopSpmStatusFailedNoMemory = 1,
+		PopSpmStatusFailedNoPoliciesFound = 2,
+		PopSpmStatusFailedToOpenExtHandle = 3,
+		PopSpmStatusFailedToOpenIntHandle = 4,
+		PopSpmStatusWaitingForRegistration = 5,
+		PopSpmStatusInitialized = 6,
+		PopSpmStatusInvalid = 7
 	}
 	public enum _HEAP_FAILURE_TYPE
 	{
@@ -617,8 +560,7 @@ namespace MemoryExplorer.Symbols
 		heap_failure_listentry_corruption = 13,
 		heap_failure_lfh_bitmap_mismatch = 14,
 		heap_failure_segment_lfh_bitmap_corruption = 15,
-		heap_failure_segment_lfh_double_free = 16,
-		heap_failure_vs_subsegment_corruption = 17
+		heap_failure_segment_lfh_double_free = 16
 	}
 	public enum _BLOB_ID
 	{
@@ -717,6 +659,13 @@ namespace MemoryExplorer.Symbols
 		CreateFileTypeNamedPipe = 1,
 		CreateFileTypeMailslot = 2
 	}
+	public enum _EVENT_INFO_CLASS
+	{
+		EventProviderBinaryTrackInfo = 0,
+		EventProviderSetTraits = 2,
+		EventProviderUseDescriptorType = 3,
+		MaxEventInfo = 4
+	}
 	public enum _ETW_RT_EVENT_LOSS
 	{
 		EtwRtEventNoLoss = 0,
@@ -764,21 +713,6 @@ namespace MemoryExplorer.Symbols
 		SecurityIdentification = 1,
 		SecurityImpersonation = 2,
 		SecurityDelegation = 3
-	}
-	public enum POWER_POLICY_DEVICE_TYPE
-	{
-		PolicyDeviceSystemButton = 0,
-		PolicyDeviceThermalZone = 1,
-		PolicyDeviceBattery = 2,
-		PolicyDeviceMemory = 3,
-		PolicyInitiatePowerActionAPI = 4,
-		PolicySetPowerStateAPI = 5,
-		PolicyImmediateDozeS4 = 6,
-		PolicySystemIdle = 7,
-		PolicyDeviceWakeAlarm = 8,
-		PolicyDeviceFan = 9,
-		PolicyCsBatterySaver = 10,
-		PolicyDeviceMax = 11
 	}
 	public enum _KTIMER2_TYPE
 	{
@@ -829,19 +763,6 @@ namespace MemoryExplorer.Symbols
 		WdfNotifyRoutinesClass = 15,
 		MaxTraceInformationClass = 16
 	}
-	public enum _MI_WORKING_SET_TYPE
-	{
-		MiWorkingSetTypeSystemCache = 0,
-		MiWorkingSetTypePagedPool = 1,
-		MiWorkingSetTypeSystemPtes = 2,
-		MiWorkingSetTypeMaximum = 3
-	}
-	public enum SLEEPSTUDY_SPM_SCENARIO_CS_EXIT
-	{
-		SpmScenarioStopReasonUnspecified = 16,
-		SpmScenarioStopReasonCsExit = 17,
-		SpmScenarioStopReasonMax = 18
-	}
 	public enum _MI_NODE_NONPAGED_POOL_BITMAP
 	{
 		NonPagedPoolLargePdeNx = 0,
@@ -868,9 +789,35 @@ namespace MemoryExplorer.Symbols
 		PsAttributeUmsThread = 15,
 		PsAttributeMitigationOptions = 16,
 		PsAttributeProtectionLevel = 17,
-		PsAttributeSecureProcess = 18,
-		PsAttributeJobList = 19,
-		PsAttributeMax = 20
+		PsAttributeMax = 18
+	}
+	public enum _KINTERRUPT_MODE
+	{
+		LevelSensitive = 0,
+		Latched = 1
+	}
+	public enum _KINTERRUPT_POLARITY
+	{
+		InterruptPolarityUnknown = 0,
+		InterruptActiveHigh = 1,
+		InterruptRisingEdge = 1,
+		InterruptActiveLow = 2,
+		InterruptFallingEdge = 2,
+		InterruptActiveBoth = 3,
+		InterruptActiveBothTriggerLow = 3,
+		InterruptActiveBothTriggerHigh = 4
+	}
+	public enum _HV_CPUID_FUNCTION
+	{
+		HvCpuIdFunctionVersionAndFeatures = 1,
+		HvCpuIdFunctionHvVendorAndMaxFunction = 1073741824,
+		HvCpuIdFunctionHvInterface = 1073741825,
+		HvCpuIdFunctionMsHvVersion = 1073741826,
+		HvCpuIdFunctionMsHvFeatures = 1073741827,
+		HvCpuIdFunctionMsHvEnlightenmentInformation = 1073741828,
+		HvCpuIdFunctionMsHvImplementationLimits = 1073741829,
+		HvCpuIdFunctionMsHvHardwareFeatures = 1073741830,
+		HvCpuIdFunctionMaxReserved = 1073741830
 	}
 	public enum _USER_ACTIVITY_PRESENCE
 	{
@@ -967,11 +914,6 @@ namespace MemoryExplorer.Symbols
 		JobObjectCycleTimeNotification = 24,
 		JobObjectClearEvent = 25,
 		JobObjectInterferenceInformation = 26,
-		JobObjectClearPeakJobMemoryUsed = 27,
-		JobObjectMemoryUsageInformation = 28,
-		JobObjectSharedCommit = 29,
-		JobObjectContainerId = 30,
-		JobObjectIoRateControlInformation = 31,
 		JobObjectReserved1Information = 18,
 		JobObjectReserved2Information = 19,
 		JobObjectReserved3Information = 20,
@@ -981,22 +923,7 @@ namespace MemoryExplorer.Symbols
 		JobObjectReserved7Information = 24,
 		JobObjectReserved8Information = 25,
 		JobObjectReserved9Information = 26,
-		JobObjectReserved10Information = 27,
-		JobObjectReserved11Information = 28,
-		JobObjectReserved12Information = 29,
-		JobObjectReserved13Information = 30,
-		JobObjectReserved14Information = 31,
-		JobObjectNetRateControlInformation = 32,
-		JobObjectNotificationLimitInformation2 = 33,
-		JobObjectLimitViolationInformation2 = 34,
-		JobObjectCreateSilo = 35,
-		JobObjectSiloBasicInformation = 36,
-		JobObjectSiloRootDirectory = 37,
-		JobObjectServerSiloBasicInformation = 38,
-		JobObjectServerSiloServiceSessionId = 39,
-		JobObjectServerSiloInitialize = 40,
-		JobObjectServerSiloDefaultCompartmentId = 41,
-		MaxJobObjectInfoClass = 42
+		MaxJobObjectInfoClass = 27
 	}
 	public enum _CM_SHARE_DISPOSITION
 	{
@@ -1004,13 +931,6 @@ namespace MemoryExplorer.Symbols
 		CmResourceShareDeviceExclusive = 1,
 		CmResourceShareDriverExclusive = 2,
 		CmResourceShareShared = 3
-	}
-	public enum _ConnectionResourceConsumerDesc
-	{
-		ConnectionResourceConsumerDescIsUndefined = 0,
-		ConnectionResourceConsumerDescIsDevice = 1,
-		ConnectionResourceConsumerDescIsOpregion = 2,
-		ConnectionResourceConsumerDescMax = 3
 	}
 	public enum _MM_PREEMPTIVE_TRIMS
 	{
@@ -1028,13 +948,6 @@ namespace MemoryExplorer.Symbols
 		EtwBufferStateFlush = 3,
 		EtwBufferStateMaximum = 4
 	}
-	public enum _PROC_HYPERVISOR_STATE
-	{
-		ProcHypervisorNone = 0,
-		ProcHypervisorPresent = 1,
-		ProcHypervisorPower = 2,
-		ProcHypervisorHvCounters = 3
-	}
 	public enum PROFILE_DEPARTURE_STYLE
 	{
 		PDS_UPDATE_DEFAULT = 1,
@@ -1048,6 +961,13 @@ namespace MemoryExplorer.Symbols
 		ForestTrustTopLevelNameEx = 1,
 		ForestTrustDomainInfo = 2,
 		ForestTrustRecordTypeLast = 2
+	}
+	public enum SYSTEM_POWER_CONDITION
+	{
+		PoAc = 0,
+		PoDc = 1,
+		PoHot = 2,
+		PoConditionMaximum = 3
 	}
 	public enum _TYPE_OF_MEMORY
 	{
@@ -1075,23 +995,12 @@ namespace MemoryExplorer.Symbols
 		LoaderNlsData = 21,
 		LoaderSpecialMemory = 22,
 		LoaderBBTMemory = 23,
-		LoaderZero = 24,
+		LoaderReserve = 24,
 		LoaderXIPRom = 25,
 		LoaderHALCachedMemory = 26,
 		LoaderLargePageFiller = 27,
 		LoaderErrorLogMemory = 28,
-		LoaderVsmMemory = 29,
-		LoaderFirmwareCode = 30,
-		LoaderFirmwareData = 31,
-		LoaderFirmwareReserved = 32,
-		LoaderMaximum = 33
-	}
-	public enum JOB_OBJECT_NET_RATE_CONTROL_FLAGS
-	{
-		JOB_OBJECT_NET_RATE_CONTROL_ENABLE = 1,
-		JOB_OBJECT_NET_RATE_CONTROL_MAX_BANDWIDTH = 2,
-		JOB_OBJECT_NET_RATE_CONTROL_DSCP_TAG = 4,
-		JOB_OBJECT_NET_RATE_CONTROL_VALID_FLAGS = 7
+		LoaderMaximum = 29
 	}
 	public enum PPM_IDLE_BUCKET_TIME_TYPE
 	{
@@ -1099,19 +1008,12 @@ namespace MemoryExplorer.Symbols
 		PpmIdleBucketTimeIn100ns = 1,
 		PpmIdleBucketTimeMaximum = 2
 	}
-	public enum _MI_KSTACK_TYPE
-	{
-		MiRegularKstack = 0,
-		MiShortLivedKstack = 1,
-		MiMaximumKstack = 2
-	}
 	public enum _DEVPROP_OPERATOR
 	{
 		DEVPROP_OPERATOR_MODIFIER_NOT = 65536,
 		DEVPROP_OPERATOR_MODIFIER_IGNORE_CASE = 131072,
 		DEVPROP_OPERATOR_NONE = 0,
 		DEVPROP_OPERATOR_EXISTS = 1,
-		DEVPROP_OPERATOR_NOT_EXISTS = 65537,
 		DEVPROP_OPERATOR_EQUALS = 2,
 		DEVPROP_OPERATOR_NOT_EQUALS = 65538,
 		DEVPROP_OPERATOR_GREATER_THAN = 3,
@@ -1142,13 +1044,11 @@ namespace MemoryExplorer.Symbols
 		DEVPROP_OPERATOR_OR_CLOSE = 4194304,
 		DEVPROP_OPERATOR_NOT_OPEN = 5242880,
 		DEVPROP_OPERATOR_NOT_CLOSE = 6291456,
-		DEVPROP_OPERATOR_ARRAY_CONTAINS = 268435456,
 		DEVPROP_OPERATOR_MASK_EVAL = 4095,
 		DEVPROP_OPERATOR_MASK_LIST = 61440,
 		DEVPROP_OPERATOR_MASK_MODIFIER = 983040,
-		DEVPROP_OPERATOR_MASK_NOT_LOGICAL = -267386881,
-		DEVPROP_OPERATOR_MASK_LOGICAL = 267386880,
-		DEVPROP_OPERATOR_MASK_ARRAY = -268435456
+		DEVPROP_OPERATOR_MASK_NOT_LOGICAL = 1048575,
+		DEVPROP_OPERATOR_MASK_LOGICAL = -1048576
 	}
 	public enum _TlgBlob_t
 	{
@@ -1167,6 +1067,21 @@ namespace MemoryExplorer.Symbols
 		IrqPriorityNormal = 2,
 		IrqPriorityHigh = 3
 	}
+	public enum POWER_POLICY_DEVICE_TYPE
+	{
+		PolicyDeviceSystemButton = 0,
+		PolicyDeviceThermalZone = 1,
+		PolicyDeviceBattery = 2,
+		PolicyDeviceMemory = 3,
+		PolicyInitiatePowerActionAPI = 4,
+		PolicySetPowerStateAPI = 5,
+		PolicyImmediateDozeS4 = 6,
+		PolicySystemIdle = 7,
+		PolicyDeviceWakeAlarm = 8,
+		PolicyDeviceFan = 9,
+		PolicyCsBatterySaver = 10,
+		PolicyDeviceMax = 11
+	}
 	public enum PS_CREATE_STATE
 	{
 		PsCreateInitialState = 0,
@@ -1177,20 +1092,6 @@ namespace MemoryExplorer.Symbols
 		PsCreateFailExeName = 5,
 		PsCreateSuccess = 6,
 		PsCreateMaximumStates = 7
-	}
-	public enum _KHETERO_CPU_POLICY
-	{
-		KHeteroCpuPolicyAll = 0,
-		KHeteroCpuPolicyLarge = 1,
-		KHeteroCpuPolicyLargeOrIdle = 2,
-		KHeteroCpuPolicySmall = 3,
-		KHeteroCpuPolicySmallOrIdle = 4,
-		KHeteroCpuPolicyDynamic = 5,
-		KHeteroCpuPolicyStaticMax = 5,
-		KHeteroCpuPolicyBiasedSmall = 6,
-		KHeteroCpuPolicyBiasedLarge = 7,
-		KHeteroCpuPolicyDefault = 8,
-		KHeteroCpuPolicyMax = 9
 	}
 	public enum _PLUGPLAY_EVENT_CATEGORY
 	{
@@ -1251,10 +1152,9 @@ namespace MemoryExplorer.Symbols
 		WaitSuspendInProgress = 3,
 		WaitSuspended = 4,
 		WaitResumeInProgress = 5,
-		WaitResumeAborted = 6,
 		WaitFirstSuspendState = 3,
-		WaitLastSuspendState = 6,
-		MaximumWaitState = 7
+		WaitLastSuspendState = 5,
+		MaximumWaitState = 6
 	}
 	public enum _PROCESSOR_CACHE_TYPE
 	{
@@ -1273,12 +1173,6 @@ namespace MemoryExplorer.Symbols
 		ExceptionContinueSearch = 1,
 		ExceptionNestedException = 2,
 		ExceptionCollidedUnwind = 3
-	}
-	public enum _KTHREAD_TAG
-	{
-		KThreadTagNone = 0,
-		KThreadTagMediaBuffering = 1,
-		KThreadTagMax = 2
 	}
 	public enum _MM_POOL_PRIORITIES
 	{
@@ -1328,6 +1222,10 @@ namespace MemoryExplorer.Symbols
 		ArbiterActionAddReserved = 8,
 		ArbiterActionBootAllocation = 9
 	}
+	public enum _HV_HYPERVISOR_INTERFACE
+	{
+		HvMicrosoftHypervisorInterface = 824407624
+	}
 	public enum _CM_DIRTY_VECTOR_OPERATION
 	{
 		DirtyVectorModified = 0,
@@ -1344,8 +1242,7 @@ namespace MemoryExplorer.Symbols
 		Waiting = 5,
 		Transition = 6,
 		DeferredReady = 7,
-		GateWaitObsolete = 8,
-		WaitingForProcessInSwap = 9
+		GateWaitObsolete = 8
 	}
 	public enum _IO_ALLOCATION_ACTION
 	{
@@ -1358,6 +1255,13 @@ namespace MemoryExplorer.Symbols
 		ResultNegative = 1,
 		ResultZero = 0,
 		ResultPositive = 2
+	}
+	public enum _PROC_PERF_UTILITY_TYPE
+	{
+		ProcPerfUtilityTypeIncrease = 0,
+		ProcPerfUtilityTypeDecrease = 1,
+		ProcPerfUtilityTypeCoreParking = 2,
+		ProcPerfUtilityTypeMax = 3
 	}
 	public enum _PS_PROTECTED_TYPE
 	{
@@ -1402,12 +1306,6 @@ namespace MemoryExplorer.Symbols
 		PerfInfoMemUsagePfnMetadata = 0,
 		PerfInfoMemUsageMax = 1
 	}
-	public enum _MI_AVAILABLE_PAGE_WAIT_TYPES
-	{
-		AvailablePagesWaitLow = 0,
-		AvailablePagesWaitHigh = 1,
-		AvailablePagesWaitMaximum = 2
-	}
 	public enum _POLICY_AUDIT_EVENT_TYPE
 	{
 		AuditCategorySystem = 0,
@@ -1444,13 +1342,6 @@ namespace MemoryExplorer.Symbols
 		PsRequestDuplicate = 1,
 		PsAlwaysDuplicate = 2,
 		PsMaxStdHandleStates = 3
-	}
-	public enum _MI_IO_PFN_TYPE
-	{
-		MiIoPfnProbes = 0,
-		MiIoPfnMaps = 1,
-		MiIoPfnUnmapped = 2,
-		MiMaximumIoPfnType = 3
 	}
 	public enum _IO_SESSION_STATE
 	{
@@ -1492,7 +1383,6 @@ namespace MemoryExplorer.Symbols
 		COMIMAGE_FLAGS_STRONGNAMESIGNED = 8,
 		COMIMAGE_FLAGS_NATIVE_ENTRYPOINT = 16,
 		COMIMAGE_FLAGS_TRACKDEBUGDATA = 65536,
-		COMIMAGE_FLAGS_32BITPREFERRED = 131072,
 		COR_VERSION_MAJOR_V2 = 2,
 		COR_VERSION_MAJOR = 2,
 		COR_VERSION_MINOR = 5,
@@ -1558,8 +1448,7 @@ namespace MemoryExplorer.Symbols
 		NotifyEjectionRelationsChange = 20,
 		ConfigureDevice = 21,
 		ConfigureDeviceClass = 22,
-		ConfigureDeviceExtensions = 23,
-		ConfigureDeviceReset = 24
+		ConfigureDeviceExtensions = 23
 	}
 	public enum _HARDWARE_COUNTER_TYPE
 	{
@@ -1638,11 +1527,6 @@ namespace MemoryExplorer.Symbols
 		WaitBlockSuspended = 6,
 		WaitBlockAllStates = 7
 	}
-	public enum JOB_OBJECT_IO_RATE_CONTROL_FLAGS
-	{
-		JOB_OBJECT_IO_RATE_CONTROL_ENABLE = 1,
-		JOB_OBJECT_IO_RATE_CONTROL_VALID_FLAGS = 1
-	}
 	public enum _KRESOURCEMANAGER_STATE
 	{
 		KResourceManagerUninitialized = 0,
@@ -1672,8 +1556,7 @@ namespace MemoryExplorer.Symbols
 		ProcessOutTransition = 3,
 		ProcessInSwap = 4,
 		ProcessOutSwap = 5,
-		ProcessRetryOutSwap = 6,
-		ProcessAllSwapStates = 7
+		ProcessAllSwapStates = 6
 	}
 	public enum _TlgIn_t
 	{
@@ -1739,7 +1622,8 @@ namespace MemoryExplorer.Symbols
 	{
 		CfgBitMapNative = 0,
 		CfgBitMapWow64 = 1,
-		CfgBitMapMax = 2
+		CfgBitMapWow64NativeLow = 2,
+		CfgBitMapMax = 3
 	}
 	public enum KTM_STATE
 	{
@@ -1872,9 +1756,7 @@ namespace MemoryExplorer.Symbols
 		RegNtPostSaveKey = 44,
 		RegNtPreReplaceKey = 45,
 		RegNtPostReplaceKey = 46,
-		RegNtPreQueryKeyName = 47,
-		RegNtPostQueryKeyName = 48,
-		MaxRegNtNotifyClass = 49
+		MaxRegNtNotifyClass = 47
 	}
 	public enum _TlgOut_t
 	{
@@ -1919,35 +1801,12 @@ namespace MemoryExplorer.Symbols
 		FoExtTypeOplockKey = 6,
 		MaxFoExtTypes = 7
 	}
-	public enum _MI_MEMORY_EVENT_TYPES
-	{
-		LowAvailablePagesEvent = 0,
-		HighAvailablePagesEvent = 1,
-		LowPagedPoolEvent = 2,
-		HighPagedPoolEvent = 3,
-		LowNonPagedPoolEvent = 4,
-		HighNonPagedPoolEvent = 5,
-		LowCommitEvent = 6,
-		HighCommitEvent = 7,
-		MaximumCommitEvent = 8,
-		BadMemoryDetectedEvent = 9,
-		PhysicalMemoryChangeEvent = 10,
-		TotalNumberOfMemoryEvents = 11
-	}
-	public enum _MI_LOCK_ACQUIRE_TYPE
-	{
-		MiAcquireExclusive = 0,
-		MiAcquireExclusiveAutoExpand = 1,
-		MiAcquireShared = 2,
-		MiAcquireSharedAutoExpand = 3
-	}
 	public enum _MI_DYNAMICBASE_BITMAP
 	{
 		DynamicBaseBitMap32 = 0,
 		DynamicBaseBitMap64Low = 1,
 		DynamicBaseBitMap64High = 2,
-		DynamicBaseBitMapWow64Dll = 3,
-		LastDynamicBaseBitMap = 4
+		LastDynamicBaseBitMap = 3
 	}
 	public enum _FS_FILTER_SECTION_SYNC_TYPE
 	{
@@ -1958,6 +1817,12 @@ namespace MemoryExplorer.Symbols
 	{
 		NotifyTypeCreate = 0,
 		NotifyTypeRetired = 1
+	}
+	public enum _DEVICE_RELATION_LEVEL
+	{
+		DeviceRelation = 0,
+		Dependent = 1,
+		DirectDescendant = 2
 	}
 	public enum _POP_IO_STATUS
 	{
@@ -1978,19 +1843,6 @@ namespace MemoryExplorer.Symbols
 		ApicDestinationModeLogicalFlat = 2,
 		ApicDestinationModeLogicalClustered = 3,
 		ApicDestinationModeUnknown = 4
-	}
-	public enum _PO_FX_PERF_STATE_UNIT
-	{
-		PoFxPerfStateUnitOther = 0,
-		PoFxPerfStateUnitFrequency = 1,
-		PoFxPerfStateUnitBandwidth = 2,
-		PoFxPerfStateUnitMaximum = 3
-	}
-	public enum _PO_FX_PERF_STATE_TYPE
-	{
-		PoFxPerfStateTypeDiscrete = 0,
-		PoFxPerfStateTypeRange = 1,
-		PoFxPerfStateTypeMaximum = 2
 	}
 	public enum _DUMP_EVENTS
 	{
@@ -2017,5 +1869,10 @@ namespace MemoryExplorer.Symbols
 		GenericLessThan = 0,
 		GenericGreaterThan = 1,
 		GenericEqual = 2
+	}
+	public enum _UNNAMED_26864
+	{
+		KTMOH_CommitTransaction_Result = 1,
+		KTMOH_RollbackTransaction_Result = 2
 	}
 }
