@@ -17,7 +17,7 @@ namespace Pdb_Magician
         private IDiaEnumSymbols _enumEnums;
         private int _pointerSize;
         private List<Symbol> _todoSymbolList = new List<Symbol>(); // I need this to process <unnamed-tag> blocks
-        private List<string> _enumList = new List<string>();
+        
 
         private bool ProcessSymbolFile()
         {
@@ -30,44 +30,33 @@ namespace Pdb_Magician
                 _errorList.Add("Could't find LIST_ENTRY to determine pointer size.");
                 return false;
             }
-            if (!ExportClassFile())
-                return false;
-
             if (!ExportConstants())
                 return false;
 
             if (!ExportEnums())
                 return false;
 
-            if (_todoList == null)
-                ProcessAllStructures();
-            else
+            int overallCount = _todoList.Count + _todoSymbolList.Count;
+            while (overallCount > 0)
             {
-                int overallCount = _todoList.Count + _todoSymbolList.Count;
-                while (overallCount > 0)
+                if (_todoList.Count > 0)
                 {
-                    if (_todoList.Count > 0)
-                    {
-                        string next = _todoList[0];
-                        _todoList.RemoveAt(0);
-                        ProcessStructure(next);
-                    }
-                    if (_todoSymbolList.Count > 0)
-                    {
-                        Symbol next = _todoSymbolList[0];
-                        _todoSymbolList.RemoveAt(0);
-                        ProcessSymbol(next);
-                    }
-                    overallCount = _todoList.Count + _todoSymbolList.Count;
+                    string next = _todoList[0];
+                    _todoList.RemoveAt(0);
+                    ProcessStructure(next);
                 }
+                if (_todoSymbolList.Count > 0)
+                {
+                    Symbol next = _todoSymbolList[0];
+                    _todoSymbolList.RemoveAt(0);
+                    ProcessSymbol(next);
+                }
+                overallCount = _todoList.Count + _todoSymbolList.Count;
             }
-
-            
             if (!ExportStructures())
                 return false;
 
             List<string> sourceFiles = new List<string>();
-            sourceFiles.Add(Path.Combine(_destinationFolder, "MxSymbols.cs"));
             sourceFiles.Add(Path.Combine(_destinationFolder, "PdbConstants.cs"));
             sourceFiles.Add(Path.Combine(_destinationFolder, "PdbEnums.cs"));
             sourceFiles.Add(Path.Combine(_destinationFolder, "PdbStructures.cs"));

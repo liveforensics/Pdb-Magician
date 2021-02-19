@@ -14,14 +14,13 @@ namespace Pdb_Magician
             {
                 string outputFile = Path.Combine(_destinationFolder, "PdbEnums.cs");
                 _enumEnums.Reset();
-                _enumList.Clear();
-                //List<string> done = new List<string>();
+                List<string> done = new List<string>();
 
                 using (StreamWriter writer = new StreamWriter(outputFile))
                 {
                     writer.WriteLine("using System;");
                     writer.WriteLine("");
-                    writer.WriteLine("namespace LiveForensics.Symbols");
+                    writer.WriteLine("namespace MemoryExplorer.Symbols");
                     writer.WriteLine("{");
                     foreach (IDiaSymbol sym in _enumEnums)
                     {
@@ -45,9 +44,9 @@ namespace Pdb_Magician
                             }
 
                         }
-                        if (_enumList.Contains(enumerator.name))
+                        if (done.Contains(enumerator.name))
                             continue;
-                        _enumList.Add(enumerator.name);
+                        done.Add(enumerator.name);
                         writer.WriteLine("\tpublic enum " + enumerator.name);
                         writer.WriteLine("\t{");
                         foreach (IDiaSymbol c in children)

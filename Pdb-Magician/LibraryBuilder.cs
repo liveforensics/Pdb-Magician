@@ -33,7 +33,7 @@ namespace Pdb_Magician
                 CodeDomProvider provider = CodeDomProvider.CreateProvider("CSharp");
                 if (provider != null)
                 {
-                    string dllName = Path.Combine(_destinationFolder, "LiveForensics.Symbols.dll");
+                    string dllName = Path.Combine(_destinationFolder, "MemoryExplorer.Symbols.dll");
                     CompilerParameters cp = new CompilerParameters();
                     // Generate a dll instead of an executable.
                     cp.GenerateExecutable = false;
@@ -97,9 +97,9 @@ namespace Pdb_Magician
                 writer.WriteLine("using System.Runtime.InteropServices;");
                 writer.WriteLine("[assembly: AssemblyTitle(\"PDB Symbol Translation Helper\")]");
                 writer.WriteLine("[assembly: AssemblyDescription(\"PDB Symbol Translation Helper\")]");
-                writer.WriteLine("[assembly: AssemblyCompany(\"LiveForensics\")]");
-                writer.WriteLine("[assembly: AssemblyProduct(\"LiveForensics.Symbols\")]");
-                writer.WriteLine("[assembly: AssemblyCopyright(\"Copyright ©LiveForensics " + year + "\")]");
+                writer.WriteLine("[assembly: AssemblyCompany(\"liveforensics\")]");
+                writer.WriteLine("[assembly: AssemblyProduct(\"MemoryExplorer.Symbols\")]");
+                writer.WriteLine("[assembly: AssemblyCopyright(\"Copyright ©liveforensics " + year + "\")]");
                 writer.WriteLine("[assembly: ComVisible(false)]");
                 writer.WriteLine("[assembly: AssemblyVersion(\"1.0.0.0\")]");
                 writer.WriteLine("[assembly: AssemblyFileVersion(\"1.0.0.0\")]");
