@@ -30,6 +30,10 @@ namespace Pdb_Magician
                 structureName = structureName.Replace("<unnamed-", "_UNNAMED_");
                 structureName = structureName.TrimEnd(new char[] { '>' });
             }
+            if(structureName == "<anonymous-tag>")
+            {
+                structureName = "_ANONYMOUS_TAG";
+            }
             // just make sure it hasn't been done already
             if (_doneList.Contains(structureName))
                 return true;
@@ -51,6 +55,8 @@ namespace Pdb_Magician
             }
             foreach (FunctionRecord entry in entries)
             {
+                if (_enumList.Contains(entry.symbolType))
+                    entry.isFoundInEnumList = true;
                 if (!entry.isBuiltinType && structureName != entry.type && !_doneList.Contains(entry.type) && !_todoList.Contains(entry.type) && !entry.type.StartsWith("_UNNAMED"))
                 {
                     if (entry.isArray)
@@ -77,7 +83,7 @@ namespace Pdb_Magician
             AddToBody("_StructureData = Buffer;", 3);
             AddToBody("_BufferOffset = PartitionOffset;", 3);
             AddToBody("}", 2);
-            AddToBody("public int MxStructureSize { get { return _StructureData.Length; } }", 2);
+            AddToBody("public int MxStructureSize { get { return " + s.Length.ToString() + "; } }", 2);
 
             AddToBody("public string manifest", 2);
             AddToBody("{", 2);
@@ -105,6 +111,8 @@ namespace Pdb_Magician
             Members member = new Members(c);
             Symbol grandChild = c.InspectType();
             Symbol greatGrandChild = grandChild.InspectType();
+            if(c.Name == "OptimalZeroingAttribute")
+                Debug.WriteLine("");
             if ("RecordType" == c.Name)
             {
                 Debug.WriteLine("");
@@ -279,6 +287,17 @@ namespace Pdb_Magician
                 }
 
             }
+            else if(fr.isArray)
+            {
+                Dictionary<string, object> inner = new Dictionary<string, object>();
+                inner.Add("target", fr.targetArg.TrimEnd(new char[] { '*' }));
+                Dictionary<string, object> loaded = new Dictionary<string, object>();
+                loaded.Add("count", fr.arrayCount);
+                loaded.Add("target", "Pointer");
+                loaded.Add("target_args", inner);
+                JArray section = GetJsonSection("Array", fr.offset, loaded);
+                _manifestRootNodes.Add(new JProperty(fr.name, section));
+            }
         }
         private void AddPointerToManifest(FunctionRecord fr)
         {
@@ -324,7 +343,7 @@ namespace Pdb_Magician
             _accessBlock.Add("{");
             _accessBlock.Add("\tget");
             _accessBlock.Add("\t{");
-            _accessBlock.Add("\t\t// start: " + fr.startBit + "  end: " + fr.endBit + "  Mask: " + Convert.ToString((int)fr.bitMask, 2).PadLeft(max, '0'));
+            _accessBlock.Add("\t\t// start: " + fr.startBit + "  end: " + fr.endBit + "  Mask: " + Convert.ToString((long)fr.bitMask, 2).PadLeft(max, '0'));
             if (fr.friendlySymbolType == "Byte")
                 _accessBlock.Add("\t\t" + fr.structureType + " value = _StructureData[_BufferOffset + " + fr.offset + "];");
             else
@@ -349,6 +368,8 @@ namespace Pdb_Magician
         }
         private void AddArrayToAccessBlock(FunctionRecord fr)
         {
+            bool isKnownEnumeration = _enumList.Contains(fr.targetArg);
+
             _accessBlock.Add("public " + fr.structureType + " " + fr.name);
             _accessBlock.Add("{");
             _accessBlock.Add("\tget");
@@ -364,6 +385,8 @@ namespace Pdb_Magician
                     _accessBlock.Add("\t\t\treturnValue[i] = new " + fr.arrayType + "(_StructureData, (i * size) + _BufferOffset + " + fr.offset + ");");
                 else if (fr.arrayType == "Byte")
                     _accessBlock.Add("\t\t\treturnValue[i] = _StructureData[i + _BufferOffset + " + fr.offset + "];");
+                else if (fr.arrayType == "float")
+                    _accessBlock.Add("\t\t\treturnValue[i] = BitConverter.ToSingle(_StructureData, (i * sizeof(" + fr.arrayType + ")) + _BufferOffset + " + fr.offset + ");");
                 else
                     _accessBlock.Add("\t\t\treturnValue[i] = BitConverter.To" + fr.arrayType + "(_StructureData, (i * sizeof(" + fr.arrayType + ")) + _BufferOffset + " + fr.offset + ");");
             }
@@ -392,6 +415,24 @@ namespace Pdb_Magician
                 else
                     _accessBlock.Add("\t\t\treturnValue[i] = (" + fr.arrayType + ")BitConverter.To" + fr.arrayType + "(_StructureData, (i * size) + _BufferOffset + " + fr.offset + ");");
 
+            }
+            else if(fr.isArray && !isKnownEnumeration)
+            {
+                if (!fr.isBuiltinType)
+                    _accessBlock.Add("\t\tint size = returnValue[0].MxStructureSize;");
+                else
+                    _accessBlock.Add("\t\tint size = " + fr.enumLength + ";");
+                _accessBlock.Add("\t\tfor(int i=0; i<" + fr.arrayCount + "; i++ )");
+                if (!fr.isBuiltinType)
+                    _accessBlock.Add("\t\t\treturnValue[i] = new " + fr.arrayType + "(_StructureData, (i * size) + _BufferOffset + " + fr.offset + ");");
+                else
+                    _accessBlock.Add("\t\t\treturnValue[i] = (" + fr.arrayType + ")BitConverter.To" + fr.arrayType + "(_StructureData, (i * size) + _BufferOffset + " + fr.offset + ");");
+            }
+            else if(fr.isArray && isKnownEnumeration)
+            {
+                _accessBlock.Add("\t\tint size = 4;");
+                _accessBlock.Add("\t\tfor(int i=0; i<" + fr.arrayCount + "; i++ )");
+                _accessBlock.Add("\t\t\treturnValue[i] = (" + fr.arrayType + ")BitConverter.ToUInt32(_StructureData, (i * size) + _BufferOffset + " + fr.offset + ");");
             }
             _accessBlock.Add("\t\treturn returnValue;");
             _accessBlock.Add("\t}");

@@ -33,7 +33,7 @@ namespace Pdb_Magician
                 {
                     writer.WriteLine("using System;");
                     writer.WriteLine("");
-                    writer.WriteLine("namespace MemoryExplorer.Symbols");
+                    writer.WriteLine("namespace LiveForensics.Symbols");
                     writer.WriteLine("{");
                 }
                 /// write out the header function
@@ -78,6 +78,34 @@ namespace Pdb_Magician
                 return false;
             }
 
+        }
+
+        private bool ExportClassFile()
+        {
+            try
+            {
+                string outputFile = Path.Combine(_destinationFolder, "MxSymbols.cs");
+                using (StreamWriter writer = new StreamWriter(outputFile))
+                {
+                    writer.WriteLine("namespace LiveForensics.Symbols");
+                    writer.WriteLine("{");
+                    writer.WriteLine("\tpublic partial class MxSymbols");
+                    writer.WriteLine("\t{");
+                    writer.WriteLine("\t\tpublic MxSymbols()");
+                    writer.WriteLine("\t\t{");
+                    writer.WriteLine("\t\t\tLoadConstants();");
+                    writer.WriteLine("\t\t}");
+                    writer.WriteLine("\t}");
+                    writer.WriteLine("}");
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _errorList.Add("Error while processing structures..");
+                _errorList.Add(ex.Message);
+                return false;
+            }
         }
     }
 }
