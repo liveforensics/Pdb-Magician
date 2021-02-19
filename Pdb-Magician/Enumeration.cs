@@ -1,4 +1,5 @@
-﻿namespace Pdb_Magician
+﻿// force github commit
+namespace Pdb_Magician
 {
     public partial class PdbMagician
     {

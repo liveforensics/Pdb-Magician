@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+// force github commit
 
 namespace Pdb_Magician
 {
@@ -44,6 +45,10 @@ namespace Pdb_Magician
                 string testName = DiaSymbol.name;
                 if (testName == "<unnamed-tag>")
                     testName = "<unnamed-" + ID.ToString() + ">";
+                if (testName == "<anonymous-tag>")
+                {
+                    testName = "_ANONYMOUS_TAG";
+                }
                 return testName;
             }
         }

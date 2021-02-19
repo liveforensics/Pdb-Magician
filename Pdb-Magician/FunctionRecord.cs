@@ -1,6 +1,7 @@
 ﻿using Dia2Lib;
 using System;
 using System.Diagnostics;
+// force github commit
 
 namespace Pdb_Magician
 {
@@ -173,6 +174,8 @@ namespace Pdb_Magician
                 return true;
             if (arrayType == "float" || arrayType == "Double" || arrayType == "Char")
                 return true;
+            if (arrayType == "HRESULT")
+                return true;
 
             return false;
         }
@@ -246,6 +249,8 @@ namespace Pdb_Magician
                                 case 8: answer += "Double"; break;
                             }
                             break;
+                        case (int)BasicType.btHresult:
+                            answer += "Int32"; break;
                         default:
                             answer += SymbolWrapper.rgBaseType[baseType.baseType];
                             break;
@@ -255,6 +260,8 @@ namespace Pdb_Magician
                     Structure utd = new Structure(symbol);
                     if (utd.name.StartsWith("<unnamed-"))
                         utd.name = "_UNNAMED_" + utd.symIndexId.ToString();
+                    if(utd.name == "<anonymous-tag>")
+                        utd.name = "_ANONYMOUS_TAG";
                     answer += utd.name;
                     break;
                 case SymTagEnum.SymTagFunctionType:
@@ -309,7 +316,12 @@ namespace Pdb_Magician
                 {
                     int index = st.IndexOf('*');
                     targetArg = st.Substring(0, index + 1);
-                    return st.Replace(targetArg, pointer);
+                    if(st.StartsWith("_"))
+                    {
+                        pointer = st.Substring(0, index);
+                    }
+                    st = st.Replace(targetArg, pointer);
+
                 }
                 int count = st.Split('[').Length - 1; // have we got a multi-dimensional array?
                 if(count > 1)
@@ -327,8 +339,13 @@ namespace Pdb_Magician
                         total *= v;
                     }
                     st = targetArg + "[" + total.ToString() + "]";
-                    return st;
+                    
                 }
+                return st;
+            }
+            if (st == "HRESULT")
+            {
+                st = st.Replace("HRESULT", "Int32");
             }
             return st;
         }
