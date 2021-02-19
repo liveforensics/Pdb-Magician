@@ -30,6 +30,10 @@ namespace Pdb_Magician
                 structureName = structureName.Replace("<unnamed-", "_UNNAMED_");
                 structureName = structureName.TrimEnd(new char[] { '>' });
             }
+            if(structureName == "<anonymous-tag>")
+            {
+                structureName = "_ANONYMOUS_TAG";
+            }
             // just make sure it hasn't been done already
             if (_doneList.Contains(structureName))
                 return true;
@@ -381,6 +385,8 @@ namespace Pdb_Magician
                     _accessBlock.Add("\t\t\treturnValue[i] = new " + fr.arrayType + "(_StructureData, (i * size) + _BufferOffset + " + fr.offset + ");");
                 else if (fr.arrayType == "Byte")
                     _accessBlock.Add("\t\t\treturnValue[i] = _StructureData[i + _BufferOffset + " + fr.offset + "];");
+                else if (fr.arrayType == "float")
+                    _accessBlock.Add("\t\t\treturnValue[i] = BitConverter.ToSingle(_StructureData, (i * sizeof(" + fr.arrayType + ")) + _BufferOffset + " + fr.offset + ");");
                 else
                     _accessBlock.Add("\t\t\treturnValue[i] = BitConverter.To" + fr.arrayType + "(_StructureData, (i * sizeof(" + fr.arrayType + ")) + _BufferOffset + " + fr.offset + ");");
             }
