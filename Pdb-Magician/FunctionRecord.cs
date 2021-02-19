@@ -1,6 +1,7 @@
 ﻿using Dia2Lib;
 using System;
 using System.Diagnostics;
+// force github commit
 
 namespace Pdb_Magician
 {
@@ -315,7 +316,12 @@ namespace Pdb_Magician
                 {
                     int index = st.IndexOf('*');
                     targetArg = st.Substring(0, index + 1);
-                    return st.Replace(targetArg, pointer);
+                    if(st.StartsWith("_"))
+                    {
+                        pointer = st.Substring(0, index);
+                    }
+                    st = st.Replace(targetArg, pointer);
+
                 }
                 int count = st.Split('[').Length - 1; // have we got a multi-dimensional array?
                 if(count > 1)
@@ -333,8 +339,9 @@ namespace Pdb_Magician
                         total *= v;
                     }
                     st = targetArg + "[" + total.ToString() + "]";
-                    return st;
+                    
                 }
+                return st;
             }
             if (st == "HRESULT")
             {

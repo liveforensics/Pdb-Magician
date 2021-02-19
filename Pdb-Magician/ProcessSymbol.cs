@@ -4,9 +4,6 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Pdb_Magician
 {
@@ -111,7 +108,7 @@ namespace Pdb_Magician
             Members member = new Members(c);
             Symbol grandChild = c.InspectType();
             Symbol greatGrandChild = grandChild.InspectType();
-            if(c.Name == "OptimalZeroingAttribute")
+            if(c.Name == "LargePageEntries")
                 Debug.WriteLine("");
             if ("RecordType" == c.Name)
             {

@@ -19,7 +19,8 @@ namespace TestHarness
         {
             //string guidAge = "0F0B35EF85904B09A22E11C1DBEF83921";
             //string guidAge = "afcb4fd7b7a844acaa1a4154cc1091871";
-            string guidAge = "1453BDA99D224237ABDDB806A482DDF41";
+            //string guidAge = "3D4400784115718818EFC898413F36C41";
+            string guidAge = "5278AFF86C341677D7D7835C85B7B8441";
             //string guidAge = "864170751E2F4E98A60091F60CA538D11";
             string filename = "ntkrnlmp.pdb";
             //string filename = "ntoskrnl.pdb";
@@ -27,9 +28,10 @@ namespace TestHarness
 
 
 
+            // start by retrieving the Symbol file (PDB)
             PdbMagician myLib = new PdbMagician();
             bool result = myLib.RetrieveSymbolFile(filename, guidAge, @"c:\temp\magician");
-            if(!result)
+            if (!result)
             {
                 Console.WriteLine("One or more errors occurred..");
                 string[] errors = myLib.GetErrorList();
@@ -39,38 +41,34 @@ namespace TestHarness
             else
                 Console.WriteLine("Got It!");
 
-            string pdbLocation = Path.Combine(Path.Combine(@"c:\temp\magician", guidAge), filename);
-            List<string> todoList = new List<string>();
+            // now you have 2 choices, process all the symbols or just the ones you need for your project
+            //
+            // ALL symbols option
+            string pdbLocation = Path.Combine(@"c:\temp\magician", guidAge, filename);
+            //result = myLib.ParseAllSymbols(pdbLocation, Path.Combine(@"c:\temp\magician", guidAge));
+            //if (!result)
+            //{
+            //    Console.WriteLine("One or more errors occurred..");
+            //    string[] errors = myLib.GetErrorList();
+            //    foreach (string s in errors)
+            //        Console.WriteLine(s);
+            //}
+            //else
+            //    Console.WriteLine("Successfully Built: ");
 
-            FileInfo fi = new FileInfo(@"C:\temp\magician\" + guidAge + @"\" + guidAge + ".json");
-            if (!fi.Exists)
-                return;
-            byte[] json = null;
-            using (FileStream original = fi.OpenRead())
-            {
-                using (BinaryReader reader = new BinaryReader(original))
-                {
-                    json = reader.ReadBytes((int)fi.Length);
-                }
-            }
-            List<string> testList = new List<string>();
-            string theJson = Encoding.UTF8.GetString(json);
-            var parsedJson = JObject.Parse(theJson);
-            todoList.Clear();
-            foreach (dynamic item in parsedJson["$STRUCTS"])
-            {
-                if (item.Name.StartsWith("<unnamed"))
-                    continue;
-                
-                todoList.Add(item.Name);
-            }
-            result = myLib.ParseSymbolFile(pdbLocation, @"E:\Code\github\Pdb-Magician\MemoryExplorer.Symbols", todoList.ToArray());
+            // selected symbols option
+            List<string> todoList = new List<string>();
+            todoList.Add("_MI_FREE_LARGE_PAGES");
+            //todoList.Add("_EPROCESS");
+            //todoList.Add("_LIST_ENTRY");
+            result = myLib.ParseSymbolFile(pdbLocation, Path.Combine(@"c:\temp\magician", guidAge), todoList.ToArray());
+            //result = myLib.ParseAllSymbols(pdbLocation, Path.Combine(@"c:\temp\magician", guidAge));
             if (!result)
             {
                 Console.WriteLine("One or more errors occurred..");
                 string[] errors = myLib.GetErrorList();
                 foreach (string s in errors)
-                    Console.WriteLine(s);                
+                    Console.WriteLine(s);
             }
             else
                 Console.WriteLine("Successfully Built: ");
