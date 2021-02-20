@@ -7,12 +7,6 @@ using System.Text;
 
 namespace TestHarness
 {
-    /// <summary>
-    /// For my testing, I've used some rekall profiles (github rekall-profile)
-    /// Unzip the file and rename the output to .json extension.
-    /// Put it in the same folder as your pdb file.
-    /// The test harness parses out the structure names and feeds them to magician.
-    /// </summary>
     class Program
     {
         static void Main(string[] args)
@@ -24,7 +18,6 @@ namespace TestHarness
             string guidAge = "864170751E2F4E98A60091F60CA538D11";
             string filename = "ntkrnlmp.pdb";
             //string filename = "ntoskrnl.pdb";
-            //12 / 02 / 2021 16:49:30 - RSDS Filename ntoskrnl.pdb GuidAge 864170751E2F4E98A60091F60CA538D11
 
 
 
@@ -45,24 +38,15 @@ namespace TestHarness
             //
             // ALL symbols option
             string pdbLocation = Path.Combine(@"c:\temp\magician", guidAge, filename);
-            //result = myLib.ParseAllSymbols(pdbLocation, Path.Combine(@"c:\temp\magician", guidAge));
-            //if (!result)
-            //{
-            //    Console.WriteLine("One or more errors occurred..");
-            //    string[] errors = myLib.GetErrorList();
-            //    foreach (string s in errors)
-            //        Console.WriteLine(s);
-            //}
-            //else
-            //    Console.WriteLine("Successfully Built: ");
+            result = myLib.ParseAllSymbols(pdbLocation, Path.Combine(@"c:\temp\magician", guidAge));
 
             // selected symbols option
             List<string> todoList = new List<string>();
             todoList.Add("_MI_FREE_LARGE_PAGES");
-            //todoList.Add("_EPROCESS");
-            //todoList.Add("_LIST_ENTRY");
+            todoList.Add("_EPROCESS");
+            todoList.Add("_LIST_ENTRY");
             result = myLib.ParseSymbolFile(pdbLocation, Path.Combine(@"c:\temp\magician", guidAge), todoList.ToArray());
-            //result = myLib.ParseAllSymbols(pdbLocation, Path.Combine(@"c:\temp\magician", guidAge));
+
             if (!result)
             {
                 Console.WriteLine("One or more errors occurred..");

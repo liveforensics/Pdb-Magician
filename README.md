@@ -1,8 +1,6 @@
 # Pdb-Magician
 Parse PDB Files and generates C# class library which helps with interpreting memory images.
 
-This is research code, so it's a bit hacky but it seems to work.
-
 In support of the memory forensics work I'm doing, I wanted to be able to grab the appropriate PDB file
 from the Microsoft Symbol Server based on the GUIDAGE of the kernel file.
 
