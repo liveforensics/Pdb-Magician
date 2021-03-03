@@ -1,6 +1,12 @@
 # Pdb-Magician
 Parse PDB Files and generates C# class library which helps with interpreting memory images.
 
+Before you start, make sure that msdia140.dll is regiatered.
+
+````
+regsvr32 msdia140.dll
+````
+
 In support of the memory forensics work I'm doing, I wanted to be able to grab the appropriate PDB file
 from the Microsoft Symbol Server based on the GUIDAGE of the kernel file.
 
