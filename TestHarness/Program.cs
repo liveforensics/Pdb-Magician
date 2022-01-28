@@ -15,7 +15,9 @@ namespace TestHarness
             //string guidAge = "afcb4fd7b7a844acaa1a4154cc1091871";
             //string guidAge = "3D4400784115718818EFC898413F36C41";
             //string guidAge = "5278AFF86C341677D7D7835C85B7B8441";
-            string guidAge = "864170751E2F4E98A60091F60CA538D11";
+            //string guidAge = "864170751E2F4E98A60091F60CA538D11";
+            string guidAge = "BF8CAE58DB897A8B8E09080F577B7ECD1"; // win11-pro
+
             string filename = "ntkrnlmp.pdb";
             //string filename = "ntoskrnl.pdb";
 
