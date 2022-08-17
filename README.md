@@ -1,7 +1,7 @@
 # Pdb-Magician
 Parse PDB Files and generates C# class library which helps with interpreting memory images.
 
-Before you start, make sure that msdia140.dll is regiatered.
+Before you start, make sure that msdia140.dll is registered.
 
 ````
 regsvr32 msdia140.dll
